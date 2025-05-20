@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "vd.fullname" . }}-gui
+  labels: {{- include "vd.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.gui.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "vd.name" . }}
+      component: gui
+  template:
+    metadata:
+      labels:
+        app: {{ include "vd.name" . }}
+        component: gui
+    spec:
+      containers:
+        - name: gui
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.gui.port }}
