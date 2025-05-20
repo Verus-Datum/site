@@ -1,0 +1,22 @@
+services:
+  vd-gui:
+    image: ghcr.io/isaiahharvi/vd/vd-gui:latest
+    build:
+      context: .
+      dockerfile: deploy/gui/Dockerfile
+    container_name: vd-gui
+    ports:
+      - 3000:3000
+    environment:
+      - VITE_API_URL=https://vd.harville.dev/api:8081
+
+  vd-api:
+    image: ghcr.io/isaiahharvi/vd/vd-api:latest
+    build:
+      context: .
+      dockerfile: deploy/api/Dockerfile
+    container_name: vd-api
+    ports:
+      - 8081:8081
+    environment:
+      - VITE_API_URL=https://vd.harville.dev/api:8081
