@@ -1,6 +1,6 @@
 services:
   vd-gui:
-    image: ghcr.io/isaiahharvi/vd/vd-gui:latest
+    image: ghcr.io/verus-datum/gui:latest
     build:
       context: .
       dockerfile: deploy/gui/Dockerfile
@@ -11,7 +11,7 @@ services:
       - VITE_API_URL=https://vd.harville.dev/api:8081
 
   vd-api:
-    image: ghcr.io/isaiahharvi/vd/vd-api:latest
+    image: ghcr.io/verus-datum/api:latest
     build:
       context: .
       dockerfile: deploy/api/Dockerfile
