@@ -19,7 +19,8 @@ const config = {
 			$services: 'src/services',
 			$utils: 'src/utils',
 			$types: 'src/types',
-			$hooks: 'src/hooks'
+			$hooks: 'src/hooks',
+			$assets: 'src/assets'
 		}
 	}
 };

@@ -1,11 +1,6 @@
 <script lang="ts">
+	import Map from "$components/layout/Map.svelte";
     import { Button } from "$components/ui/button";
 </script>
 
-<h1>
-    Verus Datum
-</h1>
-
-<Button>
-    Hello, World!
-</Button>
+<Map />

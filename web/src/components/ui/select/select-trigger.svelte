@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Select as SelectPrimitive, type WithoutChild } from "bits-ui";
 	import ChevronDown from "@lucide/svelte/icons/chevron-down";
-	import { cn } from "$utils.js";
+	import { cn } from "$utils/shadcn.js";
 
 	let {
 		ref = $bindable(null),
@@ -14,11 +14,11 @@
 <SelectPrimitive.Trigger
 	bind:ref
 	class={cn(
-		"border-input bg-background ring-offset-background data-[placeholder]:text-muted-foreground focus:ring-ring flex h-10 w-full items-center justify-between rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+		"rounded-full bg-background data-[placeholder]:text-muted-foreground flex w-full items-center justify-between border px-6 py-3.5 text-sm font-semibold focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
 		className
 	)}
 	{...restProps}
 >
 	{@render children?.()}
-	<ChevronDown class="size-4 opacity-50" />
+	<ChevronDown class="size-4" />
 </SelectPrimitive.Trigger>

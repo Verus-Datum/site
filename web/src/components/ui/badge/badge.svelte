@@ -25,7 +25,7 @@
 <script lang="ts">
 	import type { WithElementRef } from "bits-ui";
 	import type { HTMLAnchorAttributes } from "svelte/elements";
-	import { cn } from "$utils.js";
+	import { cn } from "$utils/shadcn.js";
 
 	let {
 		ref = $bindable(null),

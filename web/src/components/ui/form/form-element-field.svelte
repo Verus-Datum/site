@@ -8,7 +8,7 @@
 	import * as FormPrimitive from "formsnap";
 	import type { HTMLAttributes } from "svelte/elements";
 	import type { WithElementRef, WithoutChildren } from "bits-ui";
-	import { cn } from "$utils.js";
+	import { cn } from "$utils/shadcn.js";
 
 	let {
 		ref = $bindable(null),
