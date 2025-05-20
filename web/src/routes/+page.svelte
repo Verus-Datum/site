@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Map from "$components/layout/Map.svelte";
-    import { Button } from "$components/ui/button";
-</script>
+	import MapMarker from "$components/business/BusinessMarker.svelte";
+    import { generateFakeBusiness } from "$types/Business";
 
-<Map />
+    let business = generateFakeBusiness(-86.75, -86.45, 34.65, 34.85); // HSV
+</script>

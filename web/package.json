@@ -16,6 +16,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
 		"@eslint/js": "^9.18.0",
+		"@faker-js/faker": "^9.8.0",
 		"@internationalized/date": "^3.8.0",
 		"@lucide/svelte": "^0.511.0",
 		"@sveltejs/adapter-auto": "^4.0.0",

@@ -4,11 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.shadow-ui {
+	@apply shadow-[0_0_16px_rgba(0,0,0,0.1)];
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;
 		--foreground: 212 0% 20%;
-		--muted: 220 14.3% 95.9%;
+		--muted: 0 0% 87%;
 		--muted-foreground: 0 0% 44%;
 		--popover: 0 0% 100%;
 		--popover-foreground: 224 71.4% 4.1%;

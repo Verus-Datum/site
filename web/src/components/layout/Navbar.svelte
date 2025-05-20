@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Button } from "$components/ui/button";
-    import NotificationBell from '@lucide/svelte/icons/bell'
+    import UserDropdown from "$components/user/UserDropdown.svelte"
+    import NotificationsDropdown from "$components/user/NotificationsDropdown.svelte"
     import ChevronDown from "@lucide/svelte/icons/chevron-down";
     import Briefcase from "@lucide/svelte/icons/briefcase-business"
     import Provider from "@lucide/svelte/icons/life-buoy"
@@ -39,23 +40,14 @@
             </button>
             <button
                 class="font-semibold text-sm flex flex-row gap-3 px-2 w-full justify-center text-muted-foreground px-5 items-center h-full"
-                on:mouseenter={() => (active = 'provider')}
             >
                 <Provider />
                 <p>Service Providers</p>
             </button>
         </section>    
         <section class="flex flex-row gap-6">
-            <button class="relative">
-                <p class="absolute bg-chip-red top-0 left-4 text-white px-1 text-xs rounded">
-                    2
-                </p>
-                <NotificationBell color="#717171" size={22} />
-            </button>
-            <button class="flex flex-row gap-2 items-center">
-                <img src={exampleUrl} class="rounded-full w-10 h-10 object-cover" />
-                <ChevronDown size={22} color="#717171" class="" />
-            </button>
+            <NotificationsDropdown />
+            <UserDropdown />
         </section>
     </nav>
 
