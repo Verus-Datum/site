@@ -4,6 +4,7 @@ Dev Build:
 ```
 npm i
 npm run dev
+docker compose up vd-api vd-db --build
 ```
 
 
