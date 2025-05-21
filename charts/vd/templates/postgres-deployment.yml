@@ -17,8 +17,10 @@ spec:
         app.kubernetes.io/name: {{ include "vd.name" . }}
         component: db
     spec:
+      {{- if .Values.imagePullSecret }}
       imagePullSecrets:
       - name: {{ .Values.imagePullSecret }}
+      {{- end }}
       volumes:
       - name: db-data
         persistentVolumeClaim:
@@ -31,11 +33,11 @@ spec:
         volumeMounts:
         - name: db-data
           mountPath: /var/lib/postgresql/data
+        {{- with .Values.db.env }}
         env:
-        - name: POSTGRES_USER
-          value: "{{ .Values.db.env.POSTGRES_USER | default "admin" }}"
-        - name: POSTGRES_PASSWORD
-          value: "{{ .Values.db.env.POSTGRES_PASSWORD | default "password" }}"
-        - name: POSTGRES_DB
-          value: "{{ .Values.db.env.POSTGRES_DB | default "vd_db" }}"
+        {{- range $key, $val := . }}
+        - name: {{ $key }}
+          value: "{{ $val }}"
+        {{- end }}
+        {{- end }}
 
