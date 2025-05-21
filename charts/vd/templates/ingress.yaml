@@ -1,0 +1,35 @@
+{{-- only render if enabled -}}
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "vd.fullname" . }}-ingress
+  annotations:
+{{ toYaml .Values.ingress.annotations | indent 4 }}
+spec:
+  ingressClassName: {{ .Values.ingress.ingressClassName }}
+  tls:
+{{-- for each tls block }}
+{{- range .Values.ingress.tls }}
+  - hosts:
+{{-   range .hosts }}
+    - {{ . }}
+{{-   end }}
+    secretName: {{ .secretName }}
+{{- end }}
+  rules:
+{{-- for each host block }}
+{{- range .Values.ingress.hosts }}
+  - host: {{ .host }}
+    http:
+      paths:
+{{-     range .paths }}
+      - path: {{ .path }}
+        pathType: {{ .pathType }}
+        backend:
+          service:
+            name: {{ include "vd.fullname" $ }}-{{ (index (splitList "." .host) 0) | lower }}
+            port:
+              number: {{ if contains "gui." .host }}{{ $.Values.gui.port }}{{ else }}{{ $.Values.api.port }}{{ end }}
+{{-     end }}
+{{- end }}
