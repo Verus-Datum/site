@@ -18,6 +18,7 @@ type Business = {
 	address: string;
 	market: string;
 	lngLat: LngLatLike;
+	contactMethod: string;
 
 	financials: Financials;
 	media: Media[];
@@ -69,7 +70,8 @@ function generateFakeBusiness(
 		lngLat,
 		financials,
 		media,
-		market
+		market,
+		contactMethod: 'Direct Owner'
 	};
 }
 

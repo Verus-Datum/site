@@ -5,10 +5,14 @@
     import PieChart from '@lucide/svelte/icons/chart-pie'
     import People from '@lucide/svelte/icons/users-round'
     import Star from '@lucide/svelte/icons/star'
+    import List from "@lucide/svelte/icons/list"
     import CalendarIcon from '@lucide/svelte/icons/calendar'
+    import { FloatingPanelState } from '$states/FloatingPanel.svelte'
+    import { flyAndScale } from '$utils/shadcn'
 
     import { mapState } from "$states/MapState.svelte"
 	import { type LngLatLike } from 'maplibre-gl';
+	import FloatingPanel from '$components/ui/floating-panel/floating-panel.svelte';
 
     const locations = [
         { value: 'ny', label: 'New York', lng_lat: [-74.006, 40.7128] },
@@ -49,6 +53,16 @@
     let size = ''
     let date = ''
 </script>
+
+{#if !FloatingPanelState.open}
+    <button onclick={() => {
+        FloatingPanelState.open = true;
+        FloatingPanelState.displaySnippet("brokers");
+    }} transition:flyAndScale={{ delay: 100 }} class="absolute hover:bg-secondary duration-200 top-[11.5rem] left-6 flex flex-row gap-2 items-center justify-center bg-white shadow-ui rounded-lg p-3 px-4 font-semibold">
+        <List size={18} />
+        Show List
+    </button>
+{/if}
 
 <div class="border-b w-full h-[5.5rem] overflow-x-auto hide-scrollbar overflow-y-hidden px-6 gap-4 flex items-center">
     <Select.Root type="single" name="location" bind:value={location}>

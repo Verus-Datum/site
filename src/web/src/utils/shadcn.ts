@@ -9,6 +9,7 @@ type FlyAndScaleParams = {
 	start?: number;
 	duration?: number;
 	blur?: number;
+	delay?: number;
 };
 
 let minBlur = 1.5;
@@ -31,7 +32,7 @@ function calculateBlur(duration: number) {
 
 export const flyAndScale = (
 	node: Element,
-	params: FlyAndScaleParams = { y: -12, x: 0, start: 0.8, duration: 500, blur: 0 }
+	params: FlyAndScaleParams = { y: -12, x: 0, start: 0.8, duration: 500, blur: 0, delay: 0 }
 ): TransitionConfig => {
 	params.duration = 200;
 	params.blur = 0;

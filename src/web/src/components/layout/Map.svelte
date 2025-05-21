@@ -15,50 +15,50 @@
         if (!mapState.map && mapContainer != undefined) {
             mapState.container = mapContainer;
 
-            // Wait until the map is initialized before adding markers
             const checkMapReady = setInterval(() => {
-            if (mapState.map) {
-                clearInterval(checkMapReady);
-                
-                const businesses = Array.from({ length: Math.floor(Math.random() * (50 - 35)) + 35 }, () =>
-                    generateFakeBusiness(-86.75, -86.45, 34.65, 34.85)
-                );
+                if (mapState.map) {
+                    clearInterval(checkMapReady);
+                    mapState.map.resize();
+                    
+                    const businesses = Array.from({ length: Math.floor(Math.random() * (50 - 35)) + 35 }, () =>
+                        generateFakeBusiness(-86.75, -86.45, 34.65, 34.85)
+                    );
 
-                for (const biz of businesses) {
-                    const markerEl = document.createElement('div');
+                    for (const biz of businesses) {
+                        const markerEl = document.createElement('div');
 
-                    mount(BusinessMarker, {
-                        target: markerEl,
-                        props: { map: mapState.map, business: biz }
-                    });
+                        mount(BusinessMarker, {
+                            target: markerEl,
+                            props: { map: mapState.map, business: biz }
+                        });
 
-                    new maplibregl.Marker({ element: markerEl })
-                        .setLngLat(biz.lngLat)
-                        .addTo(mapState.map);
+                        new maplibregl.Marker({ element: markerEl })
+                            .setLngLat(biz.lngLat)
+                            .addTo(mapState.map);
+                    }
+                    
+                    const brokers = Array.from({ length: Math.floor(Math.random() * (15 - 5)) + 5 }, () =>
+                        generateFakeBroker(-86.75, -86.45, 34.65, 34.85)
+                    );
+
+                    for (const bro of brokers) {
+                        const markerEl = document.createElement('div');
+
+                        mount(BrokerMarker, {
+                            target: markerEl,
+                            props: { map: mapState.map, broker: bro }
+                        });
+
+                        new maplibregl.Marker({ element: markerEl })
+                            .setLngLat(bro.lngLat)
+                            .addTo(mapState.map);
+                    }
                 }
-
-                const brokers = Array.from({ length: Math.floor(Math.random() * (15 - 5)) + 5 }, () =>
-                    generateFakeBroker(-86.75, -86.45, 34.65, 34.85)
-                );
-
-                for (const bro of brokers) {
-                    const markerEl = document.createElement('div');
-
-                    mount(BrokerMarker, {
-                        target: markerEl,
-                        props: { map: mapState.map, broker: bro }
-                    });
-
-                    new maplibregl.Marker({ element: markerEl })
-                        .setLngLat(bro.lngLat)
-                        .addTo(mapState.map);
-                }
-            }
             }, 100);
         }
     });
 </script>
 
-<div bind:this={mapContainer} class="w-screen h-screen">
+<div bind:this={mapContainer} class="w-screen h-screen overflow-hidden">
 
 </div>

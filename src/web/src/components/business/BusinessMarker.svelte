@@ -5,10 +5,16 @@
     import MapPin from "@lucide/svelte/icons/map-pin";
     import Provider from "@lucide/svelte/icons/life-buoy";
 	import { Button } from "$components/ui/button";
+    import Chevron from "@lucide/svelte/icons/chevron-left";
+    import Cash from "@lucide/svelte/icons/circle-dollar-sign"
 	import { AspectRatio } from "$components/ui/aspect-ratio";
 	import maplibregl from "maplibre-gl";
     import * as Popover from "$components/ui/popover";
     import * as Drawer from "$components/ui/drawer";
+    import * as Carousel from "$components/ui/carousel";
+    import Info from "@lucide/svelte/icons/info";
+	import { FloatingPanelState } from "$states/FloatingPanel.svelte";
+	import FloatingPanel from "$components/ui/floating-panel/floating-panel.svelte";
 
     type Props = {
         business: Business;
@@ -37,6 +43,21 @@
 	});
 
     const isDesktop = new MediaQuery("(min-width: 768px)");
+    let isOpen = $state(false);
+    let isSelected = $state(false);
+    let isOpenDrawer = $state(false);
+
+    $effect(() => {
+        if (isOpen === false && isSelected === true && FloatingPanelState.open !== true) {
+            isSelected = false;
+        }
+    })
+
+    let exmplImgs = [
+        "https://media.istockphoto.com/id/1428594094/photo/empty-coffee-shop-interior-with-wooden-tables-coffee-maker-pastries-and-pendant-lights.jpg?s=612x612&w=0&k=20&c=dMqeYCJDs3BeBP_jv93qHRISDt-54895SPoVc6_oJt4=",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/R%C3%B6e_g%C3%A5rd_caf%C3%A9_2.jpg/1200px-R%C3%B6e_g%C3%A5rd_caf%C3%A9_2.jpg",
+        "https://blog.rotacloud.com/content/images/2022/08/tony-lee-8IKf54pc3qk-unsplash-1.jpg"
+    ]
 </script>
 
 {#snippet MarkerContent()}
@@ -45,11 +66,11 @@
             {business.name}
         </h1>
         <h2 class="flex flex-row font-medium text-primary py-1 gap-1 items-center">
-            <MapPin size={16} />
+            <MapPin size={18} />
             {business.address}
         </h2>
         <h2 class="flex flex-row font-medium text-primary py-1 gap-1 items-center">
-            <Provider size={16} />
+            <Provider size={18} />
             {business.market}
         </h2>
     </header>
@@ -64,7 +85,13 @@
     </section>
 
     <footer class="w-full flex flex-row gap-2">
-        <Button class="w-full font-semibold bg-primaryFlat text-primary hover:bg-primary/20">
+        <Button onclick={() => {
+            isOpen = false;
+            isSelected = true;
+            isOpenDrawer = false;
+            FloatingPanelState.open = true;
+            FloatingPanelState.snippet = LearnMoreContent;
+        }} class="w-full font-semibold bg-primaryFlat text-primary hover:bg-primary/20">
             Learn More
         </Button>
         <Button class="w-full">
@@ -73,9 +100,87 @@
     </footer>
 {/snippet}
 
+{#snippet LearnMoreContent()}
+    <!--
+    <button onclick={() => {
+        if (isDesktop.current) {
+            FloatingPanelState.open = false;
+            FloatingPanelState.displaySnippet("businesses");
+            setTimeout(() => {
+                FloatingPanelState.open = true;
+            }, 250);
+        } else {
+            
+        }
+    }} class="flex pb-5 pt-1 text-left hover:text-foreground/80 duration-200 flex-row gap-2 font-medium items-center justify-center">
+        <Chevron size={18} />
+        Show All
+    </button>
+    -->
+
+    <header>
+        <h1 class="font-semibold py-1 text-2xl">
+            {business.name}
+        </h1>
+        <h2 class="flex flex-row text-muted-foreground font-medium gap-2 items-center">
+            {business.contactMethod}
+        </h2>
+    </header>
+
+    <div class="grid grid-rows-3 grid-cols-[auto,1fr] pt-5 gap-y-4 gap-x-4 items-center">
+        <div class="flex items-center gap-2 text-muted-foreground font-medium">
+            <MapPin size={18} />
+            Location:
+        </div>
+        <div class="text-left font-medium text-nowrap">{business.address}</div>
+
+        <div class="flex items-center gap-2 text-muted-foreground font-medium">
+            <Provider size={18} />
+            Market:
+        </div>
+        <div class="text-left font-medium">{business.market}</div>
+
+        <div class="flex items-center gap-2 text-muted-foreground font-medium">
+            <Cash size={18} />
+            Revenue:
+        </div>
+        <div class="text-left font-medium">{formatCurrency(business.financials.revenuePerYr)} / yr</div>
+    </div>
+
+    <div class="py-6">
+        <h1 class="font-semibold text-primary text-2xl">
+            {formatCurrency(business.financials.askingPrice)}
+        </h1>
+        <h2 class="font-medium text-muted-foreground">
+            asking price
+        </h2>
+    </div>
+
+    <div class="flex items-center gap-2 text-muted-foreground font-medium">
+        <Info size={18} />
+        About
+    </div>
+
+    <Carousel.Root class="w-full py-6">
+        <Carousel.Content class="flex w-full">
+            {#each exmplImgs as imgUrl}
+                <Carousel.Item class="w-full basis-[85%] shrink-0 grow-0">
+                    <img src={imgUrl} alt="Cafe" class="object-cover w-full h-48 rounded-lg" />
+                </Carousel.Item>
+            {/each}
+        </Carousel.Content>
+    </Carousel.Root>
+
+    <footer class="w-full flex flex-row justify-end gap-2">
+        <Button class="w-2/5">
+            Request Contact
+        </Button>
+    </footer>
+{/snippet}
+
 {#snippet Marker()}
-    <div class="bg-white scale-75 h-8 w-8 flex items-center justify-center rounded-full">
-        <div class="bg-primary w-6 h-6 flex items-center justify-center rounded-full">
+    <div class="bg-white scale-75 h-9 w-9 flex items-center justify-center rounded-full">
+        <div class={`${isSelected ? "bg-orange" : "bg-primary"} duration-200 w-6 h-6 flex items-center justify-center rounded-full`}>
             <div class="bg-white h-4 w-4 flex items-center justify-center rounded-full" />
         </div>
     </div>
@@ -83,8 +188,10 @@
 
 <div bind:this={container}>
     {#if isDesktop.current}
-        <Popover.Root>
-            <Popover.Trigger>
+        <Popover.Root bind:open={isOpen}>
+            <Popover.Trigger onclick={() => {
+                isSelected = !isSelected;
+            }}>
                 {@render Marker()}
             </Popover.Trigger>
             <Popover.Content class="bg-white p-4 rounded-xl shadow-ui w-[27rem] relative">
@@ -92,7 +199,7 @@
             </Popover.Content>
         </Popover.Root>
     {:else}
-        <Drawer.Root>
+        <Drawer.Root bind:open={isOpenDrawer}>
             <Drawer.Trigger>
                 {@render Marker()}
             </Drawer.Trigger>
