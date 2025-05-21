@@ -1,3 +1,6 @@
+imagePullSecrets:
+  - name: ghcr-registry
+
 gui:
   image:
     repository: ghcr.io/verus-datum/gui
