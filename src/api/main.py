@@ -1,14 +1,29 @@
 import os
 
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker
 
 app = FastAPI(
     root_path="/api",
 )
 
-print("INFO:\t API URL:", os.environ.get("VITE_API_URL"))
-if not "https" in (os.environ.get("VITE_API_URL")):
+API_URL = os.environ.get("VITE_API_URL")
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+engine = create_engine(DATABASE_URL, echo=True)
+SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+print(f"{API_URL=}")
+if "https" not in API_URL:
     # Production sets CORS in nginx, so we wouldnt set it here again.
     print("\nConfiguring CORS\n")
     app.add_middleware(
@@ -23,3 +38,12 @@ if not "https" in (os.environ.get("VITE_API_URL")):
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+
+@app.get("/health/db")
+def health_check(db=Depends(get_db)):
+    try:
+        result = db.execute(text("SELECT 1")).scalar()
+        return {"db_alive": True, "result": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"DB error: {e}")
