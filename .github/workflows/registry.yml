@@ -14,9 +14,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-<<<<<<< Updated upstream
-=======
-        wth:
+        with:
           fetch-depth: 0        # need all commits
           fetch-tags: true      # need existing 0.0.* tags
           token: ${{ secrets.PAT_TOKEN }}
@@ -36,7 +34,6 @@ jobs:
 
           git tag "$NEXT"
           git push origin "$NEXT"
->>>>>>> Stashed changes
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
