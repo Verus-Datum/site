@@ -70,6 +70,8 @@ mdurl==0.1.2
     #   markdown-it-py
 orjson==3.10.18
     # via -r .devcontainer/requirements.in
+psycopg2==2.9.10
+    # via -r .devcontainer/requirements.in
 pydantic==2.11.4
     # via
     #   -r .devcontainer/requirements.in
@@ -116,6 +118,8 @@ sniffio==1.3.1
     # via
     #   -r .devcontainer/requirements.in
     #   anyio
+sqlalchemy==2.0.41
+    # via -r .devcontainer/requirements.in
 starlette==0.46.2
     # via
     #   -r .devcontainer/requirements.in
@@ -127,12 +131,12 @@ typer==0.15.4
 typing-extensions==4.13.2
     # via
     #   -r .devcontainer/requirements.in
-    #   anyio
     #   fastapi
     #   pydantic
     #   pydantic-core
     #   pydantic-extra-types
     #   rich-toolkit
+    #   sqlalchemy
     #   typer
     #   typing-inspection
 typing-inspection==0.4.0
