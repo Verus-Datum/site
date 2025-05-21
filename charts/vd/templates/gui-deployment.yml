@@ -17,7 +17,7 @@ spec:
         component: gui
     spec:
       imagePullSecrets:
-      {{- toYaml .Values.imagePullSecrets | indent 6 }}
+      {{- toYaml .Values.imagePullSecrets | indent 8 }}
       containers:
         - name: gui
           image: "{{ .Values.gui.image.repository }}:{{ .Values.gui.image.tag }}"

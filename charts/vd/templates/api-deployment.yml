@@ -17,7 +17,7 @@ spec:
         component: api
     spec:
       imagePullSecrets:
-      {{- toYaml .Values.imagePullSecrets | indent 6 }}
+      {{- toYaml .Values.imagePullSecrets | indent 8 }}
       containers:
         - name: api
           image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"
