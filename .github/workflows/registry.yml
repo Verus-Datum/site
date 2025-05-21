@@ -14,6 +14,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        wth:
+          fetch-depth: 0        # need all commits
+          fetch-tags: true      # need existing 0.0.* tags
+
+      - name: Bump patch version
+        id: bump
+        run: |
+          # find latest 0.0.* tag
+          LAST=$(git tag --list '0.0.*' --sort=-v:refname | head -n1)
+          if [ -z "$LAST" ]; then
+            NEXT="0.0.1"
+          else
+            P=${LAST##*.}
+            NEXT="0.0.$((P+1))"
+          fi
+          echo "IMAGE_TAG=$NEXT" >> $GITHUB_ENV
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "$NEXT"
+          git push origin "$NEXT"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -26,4 +47,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build & Push Images
+        env:
+          IMAGE_TAG: ${{ env.IMAGE_TAG }}
         run: docker compose build --push
