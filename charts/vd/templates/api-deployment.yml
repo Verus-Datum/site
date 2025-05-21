@@ -1,8 +1,10 @@
+# charts/vd/templates/api-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "vd.fullname" . }}-api
-  labels: {{- include "vd.labels" . | nindent 4 }}
+  labels:
+    {{- include "vd.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.api.replicaCount }}
   selector:
@@ -17,6 +19,6 @@ spec:
     spec:
       containers:
         - name: api
-          image: "{{ .Values.api.image.repository }}"
+          image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"
           ports:
             - containerPort: {{ .Values.api.port }}

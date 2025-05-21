@@ -1,6 +1,7 @@
 gui:
   image:
-    repository: ghcr.io/verus-datum/gui:latest
+    repository: ghcr.io/verus-datum/gui
+    tag: latest
   replicaCount: 2
   port: 3000
   hpa:
@@ -11,7 +12,8 @@ gui:
 
 api:
   image:
-    repository: ghcr.io/verus-datum/api:latest
+    repository: ghcr.io/verus-datum/api
+    tag: latest
   replicaCount: 2
   port: 8081
   hpa:
