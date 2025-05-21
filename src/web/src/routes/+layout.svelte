@@ -10,4 +10,6 @@
     <Header />
 </Navbar>
 
-{@render children()}
+<main class="pt-40">
+    {@render children()}
+</main>

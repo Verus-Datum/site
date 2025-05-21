@@ -1,5 +1,5 @@
 import type { LngLat, LngLatLike } from 'maplibre-gl';
-import { faker } from '@faker-js/faker';
+import { fakerEN_US as faker } from '@faker-js/faker';
 
 type Financials = {
 	askingPrice: number;

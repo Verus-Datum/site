@@ -72,6 +72,7 @@ const config: Config = {
 					flat: 'hsl(var(--green-flat) / <alpha-value>)'
 				},
 				orange: {
+					DEFAULT: 'hsl(var(--orange) / <alpha-value>)',
 					foreground: 'hsl(var(--orange-foreground) / <alpha-value>)',
 					muted: 'hsl(var(--orange-muted) / <alpha-value>)',
 					flat: 'hsl(var(--orange-flat) / <alpha-value>)'
