@@ -1,11 +1,11 @@
 FROM node:22-bookworm AS build
 WORKDIR /app
 
-COPY web/package*.json ./
+COPY src/web/package*.json ./
 
 RUN npm ci
 
-COPY ./web .
+COPY ./src/web .
 
 RUN npm run build
 
