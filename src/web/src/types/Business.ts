@@ -1,5 +1,5 @@
 import type { LngLat, LngLatLike } from 'maplibre-gl';
-import { faker } from '@faker-js/faker';
+import { fakerEN_US as faker } from '@faker-js/faker';
 
 type Financials = {
 	askingPrice: number;
@@ -18,6 +18,7 @@ type Business = {
 	address: string;
 	market: string;
 	lngLat: LngLatLike;
+	contactMethod: string;
 
 	financials: Financials;
 	media: Media[];
@@ -69,7 +70,8 @@ function generateFakeBusiness(
 		lngLat,
 		financials,
 		media,
-		market
+		market,
+		contactMethod: 'Direct Owner'
 	};
 }
 
