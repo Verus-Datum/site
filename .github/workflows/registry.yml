@@ -45,5 +45,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build & Push Images
-        run: docker compose build --push
+      - name: Build Images
+        run: docker compose build
+
+      - name: Push Images
+        run: docker compose push
+
