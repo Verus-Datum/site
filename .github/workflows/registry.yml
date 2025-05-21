@@ -25,11 +25,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          file: ./web/Dockerfile
-          push: true
-          tags: |
-            ghcr.io/isaiahharvi/vd/vd-gui:latest
+      - name: Build & Push Images
+        run: docker compose build --push
