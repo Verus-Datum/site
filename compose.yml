@@ -20,3 +20,20 @@ services:
       - 8081:8081
     environment:
       - VITE_API_URL=https://vd.harville.dev/api:8081
+      - DATABASE_URL=postgresql://admin:password@vd-db:5432/vd_db
+    depends_on:
+      - vd-db
+
+  vd-db:
+    image: ghcr.io/verus-datum/db:latest
+    build:
+      context: .
+      dockerfile: deploy/postgres/Dockerfile
+    container_name: vd-db
+    ports:
+      - 5432:5432
+    volumes:
+      - vd-db-data:/var/lib/postgresql/data
+
+volumes:
+  vd-db-data:
