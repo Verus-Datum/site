@@ -1,5 +1,3 @@
-
-
 gui:
   image:
     repository: ghcr.io/verus-datum/gui
@@ -42,3 +40,16 @@ postgresqlHPA:
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 80
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - vd.harville.dev
+  path: /
+  tls:
+    - secretName: harvilledev
+      hosts:
+        - vd.harville.dev
