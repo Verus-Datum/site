@@ -1,5 +1,4 @@
-imagePullSecrets:
-  - name: ghcr-registry
+imagePullSecret: ghcr-registry
 
 gui:
   image:
