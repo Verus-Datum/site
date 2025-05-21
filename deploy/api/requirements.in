@@ -1,1 +1,3 @@
 fastapi[all]
+SQLAlchemy
+psycopg2
