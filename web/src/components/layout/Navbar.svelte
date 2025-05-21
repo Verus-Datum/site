@@ -20,11 +20,11 @@
 
 <div class="w-screen z-50 bg-background flex justify-center flex-col absolute top-0 left-0">
     <nav class="w-full flex items-center justify-between px-6 border-b h-[4.5rem]">
-        <header class="flex flex-row gap-3 items-center">
+        <header class="flex-row gap-3 items-center hidden md:flex">
             <img src={Logo} alt="Verus Datum" class="w-10 h-10 rounded-lg" />
             <h1 class="font-bold">Verus Datum</h1>
         </header>
-        <section class="relative h-full w-[25rem] items-center justify-center flex flex-row">
+        <section class="relative h-full w-full md:w-[25rem] items-center justify-center flex flex-row">
             <div
                 class="absolute bottom-0 h-0.5 bg-black transition-all duration-300"
                 style:width="{active === 'business' ? '50%' : '50%'}"
@@ -45,7 +45,7 @@
                 <p>Service Providers</p>
             </button>
         </section>    
-        <section class="flex flex-row gap-6">
+        <section class="flex flex-row gap-6 hidden md:flex">
             <NotificationsDropdown />
             <UserDropdown />
         </section>

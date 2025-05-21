@@ -50,9 +50,9 @@
     let date = ''
 </script>
 
-<div class="border-b w-full h-[5.5rem] px-6 gap-4 flex items-center">
+<div class="border-b w-full h-[5.5rem] overflow-x-auto hide-scrollbar overflow-y-hidden px-6 gap-4 flex items-center">
     <Select.Root type="single" name="location" bind:value={location}>
-        <Select.Trigger class={`w-[13rem] text-left ${location ? 'bg-primaryFlat border-none text-primary' : ''}`}>
+        <Select.Trigger class={`w-auto min-w-[24ch] text-nowrap text-left ${location ? 'bg-primaryFlat border-none text-primary' : ''}`}>
             <p class="flex flex-row items-center gap-2">
                 <LocationPin size={18} />
                 {locations.find((l) => l.value === location)?.label ?? 'Select a location'}
@@ -70,7 +70,7 @@
     </Select.Root>
 
     <Select.Root type="single" name="market" bind:value={industry}>
-        <Select.Trigger class={`w-[13rem] text-left ${industry ? 'bg-primaryFlat border-none text-primary' : ''}`}>
+        <Select.Trigger class={`w-auto min-w-[22ch] text-nowrap text-left ${industry ? 'bg-primaryFlat border-none text-primary' : ''}`}>
             <p class="flex flex-row items-center gap-2">
                 <PieChart size={18} />
                 {industries.find((i) => i.value === industry)?.label ?? 'Market'}
@@ -86,7 +86,7 @@
     </Select.Root>
 
     <Select.Root type="single" name="role" bind:value={role}>
-        <Select.Trigger class={`w-[15rem] text-left ${role ? 'bg-primaryFlat border-none text-primary' : ''}`}>
+        <Select.Trigger class={`w-auto min-w-[22ch] text-nowrap text-left ${role ? 'bg-primaryFlat border-none text-primary' : ''}`}>
             <p class="flex flex-row items-center gap-2">
                 <People size={18} />
                 {roles.find((r) => r.value === role)?.label ?? 'Brokers and Owners'}
@@ -102,7 +102,7 @@
     </Select.Root>
 
     <Select.Root type="single" name="size" bind:value={size}>
-        <Select.Trigger class={`w-[13rem] text-left ${size ? 'bg-primaryFlat border-none text-primary' : ''}`}>
+        <Select.Trigger class={`w-auto min-w-[22ch] text-nowrap text-left ${size ? 'bg-primaryFlat border-none text-primary' : ''}`}>
             <p class="flex flex-row items-center gap-2">
                 <Star size={18} />
                 {sizes.find((s) => s.value === size)?.label ?? 'Any Size'}
@@ -118,7 +118,7 @@
     </Select.Root>
 
     <Select.Root type="single" name="date" bind:value={date}>
-        <Select.Trigger class={`w-[13rem] text-left ${date ? 'bg-primaryFlat border-none text-primary' : ''}`}>
+        <Select.Trigger class={`w-auto min-w-[22ch] text-nowrap text-left ${date ? 'bg-primaryFlat border-none text-primary' : ''}`}>
             <p class="flex flex-row items-center gap-2">
                 <CalendarIcon size={18} />
                 {dates.find((d) => d.value === date)?.label ?? 'Any Date'}

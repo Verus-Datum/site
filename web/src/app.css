@@ -8,6 +8,14 @@
 	@apply shadow-[0_0_16px_rgba(0,0,0,0.1)];
 }
 
+.hide-scrollbar {
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+}
+.hide-scrollbar::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, Opera */
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;
