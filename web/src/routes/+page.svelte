@@ -1,11 +1,6 @@
 <script lang="ts">
-    import { Button } from "$components/ui/button";
+	import MapMarker from "$components/business/BusinessMarker.svelte";
+    import { generateFakeBusiness } from "$types/Business";
+
+    let business = generateFakeBusiness(-86.75, -86.45, 34.65, 34.85); // HSV
 </script>
-
-<h1>
-    Verus Datum
-</h1>
-
-<Button>
-    Hello, World!
-</Button>

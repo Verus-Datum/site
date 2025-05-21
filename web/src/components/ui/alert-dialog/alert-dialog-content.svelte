@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { AlertDialog as AlertDialogPrimitive, type WithoutChild } from "bits-ui";
 	import AlertDialogOverlay from "./alert-dialog-overlay.svelte";
-	import { cn } from "$utils.js";
+	import { cn } from "$utils/shadcn.js";
 
 	let {
 		ref = $bindable(null),

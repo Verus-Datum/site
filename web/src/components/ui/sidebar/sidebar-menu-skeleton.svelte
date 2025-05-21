@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Skeleton } from "$components/ui/skeleton/index.js";
-	import { cn } from "$utils.js";
+	import { cn } from "$utils/shadcn.js";
 	import type { WithElementRef } from "bits-ui";
 	import type { HTMLAttributes } from "svelte/elements";
 

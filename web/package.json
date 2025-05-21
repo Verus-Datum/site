@@ -7,6 +7,7 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
+		"start": "node build/index.js",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -16,9 +17,11 @@
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
 		"@eslint/js": "^9.18.0",
+		"@faker-js/faker": "^9.8.0",
 		"@internationalized/date": "^3.8.0",
 		"@lucide/svelte": "^0.511.0",
 		"@sveltejs/adapter-auto": "^4.0.0",
+		"@sveltejs/adapter-node": "^5.2.12",
 		"@sveltejs/kit": "^2.16.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"autoprefixer": "^10.4.20",
@@ -48,5 +51,8 @@
 		"vaul-svelte": "^1.0.0-next.7",
 		"vite": "^6.0.0",
 		"zod": "^3.24.4"
+	},
+	"dependencies": {
+		"maplibre-gl": "^5.5.0"
 	}
 }

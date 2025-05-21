@@ -1,0 +1,9 @@
+apiVersion: v2
+name: vd
+version: 0.1.5
+description: “Umbrella chart for vd GUI & API”
+
+dependencies:
+  - name: postgresql
+    version: 13
+    repository: https://charts.bitnami.com/bitnami
