@@ -67,7 +67,7 @@
         drawerOpen = false;
         FloatingPanelState.displaySnippet("brokers");
     }} class="flex pb-5 pt-1 text-left hover:text-foreground/80 duration-200 flex-row gap-2 font-medium items-center justify-center">
-        <Chevron size={18} />
+        <Chevron size={24} />
         Show All
     </button>
 
@@ -82,19 +82,19 @@
 
     <div class="grid grid-rows-3 grid-cols-[auto,1fr] py-5 gap-y-4 gap-x-4 items-center">
         <div class="flex items-center gap-2 text-muted-foreground font-medium">
-            <MapPin size={18} />
+            <MapPin size={24} />
             Location:
         </div>
         <div class="text-left font-medium">{broker.address}</div>
 
         <div class="flex items-center gap-2 text-muted-foreground font-medium">
-            <Provider size={18} />
+            <Provider size={24} />
             Market:
         </div>
         <div class="text-left font-medium">{broker.market}</div>
 
         <div class="flex items-center gap-2 text-muted-foreground font-medium">
-            <DealSize size={18} />
+            <DealSize size={24} />
             Deal Size:
         </div>
         <div class="text-left font-medium">
@@ -103,7 +103,7 @@
     </div>
 
     <div class="flex items-center gap-2 mt-2 text-muted-foreground font-medium">
-        <Chart size={18} />
+        <Chart size={24} />
         Key Stats:
     </div>
 
@@ -123,7 +123,7 @@
     </div>
 
     <div class="flex items-center gap-2 mt-2 text-muted-foreground font-medium">
-        <Info size={18} />
+        <Info size={24} />
         Services:
     </div>
 

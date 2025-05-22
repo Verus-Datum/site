@@ -1,11 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 .shadow-ui {
-	@apply shadow-[0_0_16px_rgba(0,0,0,0.1)];
+	@apply shadow-[0_0_12px_rgba(0,0,0,0.08)];
+}
+
+.maplibregl-control-container {
+	display: none !important;
+}
+
+html,
+body {
+	overflow-x: hidden;
 }
 
 .hide-scrollbar {
@@ -16,10 +25,14 @@
 	display: none; /* Chrome, Safari, Opera */
 }
 
+.button {
+	@apply cursor-default;
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;
-		--foreground: 212 0% 20%;
+		--foreground: 0 0% 0%;
 		--muted: 0 0% 87%;
 		--muted-foreground: 0 0% 44%;
 		--popover: 0 0% 100%;
@@ -47,8 +60,9 @@
 		--sidebar-border: 220 13% 91%;
 		--sidebar-ring: 217.2 91.2% 59.8%;
 		--chip-red: 0 80% 61%;
-		--primary-flat: 213 71% 95%;
-		--primary-flat-light: 212 49% 60%;
+		--blue-flat: 213 71% 95%;
+		--blue-foreground: 212 69% 39%;
+		--blue-muted: 212 49% 60%;
 		--green-foreground: 104 26% 37%;
 		--green-muted: 105 18% 57%;
 		--green-flat: 105 53% 93%;

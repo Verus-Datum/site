@@ -34,8 +34,9 @@ export const flyAndScale = (
 	node: Element,
 	params: FlyAndScaleParams = { y: -12, x: 0, start: 0.8, duration: 500, blur: 0, delay: 0 }
 ): TransitionConfig => {
-	params.duration = 200;
-	params.blur = 0;
+	params.duration = 300;
+	params.blur = 0.5;
+	params.delay = 0;
 
 	const style = getComputedStyle(node);
 	const transform = style.transform === 'none' ? '' : style.transform;
@@ -62,8 +63,8 @@ export const flyAndScale = (
 	};
 
 	return {
-		duration: params.duration ?? 200,
-		delay: 0,
+		duration: params.duration ?? 250,
+		delay: params.delay ?? 0,
 		css: (t) => {
 			const y = scaleConversion(t, [0, 1], [params.y ?? 5, 0]);
 			const x = scaleConversion(t, [0, 1], [params.x ?? 0, 0]);

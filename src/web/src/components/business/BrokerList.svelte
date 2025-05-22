@@ -36,11 +36,11 @@
                 <div class="py-6 border-b flex flex-col gap-2 w-full">
                     <h1 class="text-lg font-semibold relative">{_broker.name}         
                         <Button onclick={() => {}} size="icon" class="p-1 h-auto w-auto text-muted-foreground hover:bg-opacity-50 absolute top-0 right-0" variant="secondary">
-                        <ChevronRight size={18} />
+                        <ChevronRight size={24} />
                     </Button>
                     </h1>
-                    <h2 class="text-muted-foreground flex flex-row items-center gap-2"><MapPin size={18} /> {_broker.address}</h2>
-                    <h2 class="text-muted-foreground flex flex-row items-center gap-2"><Provider size={18} /> {_broker.market}</h2>
+                    <h2 class="text-muted-foreground flex flex-row items-center gap-2"><MapPin size={24} /> {_broker.address}</h2>
+                    <h2 class="text-muted-foreground flex flex-row items-center gap-2"><Provider size={24} /> {_broker.market}</h2>
                 </div>
             {/each}
         {/if}

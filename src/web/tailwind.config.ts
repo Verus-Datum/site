@@ -62,9 +62,10 @@ const config: Config = {
 				chip: {
 					red: 'hsl(var(--chip-red) / <alpha-value>)'
 				},
-				primaryFlat: {
-					DEFAULT: 'hsl(var(--primary-flat) / <alpha-value>)',
-					light: 'hsl(var(--primary-flat-light) / <alpha-value>)'
+				blue: {
+					foreground: 'hsl(var(--blue-foreground) / <alpha-value>)',
+					muted: 'hsl(var(--blue-muted) / <alpha-value>)',
+					flat: 'hsl(var(--blue-flat) / <alpha-value>)'
 				},
 				green: {
 					foreground: 'hsl(var(--green-foreground) / <alpha-value>)',
@@ -85,7 +86,7 @@ const config: Config = {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['Geist']
+				sans: ['Inter']
 			},
 			keyframes: {
 				'accordion-down': {

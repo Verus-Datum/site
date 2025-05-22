@@ -11,36 +11,38 @@
     import Provider from "@lucide/svelte/icons/life-buoy"
     import Settings from "@lucide/svelte/icons/settings"
 
-    let exampleUrl = "https://media.istockphoto.com/id/1413766112/photo/successful-mature-businessman-looking-at-camera-with-confidence.jpg?s=612x612&w=0&k=20&c=NJSugBzNuZqb7DJ8ZgLfYKb3qPr2EJMvKZ21Sj5Sfq4=";
+    let exampleUrl = "https://www.jpmorgan.com/content/dam/jpm/treasury-services/headshots/headshot-shahrokh-moinian.jpg";
 </script>
 
 <DropdownMenu.Root>
     <DropdownMenu.Trigger class="flex flex-row duration-150 rounded-lg gap-2 items-center">
-        <img src={exampleUrl} alt="User" class="rounded-full w-10 h-10 object-cover" />
+        <img src={exampleUrl} alt="User" class="rounded-full w-8 h-8 object-cover" />
         <ChevronDown size={22} color="#717171" class="" />
     </DropdownMenu.Trigger>
     <DropdownMenu.Content class="mr-2 w-[250px]">
         <DropdownMenu.Label class="font-medium leading-none py-2.5">My Account</DropdownMenu.Label>
         <DropdownMenu.Separator />
+        <a href="/profile">
+            <DropdownMenu.Item>
+                <Profile size={24} class="opacity-50" />
+                Profile
+            </DropdownMenu.Item>
+        </a>
         <DropdownMenu.Item>
-            <Profile class="opacity-50" />
-            Profile
-        </DropdownMenu.Item>
-        <DropdownMenu.Item>
-            <Billing class="opacity-50" />
+            <Billing size={24} class="opacity-50" />
             Billing
         </DropdownMenu.Item>
         <DropdownMenu.Item>
-            <Listings class="opacity-50" />
+            <Listings size={24} class="opacity-50" />
             Listings
         </DropdownMenu.Item>
         <DropdownMenu.Item>
-            <Settings class="opacity-50" />
+            <Settings size={24} class="opacity-50" />
             Settings
         </DropdownMenu.Item>
         <DropdownMenu.Separator />
         <DropdownMenu.Item>
-            <LogOut class="opacity-50" />
+            <LogOut size={24} class="opacity-50" />
             Log Out
         </DropdownMenu.Item>
     </DropdownMenu.Content>
