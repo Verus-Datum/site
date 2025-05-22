@@ -30,29 +30,39 @@
         <div class="font-medium leading-none py-2 px-2 text-sm">My Account</div>
         <div class="h-px bg-border/60 my-1 mx-[-0.25rem]" />
 
-        <a href="/profile" class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
+        <a onclick={() => {
+            isOpen = false;
+        }} href="/profile" class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
             <Profile size={20} class="opacity-50" />
             Profile
         </a>
 
-        <button class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
+        <button onclick={() => {
+            isOpen = false;
+        }} class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
             <Billing size={20} class="opacity-50" />
             Billing
         </button>
 
-        <button class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
+        <button onclick={() => {
+            isOpen = false;
+        }} class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
             <Listings size={20} class="opacity-50" />
             Listings
         </button>
 
-        <button class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
+        <button onclick={() => {
+            isOpen = false;
+        }} class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
             <Settings size={20} class="opacity-50" />
             Settings
         </button>
 
         <div class="h-px bg-border/60 my-1 mx-[-0.25rem]" />
 
-        <button class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
+        <button onclick={() => {
+            isOpen = false;
+        }} class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
             <LogOut size={20} class="opacity-50" />
             Log Out
         </button>
