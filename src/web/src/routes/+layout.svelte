@@ -4,6 +4,7 @@
 	import Header from '$components/layout/Header.svelte';
 	import FloatingPanel from '$components/ui/floating-panel/floating-panel.svelte';
 	import BrokerList from '$components/business/BrokerList.svelte';
+    import { page } from "$app/state"
 
 	let { children } = $props();
 </script>
@@ -17,5 +18,5 @@
 </Navbar>
 
 <main class="">
-    <slot />
+    {@render children?.()}
 </main>

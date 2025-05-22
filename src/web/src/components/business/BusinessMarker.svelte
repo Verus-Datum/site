@@ -66,11 +66,11 @@
             {business.name}
         </h1>
         <h2 class="flex flex-row font-medium text-primary py-1 gap-1 items-center">
-            <MapPin size={18} />
+            <MapPin size={24} />
             {business.address}
         </h2>
         <h2 class="flex flex-row font-medium text-primary py-1 gap-1 items-center">
-            <Provider size={18} />
+            <Provider size={24} />
             {business.market}
         </h2>
     </header>
@@ -91,7 +91,7 @@
             isOpenDrawer = false;
             FloatingPanelState.open = true;
             FloatingPanelState.snippet = LearnMoreContent;
-        }} class="w-full font-semibold bg-primaryFlat text-primary hover:bg-primary/20">
+        }} class="w-full font-semibold bg-blue-flat text-blue-foreground hover:bg-blue-muted/30">
             Learn More
         </Button>
         <Button class="w-full">
@@ -113,7 +113,7 @@
             
         }
     }} class="flex pb-5 pt-1 text-left hover:text-foreground/80 duration-200 flex-row gap-2 font-medium items-center justify-center">
-        <Chevron size={18} />
+        <Chevron size={24} />
         Show All
     </button>
     -->
@@ -129,19 +129,19 @@
 
     <div class="grid grid-rows-3 grid-cols-[auto,1fr] pt-5 gap-y-4 gap-x-4 items-center">
         <div class="flex items-center gap-2 text-muted-foreground font-medium">
-            <MapPin size={18} />
+            <MapPin size={24} />
             Location:
         </div>
         <div class="text-left font-medium text-nowrap">{business.address}</div>
 
         <div class="flex items-center gap-2 text-muted-foreground font-medium">
-            <Provider size={18} />
+            <Provider size={24} />
             Market:
         </div>
         <div class="text-left font-medium">{business.market}</div>
 
         <div class="flex items-center gap-2 text-muted-foreground font-medium">
-            <Cash size={18} />
+            <Cash size={24} />
             Revenue:
         </div>
         <div class="text-left font-medium">{formatCurrency(business.financials.revenuePerYr)} / yr</div>
@@ -157,7 +157,7 @@
     </div>
 
     <div class="flex items-center gap-2 text-muted-foreground font-medium">
-        <Info size={18} />
+        <Info size={24} />
         About
     </div>
 

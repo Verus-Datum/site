@@ -2,6 +2,7 @@
     import ChevronDown from "@lucide/svelte/icons/chevron-down";
     import { Button } from "$components/ui/button";
     import * as DropdownMenu from "$components/ui/dropdown-menu"
+    import * as Popover from "$components/ui/popover";
 
     import Profile from "@lucide/svelte/icons/user";
     import Billing from "@lucide/svelte/icons/credit-card";
@@ -10,38 +11,50 @@
     import Listings from "@lucide/svelte/icons/clipboard-list"
     import Provider from "@lucide/svelte/icons/life-buoy"
     import Settings from "@lucide/svelte/icons/settings"
+	import { type Snippet } from "svelte";
 
-    let exampleUrl = "https://media.istockphoto.com/id/1413766112/photo/successful-mature-businessman-looking-at-camera-with-confidence.jpg?s=612x612&w=0&k=20&c=NJSugBzNuZqb7DJ8ZgLfYKb3qPr2EJMvKZ21Sj5Sfq4=";
+    let exampleUrl = "https://www.jpmorgan.com/content/dam/jpm/treasury-services/headshots/headshot-shahrokh-moinian.jpg";
+    let isOpen = $state(false);
+
+    $effect(() => {
+        console.log(isOpen);
+    })
 </script>
 
-<DropdownMenu.Root>
-    <DropdownMenu.Trigger class="flex flex-row duration-150 rounded-lg gap-2 items-center">
-        <img src={exampleUrl} alt="User" class="rounded-full w-10 h-10 object-cover" />
+<Popover.Root bind:open={isOpen}>
+    <Popover.Trigger class="flex flex-row duration-150 rounded-lg gap-2 items-center">
+        <img src={exampleUrl} alt="User" class="rounded-full w-8 h-8 object-cover" />
         <ChevronDown size={22} color="#717171" class="" />
-    </DropdownMenu.Trigger>
-    <DropdownMenu.Content class="mr-2 w-[250px]">
-        <DropdownMenu.Label class="font-medium leading-none py-2.5">My Account</DropdownMenu.Label>
-        <DropdownMenu.Separator />
-        <DropdownMenu.Item>
-            <Profile class="opacity-50" />
+    </Popover.Trigger>    
+    <Popover.Content class="mr-2 w-[250px] bg-white shadow-lg rounded-md p-1 pb-1">
+        <div class="font-medium leading-none py-2 px-2 text-sm">My Account</div>
+        <div class="h-px bg-border/60 my-1 mx-[-0.25rem]" />
+
+        <a href="/profile" class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
+            <Profile size={20} class="opacity-50" />
             Profile
-        </DropdownMenu.Item>
-        <DropdownMenu.Item>
-            <Billing class="opacity-50" />
+        </a>
+
+        <button class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
+            <Billing size={20} class="opacity-50" />
             Billing
-        </DropdownMenu.Item>
-        <DropdownMenu.Item>
-            <Listings class="opacity-50" />
+        </button>
+
+        <button class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
+            <Listings size={20} class="opacity-50" />
             Listings
-        </DropdownMenu.Item>
-        <DropdownMenu.Item>
-            <Settings class="opacity-50" />
+        </button>
+
+        <button class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
+            <Settings size={20} class="opacity-50" />
             Settings
-        </DropdownMenu.Item>
-        <DropdownMenu.Separator />
-        <DropdownMenu.Item>
-            <LogOut class="opacity-50" />
+        </button>
+
+        <div class="h-px bg-border/60 my-1 mx-[-0.25rem]" />
+
+        <button class="items-center gap-2 rounded-sm hover:cursor-default duration-150 px-2 py-2 text-sm hover:bg-secondary w-full flex flex-row">
+            <LogOut size={20} class="opacity-50" />
             Log Out
-        </DropdownMenu.Item>
-    </DropdownMenu.Content>
-</DropdownMenu.Root>
+        </button>
+    </Popover.Content>
+</Popover.Root>
