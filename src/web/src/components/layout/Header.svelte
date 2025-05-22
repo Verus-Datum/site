@@ -66,8 +66,8 @@
 
 <div class="border-b w-full h-[5.5rem] overflow-x-auto hide-scrollbar overflow-y-hidden px-6 gap-4 flex items-center">
     <Select.Root type="single" name="location" bind:value={location}>
-        <Select.Trigger class={`w-auto h-11 shadow-sm min-w-[24ch] text-nowrap text-left ${location ? 'bg-primaryFlat border-none text-primary' : ''}`}>
-            <p class="flex flex-row items-center gap-2">
+        <Select.Trigger class={`w-auto h-11 shadow-sm min-w-[24ch] text-nowrap text-left ${location ? 'bg-blue-flat border-none text-primary' : ''}`}>
+            <p class="flex flex-row items-center gap-2 {location ? 'text-blue-foreground' : ''}">
                 <LocationPin size={24} />
                 {locations.find((l) => l.value === location)?.label ?? 'Select a location'}
             </p>
@@ -84,8 +84,8 @@
     </Select.Root>
 
     <Select.Root type="single" name="market" bind:value={industry}>
-        <Select.Trigger class={`w-auto h-11 shadow-sm min-w-[22ch] text-nowrap text-left ${industry ? 'bg-primaryFlat border-none text-primary' : ''}`}>
-            <p class="flex flex-row items-center gap-2">
+        <Select.Trigger class={`w-auto h-11 shadow-sm min-w-[22ch] text-nowrap text-left ${industry ? 'bg-blue-flat border-none text-primary' : ''}`}>
+            <p class="flex flex-row items-center gap-2 {location ? 'text-blue-foreground' : ''}">
                 <PieChart size={24} />
                 {industries.find((i) => i.value === industry)?.label ?? 'Market'}
             </p>
@@ -100,8 +100,8 @@
     </Select.Root>
 
     <Select.Root type="single" name="role" bind:value={role}>
-        <Select.Trigger class={`w-auto h-11 shadow-sm min-w-[22ch] text-nowrap text-left ${role ? 'bg-primaryFlat border-none text-primary' : ''}`}>
-            <p class="flex flex-row items-center gap-2">
+        <Select.Trigger class={`w-auto h-11 shadow-sm min-w-[22ch] text-nowrap text-left ${role ? 'bg-blue-flat border-none text-primary' : ''}`}>
+            <p class="flex flex-row items-center gap-2 {location ? 'text-blue-foreground' : ''}">
                 <People size={24} />
                 {roles.find((r) => r.value === role)?.label ?? 'Brokers and Owners'}
             </p>
@@ -116,8 +116,8 @@
     </Select.Root>
 
     <Select.Root type="single" name="size" bind:value={size}>
-        <Select.Trigger class={`w-auto h-11 shadow-sm min-w-[22ch] text-nowrap text-left ${size ? 'bg-primaryFlat border-none text-primary' : ''}`}>
-            <p class="flex flex-row items-center gap-2">
+        <Select.Trigger class={`w-auto h-11 shadow-sm min-w-[22ch] text-nowrap text-left ${size ? 'bg-blue-flat border-none text-primary' : ''}`}>
+            <p class="flex flex-row items-center gap-2 {location ? 'text-blue-foreground' : ''}">
                 <Star size={24} />
                 {sizes.find((s) => s.value === size)?.label ?? 'Any Size'}
             </p>
@@ -132,8 +132,8 @@
     </Select.Root>
 
     <Select.Root type="single" name="date" bind:value={date}>
-        <Select.Trigger class={`w-auto h-11 shadow-sm min-w-[22ch] text-nowrap text-left ${date ? 'bg-primaryFlat border-none text-primary' : ''}`}>
-            <p class="flex flex-row items-center gap-2">
+        <Select.Trigger class={`w-auto h-11 shadow-sm min-w-[22ch] text-nowrap text-left ${date ? 'bg-blue-flat border-none text-primary' : ''}`}>
+            <p class="flex flex-row items-center gap-2 {location ? 'text-blue-foreground' : ''}">
                 <CalendarIcon size={24} />
                 {dates.find((d) => d.value === date)?.label ?? 'Any Date'}
             </p>
