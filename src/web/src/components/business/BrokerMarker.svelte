@@ -163,8 +163,8 @@
             <Drawer.Trigger>
                 {@render Marker()}
             </Drawer.Trigger>
-            <Drawer.Content class="px-4 shadow-ui">
-                <div class="mt-2 mb-4">
+            <Drawer.Content class="px-4 shadow-ui max-h-[86.5vh]">
+                <div class="mt-2 mb-4 overflow-y-auto">
                     {@render DrawerSnippet?.()}
                 </div>
             </Drawer.Content>

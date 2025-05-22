@@ -34,7 +34,7 @@
     {/if}
 {:else}
     <Drawer.Root bind:open={FloatingPanelState.open}>
-        <Drawer.Content class="p-5">
+        <Drawer.Content class="p-5 pt-0 max-h-[86.5vh]">
             {@render FloatingPanelState.snippet?.()}
         </Drawer.Content>
     </Drawer.Root>
