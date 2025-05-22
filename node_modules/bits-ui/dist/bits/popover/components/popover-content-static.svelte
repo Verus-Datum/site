@@ -1,0 +1,89 @@
+<script lang="ts">
+	import { box, mergeProps } from "svelte-toolbelt";
+	import type { PopoverContentStaticProps } from "../types.js";
+	import { usePopoverContent } from "../popover.svelte.js";
+	import PopperLayer from "../../utilities/popper-layer/popper-layer.svelte";
+	import { noop } from "../../../internal/noop.js";
+	import { useId } from "../../../internal/use-id.js";
+	import { getFloatingContentCSSVars } from "../../../internal/floating-svelte/floating-utils.svelte.js";
+	import PopperLayerForceMount from "../../utilities/popper-layer/popper-layer-force-mount.svelte";
+
+	let {
+		child,
+		children,
+		ref = $bindable(null),
+		id = useId(),
+		forceMount = false,
+		onCloseAutoFocus = noop,
+		onEscapeKeydown = noop,
+		onInteractOutside = noop,
+		trapFocus = true,
+		preventScroll = false,
+		...restProps
+	}: PopoverContentStaticProps = $props();
+
+	const contentState = usePopoverContent({
+		id: box.with(() => id),
+		ref: box.with(
+			() => ref,
+			(v) => (ref = v)
+		),
+		onInteractOutside: box.with(() => onInteractOutside),
+		onEscapeKeydown: box.with(() => onEscapeKeydown),
+		onCloseAutoFocus: box.with(() => onCloseAutoFocus),
+	});
+
+	const mergedProps = $derived(mergeProps(restProps, contentState.props));
+</script>
+
+{#if forceMount}
+	<PopperLayerForceMount
+		{...mergedProps}
+		{...contentState.popperProps}
+		isStatic
+		enabled={contentState.root.opts.open.current}
+		{id}
+		{trapFocus}
+		{preventScroll}
+		loop
+		forceMount={true}
+	>
+		{#snippet popper({ props })}
+			{@const finalProps = mergeProps(props, {
+				style: getFloatingContentCSSVars("popover"),
+			})}
+			{#if child}
+				{@render child({ props: finalProps, ...contentState.snippetProps })}
+			{:else}
+				<div {...finalProps}>
+					{@render children?.()}
+				</div>
+			{/if}
+		{/snippet}
+	</PopperLayerForceMount>
+{:else if !forceMount}
+	<PopperLayer
+		{...mergedProps}
+		{...contentState.popperProps}
+		isStatic
+		present={contentState.root.opts.open.current}
+		{id}
+		{trapFocus}
+		{preventScroll}
+		loop
+		forceMount={false}
+	>
+		{#snippet popper({ props })}
+			{@const finalProps = mergeProps(props, {
+				style: getFloatingContentCSSVars("popover"),
+			})}
+			{#if child}
+				{@render child({ props: finalProps, ...contentState.snippetProps })}
+			{:else}
+				<div {...finalProps}>
+					{@render children?.()}
+				</div>
+			{/if}
+		{/snippet}
+	</PopperLayer>
+{/if}

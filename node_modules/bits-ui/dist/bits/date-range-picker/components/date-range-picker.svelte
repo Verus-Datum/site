@@ -1,0 +1,209 @@
+<script lang="ts">
+	import { box, mergeProps } from "svelte-toolbelt";
+	import type { DateValue } from "@internationalized/date";
+	import { useDateRangePickerRoot } from "../date-range-picker.svelte.js";
+	import type { DateRangePickerRootProps } from "../types.js";
+	import { noop } from "../../../internal/noop.js";
+	import { usePopoverRoot } from "../../popover/popover.svelte.js";
+	import { useDateRangeFieldRoot } from "../../date-range-field/date-range-field.svelte.js";
+	import FloatingLayer from "../../utilities/floating-layer/components/floating-layer.svelte";
+	import { useId } from "../../../internal/use-id.js";
+	import type { DateRange } from "../../../shared/index.js";
+	import { getDefaultDate } from "../../../internal/date-time/utils.js";
+	import { watch } from "runed";
+
+	let {
+		open = $bindable(false),
+		onOpenChange = noop,
+		value = $bindable(),
+		id = useId(),
+		ref = $bindable(null),
+		onValueChange = noop,
+		placeholder = $bindable(),
+		onPlaceholderChange = noop,
+		isDateUnavailable = () => false,
+		onInvalid = noop,
+		minValue,
+		maxValue,
+		disabled = false,
+		readonly = false,
+		granularity,
+		readonlySegments = [],
+		hourCycle,
+		locale = "en",
+		hideTimeZone = false,
+		required = false,
+		calendarLabel = "Event",
+		disableDaysOutsideMonth = true,
+		preventDeselect = false,
+		pagedNavigation = false,
+		weekStartsOn,
+		weekdayFormat = "narrow",
+		isDateDisabled = () => false,
+		fixedWeeks = false,
+		numberOfMonths = 1,
+		closeOnRangeSelect = true,
+		onStartValueChange = noop,
+		onEndValueChange = noop,
+		validate = noop,
+		errorMessageId,
+		child,
+		children,
+		...restProps
+	}: DateRangePickerRootProps = $props();
+
+	let startValue = $state<DateValue | undefined>(value?.start);
+	let endValue = $state<DateValue | undefined>(value?.end);
+
+	function handleDefaultValue() {
+		if (value !== undefined) return;
+		value = { start: undefined, end: undefined };
+	}
+
+	// SSR
+	handleDefaultValue();
+
+	/**
+	 * Covers an edge case where when a spread props object is reassigned,
+	 * the props are reset to their default values, which would make value
+	 * undefined which causes errors to be thrown.
+	 */
+	watch.pre(
+		() => value,
+		() => {
+			handleDefaultValue();
+		}
+	);
+
+	const defaultPlaceholder = getDefaultDate({
+		granularity,
+		defaultValue: value?.start,
+	});
+
+	function handleDefaultPlaceholder() {
+		if (placeholder !== undefined) return;
+		placeholder = defaultPlaceholder;
+	}
+
+	// SSR
+	handleDefaultPlaceholder();
+
+	/**
+	 * Covers an edge case where when a spread props object is reassigned,
+	 * the props are reset to their default values, which would make placeholder
+	 * undefined which causes errors to be thrown.
+	 */
+	watch.pre(
+		() => placeholder,
+		() => {
+			handleDefaultPlaceholder();
+		}
+	);
+
+	function onRangeSelect() {
+		if (closeOnRangeSelect) {
+			open = false;
+		}
+	}
+
+	const pickerRootState = useDateRangePickerRoot({
+		open: box.with(
+			() => open,
+			(v) => {
+				open = v;
+				onOpenChange(v);
+			}
+		),
+		value: box.with(
+			() => value as DateRange,
+			(v) => {
+				value = v;
+				onValueChange(v);
+			}
+		),
+		placeholder: box.with(
+			() => placeholder as DateValue,
+			(v) => {
+				placeholder = v;
+				onPlaceholderChange(v as DateValue);
+			}
+		),
+		isDateUnavailable: box.with(() => isDateUnavailable),
+		minValue: box.with(() => minValue),
+		maxValue: box.with(() => maxValue),
+		disabled: box.with(() => disabled),
+		readonly: box.with(() => readonly),
+		granularity: box.with(() => granularity),
+		readonlySegments: box.with(() => readonlySegments),
+		hourCycle: box.with(() => hourCycle),
+		locale: box.with(() => locale),
+		hideTimeZone: box.with(() => hideTimeZone),
+		required: box.with(() => required),
+		calendarLabel: box.with(() => calendarLabel),
+		disableDaysOutsideMonth: box.with(() => disableDaysOutsideMonth),
+		preventDeselect: box.with(() => preventDeselect),
+		pagedNavigation: box.with(() => pagedNavigation),
+		weekStartsOn: box.with(() => weekStartsOn),
+		weekdayFormat: box.with(() => weekdayFormat),
+		isDateDisabled: box.with(() => isDateDisabled),
+		fixedWeeks: box.with(() => fixedWeeks),
+		numberOfMonths: box.with(() => numberOfMonths),
+		onRangeSelect: box.with(() => onRangeSelect),
+		startValue: box.with(
+			() => startValue,
+			(v) => {
+				startValue = v;
+				onStartValueChange(v);
+			}
+		),
+		endValue: box.with(
+			() => endValue,
+			(v) => {
+				endValue = v;
+				onEndValueChange(v);
+			}
+		),
+		defaultPlaceholder,
+	});
+
+	usePopoverRoot({
+		open: pickerRootState.opts.open,
+	});
+
+	const fieldRootState = useDateRangeFieldRoot({
+		value: pickerRootState.opts.value,
+		disabled: pickerRootState.opts.disabled,
+		readonly: pickerRootState.opts.readonly,
+		readonlySegments: pickerRootState.opts.readonlySegments,
+		validate: box.with(() => validate),
+		minValue: pickerRootState.opts.minValue,
+		maxValue: pickerRootState.opts.maxValue,
+		granularity: pickerRootState.opts.granularity,
+		hideTimeZone: pickerRootState.opts.hideTimeZone,
+		hourCycle: pickerRootState.opts.hourCycle,
+		locale: pickerRootState.opts.locale,
+		required: pickerRootState.opts.required,
+		placeholder: pickerRootState.opts.placeholder,
+		id: box.with(() => id),
+		ref: box.with(
+			() => ref,
+			(v) => (ref = v)
+		),
+		startValue: pickerRootState.opts.startValue,
+		endValue: pickerRootState.opts.endValue,
+		onInvalid: box.with(() => onInvalid),
+		errorMessageId: box.with(() => errorMessageId),
+	});
+
+	const mergedProps = $derived(mergeProps(restProps, fieldRootState.props));
+</script>
+
+<FloatingLayer>
+	{#if child}
+		{@render child({ props: mergedProps })}
+	{:else}
+		<div {...mergedProps}>
+			{@render children?.()}
+		</div>
+	{/if}
+</FloatingLayer>

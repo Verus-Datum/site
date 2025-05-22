@@ -1,0 +1,106 @@
+<script lang="ts">
+	import { box, mergeProps } from "svelte-toolbelt";
+	import type { TooltipContentProps } from "../types.js";
+	import { useTooltipContent } from "../tooltip.svelte.js";
+	import { useId } from "../../../internal/use-id.js";
+	import PopperLayer from "../../utilities/popper-layer/popper-layer.svelte";
+	import { getFloatingContentCSSVars } from "../../../internal/floating-svelte/floating-utils.svelte.js";
+	import PopperLayerForceMount from "../../utilities/popper-layer/popper-layer-force-mount.svelte";
+	import { noop } from "../../../internal/noop.js";
+
+	let {
+		children,
+		child,
+		id = useId(),
+		ref = $bindable(null),
+		side = "top",
+		sideOffset = 0,
+		align = "center",
+		avoidCollisions = true,
+		arrowPadding = 0,
+		sticky = "partial",
+		hideWhenDetached = false,
+		collisionPadding = 0,
+		onInteractOutside = noop,
+		onEscapeKeydown = noop,
+		forceMount = false,
+		...restProps
+	}: TooltipContentProps = $props();
+
+	const contentState = useTooltipContent({
+		id: box.with(() => id),
+		ref: box.with(
+			() => ref,
+			(v) => (ref = v)
+		),
+		onInteractOutside: box.with(() => onInteractOutside),
+		onEscapeKeydown: box.with(() => onEscapeKeydown),
+	});
+
+	const floatingProps = $derived({
+		side,
+		sideOffset,
+		align,
+		avoidCollisions,
+		arrowPadding,
+		sticky,
+		hideWhenDetached,
+		collisionPadding,
+	});
+
+	const mergedProps = $derived(mergeProps(restProps, floatingProps, contentState.props));
+</script>
+
+{#if forceMount}
+	<PopperLayerForceMount
+		{...mergedProps}
+		{...contentState.popperProps}
+		enabled={contentState.root.opts.open.current}
+		{id}
+		trapFocus={false}
+		loop={false}
+		preventScroll={false}
+		forceMount={true}
+	>
+		{#snippet popper({ props, wrapperProps })}
+			{@const mergedProps = mergeProps(props, {
+				style: getFloatingContentCSSVars("tooltip"),
+			})}
+			{#if child}
+				{@render child({ props: mergedProps, wrapperProps, ...contentState.snippetProps })}
+			{:else}
+				<div {...wrapperProps}>
+					<div {...mergedProps}>
+						{@render children?.()}
+					</div>
+				</div>
+			{/if}
+		{/snippet}
+	</PopperLayerForceMount>
+{:else if !forceMount}
+	<PopperLayer
+		{...mergedProps}
+		{...contentState.popperProps}
+		present={contentState.root.opts.open.current}
+		{id}
+		trapFocus={false}
+		loop={false}
+		preventScroll={false}
+		forceMount={false}
+	>
+		{#snippet popper({ props, wrapperProps })}
+			{@const mergedProps = mergeProps(props, {
+				style: getFloatingContentCSSVars("tooltip"),
+			})}
+			{#if child}
+				{@render child({ props: mergedProps, wrapperProps, ...contentState.snippetProps })}
+			{:else}
+				<div {...wrapperProps}>
+					<div {...mergedProps}>
+						{@render children?.()}
+					</div>
+				</div>
+			{/if}
+		{/snippet}
+	</PopperLayer>
+{/if}

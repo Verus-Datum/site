@@ -1,0 +1,32 @@
+<script lang="ts">
+	import { box, mergeProps } from "svelte-toolbelt";
+	import type { SwitchThumbProps } from "../types.js";
+	import { useSwitchThumb } from "../switch.svelte.js";
+	import { useId } from "../../../internal/use-id.js";
+
+	let {
+		child,
+		children,
+		ref = $bindable(null),
+		id = useId(),
+		...restProps
+	}: SwitchThumbProps = $props();
+
+	const thumbState = useSwitchThumb({
+		id: box.with(() => id),
+		ref: box.with(
+			() => ref,
+			(v) => (ref = v)
+		),
+	});
+
+	const mergedProps = $derived(mergeProps(restProps, thumbState.props));
+</script>
+
+{#if child}
+	{@render child({ props: mergedProps, ...thumbState.snippetProps })}
+{:else}
+	<span {...mergedProps}>
+		{@render children?.(thumbState.snippetProps)}
+	</span>
+{/if}

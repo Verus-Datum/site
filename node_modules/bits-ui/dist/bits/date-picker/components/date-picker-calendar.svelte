@@ -1,0 +1,56 @@
+<script lang="ts">
+	import { box, mergeProps } from "svelte-toolbelt";
+	import type { DatePickerCalendarProps } from "../types.js";
+	import { DatePickerRootContext } from "../date-picker.svelte.js";
+	import { useId } from "../../../internal/use-id.js";
+	import { useCalendarRoot } from "../../calendar/calendar.svelte.js";
+
+	let {
+		children,
+		child,
+		id = useId(),
+		ref = $bindable(null),
+		...restProps
+	}: DatePickerCalendarProps = $props();
+
+	const datePickerRootState = DatePickerRootContext.get();
+
+	const calendarState = useCalendarRoot({
+		id: box.with(() => id),
+		ref: box.with(
+			() => ref,
+			(v) => (ref = v)
+		),
+		calendarLabel: datePickerRootState.opts.calendarLabel,
+		fixedWeeks: datePickerRootState.opts.fixedWeeks,
+		isDateDisabled: datePickerRootState.opts.isDateDisabled,
+		isDateUnavailable: datePickerRootState.opts.isDateUnavailable,
+		locale: datePickerRootState.opts.locale,
+		numberOfMonths: datePickerRootState.opts.numberOfMonths,
+		pagedNavigation: datePickerRootState.opts.pagedNavigation,
+		preventDeselect: datePickerRootState.opts.preventDeselect,
+		readonly: datePickerRootState.opts.readonly,
+		type: box.with(() => "single"),
+		weekStartsOn: datePickerRootState.opts.weekStartsOn,
+		weekdayFormat: datePickerRootState.opts.weekdayFormat,
+		disabled: datePickerRootState.opts.disabled,
+		disableDaysOutsideMonth: datePickerRootState.opts.disableDaysOutsideMonth,
+		maxValue: datePickerRootState.opts.maxValue,
+		minValue: datePickerRootState.opts.minValue,
+		placeholder: datePickerRootState.opts.placeholder,
+		value: datePickerRootState.opts.value,
+		onDateSelect: datePickerRootState.opts.onDateSelect,
+		initialFocus: datePickerRootState.opts.initialFocus,
+		defaultPlaceholder: datePickerRootState.opts.defaultPlaceholder,
+	});
+
+	const mergedProps = $derived(mergeProps(restProps, calendarState.props));
+</script>
+
+{#if child}
+	{@render child({ props: mergedProps, ...calendarState.snippetProps })}
+{:else}
+	<div {...mergedProps}>
+		{@render children?.(calendarState.snippetProps)}
+	</div>
+{/if}

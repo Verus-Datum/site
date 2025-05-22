@@ -81,7 +81,7 @@
             <img src={Logo} alt="Verus Datum" class="w-10 h-10 rounded-lg" />
             <h1 class="font-bold">Verus Datum</h1>
         </a>
-        <section class="{page.url.pathname.startsWith("/profile") ? "hidden" : "hidden md:flex"} relative h-full w-full md:w-[25rem] items-center justify-center flex-row">
+        <section class="{page.url.pathname !== "/" ? "hidden" : "hidden md:flex"} relative h-full w-full md:w-[25rem] items-center justify-center flex-row">
             <div
                 class="absolute bottom-0 h-0.5 bg-black transition-all duration-300"
                 style:width="{active === 'business' ? '50%' : '50%'}"
