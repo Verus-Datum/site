@@ -21,5 +21,7 @@ spec:
       containers:
         - name: gui
           image: "{{ .Values.gui.image.repository }}:{{ .Values.gui.image.tag }}"
+          env:
+{{ toYaml .Values.gui.env | indent 12 }}
           ports:
             - containerPort: {{ .Values.gui.port }}

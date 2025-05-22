@@ -4,6 +4,9 @@ gui:
   image:
     repository: ghcr.io/verus-datum/gui
     tag: latest
+  env:
+  - name: VITE_API_URL
+    value: "https://vd.harville.dev/api:8081"
   replicaCount: 2
   port: 3000
   hpa:
@@ -16,6 +19,11 @@ api:
   image:
     repository: ghcr.io/verus-datum/api
     tag: latest
+  env:
+  - name: VITE_API_URL
+    value: "https://vd.harville.dev/api:8081"
+  - name: DATABASE_URL
+    value: "postgresql://admin:password@vd-db:5432/vd_db"
   replicaCount: 2
   port: 8081
   hpa:
@@ -28,6 +36,7 @@ db:
   image:
     repository: ghcr.io/verus-datum/db
     tag: latest
+  env: []
   replicaCount: 2
   port: 5432
   hpa:

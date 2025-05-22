@@ -17,5 +17,5 @@
 </Navbar>
 
 <main class="">
-    {@render children()}
+    <slot />
 </main>

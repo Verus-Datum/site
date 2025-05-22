@@ -46,7 +46,7 @@ jobs:
           password: ${{ secrets.PAT_TOKEN}}
 
       - name: Build Images
-        run: docker compose build
+        run: docker compose build --no-cache
 
       - name: Push Images
         run: docker compose push
