@@ -17,3 +17,7 @@ class UserResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+class HealthCheckResponse(BaseModel):
+    db_alive: bool
+    result: int
