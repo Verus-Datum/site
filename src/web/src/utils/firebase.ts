@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getAuth, getIdToken, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, getIdToken, onAuthStateChanged, signOut } from 'firebase/auth';
 import { currentUser } from '$states/CurrentUser.svelte';
 import type { User } from '$types/User';
 
@@ -23,8 +23,8 @@ onAuthStateChanged(auth, async (firebaseUser) => {
 
 	if (firebaseUser) {
 		const token = await getIdToken(firebaseUser);
-		// call api
-		const user = {} as User; // await res.json();
-		currentUser.user = user;
+		if ((await currentUser.getUserInfo()) === false) {
+			signOut(auth);
+		}
 	}
 });

@@ -10,12 +10,17 @@
     import { auth } from '$utils/firebase';
     import { toast } from 'svelte-sonner';
 	import { goto } from "$app/navigation";
-
+	import { currentUser } from "$states/CurrentUser.svelte";
+    
     type PageData = {
         data: {
             form: SuperValidated<Infer<RegistrationSchema>>
         }
     }
+
+    $effect(() => {
+        currentUser.requiresNotAuthed();
+    })
 
     let { data }: PageData = $props();
     let loggingIn = $state(false);

@@ -8,9 +8,15 @@
     import EllipisVertical from "@lucide/svelte/icons/ellipsis-vertical";
     import ArrowRight from "@lucide/svelte/icons/arrow-right";
     import ArrowUpRight from "@lucide/svelte/icons/arrow-up-right"
+    import { currentUser } from "$states/CurrentUser.svelte";
+    import { onMount } from "svelte";
 
     import { flyAndScale } from "$utils/shadcn";
 	import { fly } from "svelte/transition";
+
+    $effect(() => {
+        currentUser.requiresAuthed();
+    })
 </script>
 
 {#snippet FlatCard(title: string, subtext: string, color: string)}
@@ -41,7 +47,7 @@
 <main in:fly={{ y: 20, duration: 650 }} class="md:pt-20 pt-8 pb-8 w-full md:w-[100%] lg:w-[80%] 2xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-start justify-start">
     <header class="pt-20 w-full">
         <h1 class="text-5xl md:text-left text-center w-full font-semibold">
-            Hello William
+            Hello {currentUser.user?.first_name}
         </h1>
     </header>
     

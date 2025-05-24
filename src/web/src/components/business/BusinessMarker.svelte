@@ -36,7 +36,10 @@
 		if (!map || !container) return;
         
 		const marker = new maplibregl.Marker({ element: container })
-			.setLngLat(business.lngLat)
+			.setLngLat({
+                lng: business.longitude,
+                lat: business.latitude
+            })
 			.addTo(map);
 
 		return () => marker.remove();
@@ -77,7 +80,7 @@
 
     <section class="py-5">
         <h1 class="font-semibold text-primary text-2xl">
-            {formatCurrency(business.financials.askingPrice)}
+            {formatCurrency(business.asking_price)}
         </h1>
         <p class="font-semibold text-muted-foreground/65">
             asking price
@@ -123,7 +126,7 @@
             {business.name}
         </h1>
         <h2 class="flex flex-row text-muted-foreground font-medium gap-2 items-center">
-            {business.contactMethod}
+            {business.contact_method}
         </h2>
     </header>
 
@@ -144,12 +147,12 @@
             <Cash size={24} />
             Revenue:
         </div>
-        <div class="text-left font-medium">{formatCurrency(business.financials.revenuePerYr)} / yr</div>
+        <div class="text-left font-medium">{formatCurrency(business.revenue_per_yr)} / yr</div>
     </div>
 
     <div class="py-6">
         <h1 class="font-semibold text-primary text-2xl">
-            {formatCurrency(business.financials.askingPrice)}
+            {formatCurrency(business.asking_price)}
         </h1>
         <h2 class="font-medium text-muted-foreground">
             asking price

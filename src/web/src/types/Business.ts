@@ -1,12 +1,6 @@
 import type { LngLat, LngLatLike } from 'maplibre-gl';
 import { fakerEN_US as faker } from '@faker-js/faker';
-
-type Financials = {
-	askingPrice: number;
-	revenuePerYr: number;
-	grossPerYr: number;
-	profitPerYr: number;
-};
+import type { User } from './User';
 
 type Media = {
 	url: string;
@@ -14,14 +8,24 @@ type Media = {
 };
 
 type Business = {
+	id: number;
 	name: string;
 	address: string;
 	market: string;
-	lngLat: LngLatLike;
-	contactMethod: string;
+	contact_method: string;
 
-	financials: Financials;
-	media: Media[];
+	latitude: number;
+	longitude: number;
+
+	asking_price: number;
+	revenue_per_yr: number;
+	gross_per_yr: number;
+	profit_per_yr: number;
+
+	is_public: boolean;
+
+	// user: User;
+	// user_id: number;
 };
 
 function generateFakeBusiness(
@@ -30,50 +34,41 @@ function generateFakeBusiness(
 	min_lat: number,
 	max_lat: number
 ): Business {
-	const lngLat: LngLatLike = {
-		lng: parseFloat(faker.location.longitude({ min: min_lng, max: max_lng }).toString()),
-		lat: parseFloat(faker.location.latitude({ min: min_lat, max: max_lat }).toString())
-	};
+	const longitude = parseFloat(
+		faker.location.longitude({ min: min_lng, max: max_lng }).toString()
+	);
+	const latitude = parseFloat(faker.location.latitude({ min: min_lat, max: max_lat }).toString());
 
-	const askingPrice = faker.number.int({ min: 10, max: 200 }) * 5000;
-
-	const financials = {
-		askingPrice,
-		revenuePerYr: faker.number.int({ min: 100000, max: 5000000 }),
-		grossPerYr: faker.number.int({ min: 80000, max: 4500000 }),
-		profitPerYr: faker.number.int({ min: 20000, max: 1500000 })
-	};
-
-	const media = Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => ({
-		url: faker.image.url(),
-		type: faker.helpers.arrayElement(['image', 'video'])
-	}));
-
-	const market = faker.helpers.arrayElement([
-		'Retail',
-		'Ecommerce',
-		'Food & Beverage',
-		'Healthcare',
-		'Technology',
-		'Real Estate',
-		'Hospitality',
-		'Automotive',
-		'Education',
-		'Construction',
-		'Finance',
-		'Entertainment'
-	]);
+	const asking_price = faker.number.int({ min: 10, max: 200 }) * 5000;
 
 	return {
+		id: faker.number.int({ min: 1, max: 100000 }), // or generate with server/db
 		name: faker.company.name(),
 		address: faker.location.streetAddress(true),
-		lngLat,
-		financials,
-		media,
-		market,
-		contactMethod: 'Direct Owner'
+		market: faker.helpers.arrayElement([
+			'Retail',
+			'Ecommerce',
+			'Food & Beverage',
+			'Healthcare',
+			'Technology',
+			'Real Estate',
+			'Hospitality',
+			'Automotive',
+			'Education',
+			'Construction',
+			'Finance',
+			'Entertainment'
+		]),
+		contact_method: 'Direct Owner',
+		latitude,
+		longitude,
+		asking_price,
+		revenue_per_yr: faker.number.int({ min: 100000, max: 5000000 }),
+		gross_per_yr: faker.number.int({ min: 80000, max: 4500000 }),
+		profit_per_yr: faker.number.int({ min: 20000, max: 1500000 }),
+		is_public: faker.datatype.boolean()
 	};
 }
 
 export { generateFakeBusiness };
-export type { Business, Media, Financials };
+export type { Business };

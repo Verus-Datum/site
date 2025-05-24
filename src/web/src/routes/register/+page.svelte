@@ -9,9 +9,11 @@
     import { createUserWithEmailAndPassword } from 'firebase/auth';
     import { auth } from '$utils/firebase';
     import { toast } from 'svelte-sonner';
-    import { API_URl } from "$utils/api";
+    import { API_URL } from "$utils/api";
 	import { onMount } from "svelte";
 	import { currentUser } from "$states/CurrentUser.svelte";
+    import type { User } from "$types/User";
+	import { goto } from "$app/navigation";
 
     type PageData = {
         data: {
@@ -27,8 +29,8 @@
     });
     const { form: formData, enhance } = form;
 
-    onMount(() => {
-        console.log(`${API_URl}/api/users`)
+    $effect(() => {
+        currentUser.requiresNotAuthed();
     })
 
     async function handleSubmit(event) {
@@ -43,23 +45,20 @@
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-            // const res = await fetch(`${API_URl}/users`, {
-            const res = await fetch("http://localhost:8081/users", {
+            const res = await fetch(`${API_URL}/users`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    first_name: "lebron",
-                    last_name: "james",
+                    first_name: "William",
+                    last_name: "Neel",
                     email: email,
                     firebase_uid: userCredential.user.uid,
                 }),
-                // credentials: 'omit',
             })
 
-            const user = await res.json();
-            console.log(user);
+            const user = await res.json() as User;
             currentUser.firebase = userCredential.user;
             currentUser.user = user;
 
@@ -67,7 +66,7 @@
                 description: "You can now browse and contact business owners"
             })
             registering = false;
-            console.log('User created:', userCredential.user);
+            goto("/")
         } catch (error) {
             console.error('Firebase auth error:', error);
             toast.error(error.message)

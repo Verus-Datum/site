@@ -1,3 +1,3 @@
-export const API_URl = import.meta.env.DEV
-	? 'http://localhost:8081'
+export const API_URL = import.meta.env.DEV
+	? 'http://localhost:8000'
 	: 'https://vd.harville.dev/api';

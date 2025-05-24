@@ -1,59 +1,59 @@
 imagePullSecret: ghcr-registry
 
 gui:
-  image:
-    repository: ghcr.io/verus-datum/gui
-    tag: latest
-  env:
-  - name: VITE_API_URL
-    value: "https://vd.harville.dev/api:8081"
-  replicaCount: 2
-  port: 3000
-  hpa:
-    enabled: true
-    minReplicas: 1
-    maxReplicas: 3
-    targetCPUUtilizationPercentage: 80
+    image:
+        repository: ghcr.io/verus-datum/gui
+        tag: latest
+    env:
+        - name: VITE_API_URL
+          value: "https://vd.harville.dev/api:8081"
+    replicaCount: 2
+    port: 3000
+    hpa:
+        enabled: true
+        minReplicas: 1
+        maxReplicas: 3
+        targetCPUUtilizationPercentage: 80
 
 api:
-  image:
-    repository: ghcr.io/verus-datum/api
-    tag: latest
-  env:
-  - name: VITE_API_URL
-    value: "https://vd.harville.dev/api:8081"
-  - name: DATABASE_URL
-    value: "postgresql://admin:password@vd-db:5432/vd_db"
-  replicaCount: 2
-  port: 8081
-  hpa:
-    enabled: true
-    minReplicas: 1
-    maxReplicas: 3
-    targetCPUUtilizationPercentage: 80
+    image:
+        repository: ghcr.io/verus-datum/api
+        tag: latest
+    env:
+        - name: VITE_API_URL
+          value: "https://vd.harville.dev/api:8081"
+        - name: DATABASE_URL
+          value: "postgresql://admin:password@vd-db:5432/vd_db"
+    replicaCount: 2
+    port: 8081
+    hpa:
+        enabled: true
+        minReplicas: 1
+        maxReplicas: 3
+        targetCPUUtilizationPercentage: 80
 
 db:
-  image:
-    repository: ghcr.io/verus-datum/db
-    tag: latest
-  env: []
-  replicaCount: 2
-  port: 5432
-  hpa:
-    enabled: true
-    minReplicas: 1
-    maxReplicas: 3
-    targetCPUUtilizationPercentage: 80
+    image:
+        repository: ghcr.io/verus-datum/db
+        tag: latest
+    env: []
+    replicaCount: 2
+    port: 5432
+    hpa:
+        enabled: true
+        minReplicas: 1
+        maxReplicas: 3
+        targetCPUUtilizationPercentage: 80
 
 ingress:
-  enabled: true
-  ingressClassName: nginx
-  annotations:
-    kubernetes.io/ingress.class: nginx
-  hosts:
-    - vd.harville.dev
-  path: /
-  tls:
-    - secretName: harvilledev
-      hosts:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+        kubernetes.io/ingress.class: nginx
+    hosts:
         - vd.harville.dev
+    path: /
+    tls:
+        - secretName: harvilledev
+          hosts:
+              - vd.harville.dev

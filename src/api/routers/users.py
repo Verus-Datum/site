@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from api.db import get_db
-from api.models import User
-from api.schemas import UserCreate, UserResponse
+from src.api.db import get_db
+from src.api.models import User
+from src.api.schemas import UserCreate, UserResponse
 
 router = APIRouter(
-    prefix="/users", tags=["users"],
+    tags=["users"],
 )
 
 @router.post(
@@ -32,12 +32,12 @@ def create_user(user_in: UserCreate, db: Session = Depends(get_db)):
     return user
 
 @router.get(
-    "/{user_id}",
+    "/{firebase_uid}",
     response_model=UserResponse,
     status_code=status.HTTP_200_OK,
 )
-def read_user(user_id: int, db: Session = Depends(get_db)):
-    user = db.query(User).get(user_id)
+def read_user(firebase_uid: str, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.firebase_uid == firebase_uid).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
