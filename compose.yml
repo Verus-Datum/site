@@ -20,7 +20,7 @@ services:
             - 8081:8081
         environment:
             - VITE_API_URL=https://vd.harville.dev/api:8081
-            - DATABASE_URL=postgresql://admin:password@vd-db:5432/vd_db
+            - DATABASE_URL=postgresql://admin:password@localhost:5432/vd_db
         depends_on:
             - vd-db
 

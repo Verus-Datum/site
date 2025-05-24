@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0","wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "vd-api"
+name = "vd-api-py"
 version = "0.1.0"
 description = "Verus Datum FastAPI backend"
 requires-python = ">=3.11"
@@ -27,7 +27,6 @@ dependencies = [ # uv add -r deploy/api/requirements.txt
     "markupsafe==3.0.2",
     "mdurl==0.1.2",
     "orjson==3.10.18",
-    "psycopg2==2.9.10",
     "pydantic==2.11.4",
     "pydantic-core==2.33.2",
     "pydantic-extra-types==2.10.4",

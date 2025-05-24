@@ -2,17 +2,17 @@ from fastapi import Depends, FastAPI, HTTPException, APIRouter
 from sqlalchemy import text
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.routers import health
-from api.cors import API_URL, configure_cors
-from api.db import get_db
+from src.api.routers import health
+from src.api.cors import API_URL, configure_cors
+from src.api.db import get_db
 
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from api.db import get_db
-from api.models import User
-from api.schemas import UserCreate, UserResponse
+from src.api.db import get_db
+from src.api.models import User
+from src.api.schemas import UserCreate, UserResponse
 
 
 # def create_app() -> FastAPI:
@@ -50,9 +50,15 @@ def create_user(user_in: UserCreate, db: Session = Depends(get_db)):
         email=user_in.email,
         firebase_uid=user_in.firebase_uid,
     )
-    db.add(user)
-    db.commit()
-    db.refresh(user)
+    try:
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
     return user
 
 
