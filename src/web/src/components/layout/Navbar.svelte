@@ -102,7 +102,9 @@
             </button>
         </section>    
         <section class="flex flex-row gap-6 flex">
-            <NotificationsDropdown />
+            <!--
+                <NotificationsDropdown />
+            -->
             <UserDropdown />
         </section>
     </nav>

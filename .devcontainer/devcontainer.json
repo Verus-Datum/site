@@ -3,9 +3,9 @@
     "image": "mcr.microsoft.com/devcontainers/base:noble",
     "features": {
         "ghcr.io/eliises/devcontainer-features/devcontainers-cli:1": {},
-        // "ghcr.io/devcontainers-extra/features/apt-get-packages": {
-        //     "packages": "vim,tmux"
-        // },
+        "ghcr.io/devcontainers-extra/features/apt-get-packages": {
+            "packages": "vim,tmux,build-essential,libpq-dev,python3-dev"
+        },
         "ghcr.io/devcontainers/features/common-utils:2": {
             "configureZshAsDefaultShell": true
         },
