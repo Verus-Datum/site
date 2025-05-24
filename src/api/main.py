@@ -1,38 +1,24 @@
-import os
+from fastapi import FastAPI, Depends, HTTPException
+from sqlalchemy import text
 
-from fastapi import FastAPI, status, Depends, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import sessionmaker
+from cors import configure_cors
+from db import get_db
 
-app = FastAPI(
-    root_path="/api",
-)
+from routers import health, users
 
-API_URL = os.environ.get("VITE_API_URL")
-DATABASE_URL = os.environ.get("DATABASE_URL")
 
-engine = create_engine(DATABASE_URL, echo=True)
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-print(f"{API_URL=}")
-if "https" not in API_URL:
-    # Production sets CORS in nginx, so we wouldnt set it here again.
-    print("\nConfiguring CORS\n")
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["*"],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
+def create_app() -> FastAPI:
+    app = FastAPI(
+        root_path="/api",
     )
+    configure_cors(app)
+    app.include_router(health.router, prefix="/health") # /health/{db, serv2, etc.}
+    app.include_router(users.router) # /users
+    return app
+
+app = create_app()
+
+
 
 
 @app.get("/")
@@ -47,3 +33,4 @@ def health_check(db=Depends(get_db)):
         return {"db_alive": True, "result": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"DB error: {e}")
+
