@@ -1,13 +1,15 @@
 import os
+
 import pytest
+from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from fastapi.testclient import TestClient
 
 os.environ["DATABASE_URL"] = "sqlite:///:memory:"
 
-from db import Base, get_db, engine as real_engine
-from main import create_app
+from api.db import Base, get_db
+from api.db import engine as real_engine
+from api.main import create_app
 
 TEST_SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 test_engine = create_engine(
@@ -45,4 +47,3 @@ def client(db_session):
     app.dependency_overrides[get_db] = override_get_db
     with TestClient(app) as c:
         yield c
-

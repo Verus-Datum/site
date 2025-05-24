@@ -1,10 +1,9 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy import text
 
-from cors import configure_cors
-from db import get_db
-
-from routers import health, users
+from api.cors import configure_cors
+from api.db import get_db
+from api.routers import health, users
 
 
 def create_app() -> FastAPI:
@@ -33,4 +32,3 @@ def health_check(db=Depends(get_db)):
         return {"db_alive": True, "result": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"DB error: {e}")
-

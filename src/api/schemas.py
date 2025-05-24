@@ -1,5 +1,7 @@
-from pydantic import BaseModel, EmailStr
 from datetime import datetime
+
+from pydantic import BaseModel, ConfigDict, EmailStr
+
 
 class UserCreate(BaseModel):
     first_name: str
@@ -15,8 +17,7 @@ class UserResponse(BaseModel):
     firebase_uid: str
     created_at: datetime
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 class HealthCheckResponse(BaseModel):
     db_alive: bool

@@ -1,5 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime, func
-from db import Base
+from sqlalchemy import Column, DateTime, Integer, String, func
+
+from api.db import Base
+
 
 class User(Base):
     __tablename__ = "users"
@@ -15,4 +17,3 @@ class User(Base):
         nullable=False,
         index=True,
     )
-

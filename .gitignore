@@ -4,3 +4,5 @@ package*.json
 node_modules
 __pycache__/
 .venv/
+*.egg*info/
+*/**/uv.lock
