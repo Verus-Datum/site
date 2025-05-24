@@ -21,7 +21,7 @@
 
     let { data }: PageData = $props();
     let registering = $state(false);
- 
+
     const form = superForm(data.form, {
         validators: zodClient(registrationSchema),
     });
@@ -30,20 +30,21 @@
     onMount(() => {
         console.log(`${API_URl}/api/users`)
     })
-    
+
     async function handleSubmit(event) {
         event.preventDefault();
         const result = await form.validateForm();
         if (!result.valid) return;
         registering = true;
-        
+
         const email = $formData.email;
         const password = $formData.password;
-        
+
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            
-            const res = await fetch(`${API_URl}/users/users/`, {
+
+            // const res = await fetch(`${API_URl}/users`, {
+            const res = await fetch("http://localhost:8081/users", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,7 +54,8 @@
                     last_name: "james",
                     email: email,
                     firebase_uid: userCredential.user.uid,
-                })
+                }),
+                // credentials: 'omit',
             })
 
             const user = await res.json();
@@ -101,7 +103,7 @@
             {#if registering}
                 <LoaderCircle class="animate-spin" />
             {/if}
-        </Form.Button>        
+        </Form.Button>
         <a class="text-center text-primary text-sm" href="/login">
             Already have an account? Log in here
         </a>

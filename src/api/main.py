@@ -1,41 +1,68 @@
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, APIRouter
 from sqlalchemy import text
 from fastapi.middleware.cors import CORSMiddleware
 
+from api.routers import health
 from api.cors import API_URL, configure_cors
 from api.db import get_db
-from api.routers import health, users
 
 
-def create_app() -> FastAPI:
-    app = FastAPI(
-        root_path="/" if "https" not in API_URL else "/api",
-    )
+from fastapi import APIRouter, Depends, HTTPException, status
+from sqlalchemy.orm import Session
 
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=["http://localhost:3000"],      # or ["*"] during development
-        allow_credentials=True,
-        allow_methods=["*"],          # <-- enables OPTIONS, GET, POST, etc.
-        allow_headers=["*"],          # <-- lets your client send content-type, authorization, etc.
-    ) # im going to kill myself
+from api.db import get_db
+from api.models import User
+from api.schemas import UserCreate, UserResponse
 
-    # no need to call configure_cors any more (un   less it does something else)
-    app.include_router(health.router, prefix="/health")
-    app.include_router(users.router, prefix="/users")
-    return app
 
-app = create_app()
+# def create_app() -> FastAPI:
+app = FastAPI(
+    root_path="/" if "https" not in API_URL else "/api",
+)
+configure_cors(app)
+
+    # app.include_router(health.router, prefix="/health")
+    # return app
+
+
+# app = create_app()
+
 
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
 
-@app.get("/health/db")
-def health_check(db=Depends(get_db)):
-    try:
-        result = db.execute(text("SELECT 1")).scalar()
-        return {"db_alive": True, "result": result}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"DB error: {e}")
+@app.post(
+    "/users",
+    response_model=UserResponse,
+    status_code=status.HTTP_201_CREATED,
+)
+def create_user(user_in: UserCreate, db: Session = Depends(get_db)):
+    if db.query(User).filter(User.email == user_in.email).first():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Email already registered"
+        )
+    user = User(
+        first_name=user_in.first_name,
+        last_name=user_in.last_name,
+        email=user_in.email,
+        firebase_uid=user_in.firebase_uid,
+    )
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return user
+
+
+@app.get(
+    "/{user_id}",
+    response_model=UserResponse,
+    status_code=status.HTTP_200_OK,
+)
+def read_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(User).get(user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
