@@ -13,6 +13,7 @@
 
     import { flyAndScale } from "$utils/shadcn";
 	import { fly } from "svelte/transition";
+	import ListingCard from "$components/business/ListingCard.svelte";
 
     $effect(() => {
         currentUser.requiresAuthed();
@@ -56,64 +57,28 @@
             <h2 class="font-semibold text-xl">
                 My Listings
             </h2>
-            <button class="flex flex-row gap-2 text-base text-primary hover:text-primary/80 font-medium duration-200">
+            <a href="/listings/create" class="flex flex-row gap-2 text-base text-primary hover:text-primary/80 font-medium duration-200">
                 <Plus size={24} />
                 Add Listing
-            </button>
+            </a>
         </header>
 
-        <div class="rounded-xl border w-full p-6 flex flex-col md:flex-row gap-6 shadow-ui">
-            <img src="https://www.petitpalais.paris.fr/sites/default/files/content/images/274a7179_0.jpg" class="w-full md:w-96 shrink-0 rounded-lg" />
-            <header class="flex flex-col py-2 justify-between w-full relative">
-                <h1 class="text-3xl pb-4 font-semibold w-full flex items-center justify-between">
-                    Capital One Cafe
-                    <button class="text-muted-foreground hover:text-muted-foreground/80">
-                        <EllipisVertical size={24} />
-                    </button>
-                </h1>
-
-                <section class="flex flex-col gap-4">
-                    <div class="flex items-center gap-3 text-muted-foreground font-medium">
-                        <MapPin size={24} />
-                        3309 Michele Ln, Bowie, MD 20621
-                    </div>
-
-                    <div class="flex items-center gap-3 text-muted-foreground font-medium">
-                        <Provider size={24} />
-                        Retail
-                    </div>
-
-                    <div class="flex items-center gap-3 text-muted-foreground font-medium">
-                        <Eye size={24} />
-                        2,466 viewed
-                    </div>
-
-                    <div class="flex items-center gap-3 text-muted-foreground font-medium">
-                        <Phone size={24} />
-                        26 requested contact
-                    </div>
-                </section>
-
-                <div class="flex flex-col gap-2 mt-6 md:hidden">
-                    <Button class="text-base bg-blue-flat text-blue-foreground hover:bg-blue-muted/30 font-normal w-full">
-                        View
-                    </Button>
-                    <Button class="text-base font-normal w-full">
-                        Request Referral
-                    </Button>
+        <div class="flex flex-col gap-6 w-full max-h-[50rem] overflow-auto">
+            {#if currentUser.user?.listings.length > 0}
+                {#each currentUser.user?.listings as listing}
+                    <ListingCard listing={listing} />
+                {/each}
+            {:else}
+                <div class="w-full border rounded-xl h-80 flex items-center justify-center flex-col gap-2">
+                    <h1 class="font-semibold text-xl">
+                        No listings yet
+                    </h1>
+                    <h2 class="text-muted-foreground">
+                        Submit a listing for review
+                    </h2>
                 </div>
-
-                <div class="hidden md:flex justify-end gap-2 mt-4">
-                    <Button class="text-base text-primary hover:text-primary/80 bg-transparent hover:bg-transparent font-normal">
-                        View
-                    </Button>
-                    <Button class="text-base font-normal">
-                        Request Referral
-                    </Button>
-                </div>
-            </header>
-            </div>
-
+            {/if}
+        </div>
 
         <h2 class="font-semibold text-xl">
             Services

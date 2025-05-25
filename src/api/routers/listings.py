@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 
 from api.db import get_db
@@ -15,7 +15,15 @@ router = APIRouter(
     response_model=ListingResponse,
     status_code=status.HTTP_201_CREATED,
 )
-def create_listing(listing_in: ListingCreate, db: Session = Depends(get_db)):
+async def create_listing(request: Request, db: Session = Depends(get_db)):
+    try:
+        data = await request.json()
+        print("Incoming data:", data)
+        listing_in = ListingCreate(**data)
+    except Exception as e:
+        print("Validation error:", e)
+        raise
+
     listing = Listing(
         name=listing_in.name,
         address=listing_in.address,

@@ -8,7 +8,7 @@
     import { Toaster } from "$components/ui/sonner";
 	import { currentUser } from '$states/CurrentUser.svelte';
 
-    $inspect(currentUser.user, currentUser.firebase, currentUser.loggedIn);
+    //$inspect(currentUser.user, currentUser.firebase, currentUser.loggedIn);
 
 	let { children } = $props();
 </script>

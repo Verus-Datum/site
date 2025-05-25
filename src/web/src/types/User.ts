@@ -1,3 +1,5 @@
+import type { Business } from './Business';
+
 export type User = {
 	id: number;
 	email: string;
@@ -5,4 +7,5 @@ export type User = {
 	last_name: string;
 	firebase_uid: string;
 	created_at: Date;
+	listings: Business[];
 };
