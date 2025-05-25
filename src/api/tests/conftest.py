@@ -7,9 +7,10 @@ from sqlalchemy.orm import sessionmaker
 
 os.environ["DATABASE_URL"] = "sqlite:///:memory:"
 
-from src.api.db import Base, get_db
-from src.api.db import engine as real_engine
-from src.api.main import create_app
+from api.db import Base, get_db
+from api.main import create_app
+from api.routers import * # noqa: F403
+from api.models import *  # noqa: F403
 
 TEST_SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 test_engine = create_engine(

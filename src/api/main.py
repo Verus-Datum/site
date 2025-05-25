@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 
 
-import src.api.schemas
-from src.api.routers import health, users, listings
-from src.api.cors import configure_cors, API_URL
-from src.api.db import engine
-from src.api.models import Base
+import api.schemas # noqa: F401
+from api.routers import health, users, listings
+from api.cors import configure_cors, API_URL
+from api.db import engine
+from api.models import Base
 
 Base.metadata.create_all(bind=engine)
 

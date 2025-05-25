@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from src.api.db import get_db
-from src.api.models import Listing, User
-from src.api.schemas import ListingCreate, ListingResponse
+from api.db import get_db
+from api.models import Listing, User
+from api.schemas import ListingCreate, ListingResponse
 
 router = APIRouter(
     tags=["listings"],

@@ -10,7 +10,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 
-from src.api.db import Base
+from api.db import Base
 
 
 class User(Base):

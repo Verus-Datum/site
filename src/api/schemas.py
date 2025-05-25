@@ -51,8 +51,7 @@ class ListingResponse(BaseModel):
     user_id: int
     user: Optional[UserResponse]
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class HealthCheckResponse(BaseModel):
