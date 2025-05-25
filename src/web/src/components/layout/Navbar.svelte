@@ -10,6 +10,7 @@
 	import { page } from "$app/state";
     import Menu from "@lucide/svelte/icons/menu"
     import * as Sheet from "$components/ui/sheet";
+    import Laptop from "@lucide/svelte/icons/laptop";
 
     let {
         children
@@ -17,7 +18,7 @@
         children: Snippet
     } = $props();
 
-    let active = $derived(page.url.pathname === "/" ? "business" : "listings")
+    let active = $derived(page.url.pathname === "/" ? "business" : "online")
     let exampleUrl = "https://media.istockphoto.com/id/1413766112/photo/successful-mature-businessman-looking-at-camera-with-confidence.jpg?s=612x612&w=0&k=20&c=NJSugBzNuZqb7DJ8ZgLfYKb3qPr2EJMvKZ21Sj5Sfq4=";
 </script>
 
@@ -81,7 +82,7 @@
             <img src={Logo} alt="Verus Datum" class="w-10 h-10 rounded-lg" />
             <h1 class="font-bold">Verus Datum</h1>
         </a>
-        <section class="{page.url.pathname !== "/" ? "hidden" : "hidden md:flex"} relative h-full w-full md:w-[25rem] items-center justify-center flex-row">
+        <section class="{page.url.pathname !== "/" && !page.url.pathname.startsWith("/listings") ? "hidden" : "hidden md:flex"} relative h-full w-full md:w-[25rem] items-center justify-center flex-row">
             <div
                 class="absolute bottom-0 h-0.5 bg-black transition-all duration-300"
                 style:width="{active === 'business' ? '50%' : '50%'}"
@@ -89,17 +90,19 @@
             />
 
             <a href="/"
+                onclick={() => active = 'business'}
                 class="{active !== 'business' ? 'text-muted-foreground font-semibold' : 'font-bold'} text-sm duration-200 flex flex-row gap-3 px-2 w-full justify-center items-center h-full"
             >
                 <Briefcase />
                 <p>Businesses to Buy</p>
             </a>
-            <button
-                class="{active === 'business' ? 'text-muted-foreground font-semibold' : 'font-bold'} text-sm duration-200 flex flex-row gap-3 w-full justify-center px-5 items-center h-full"
+            <a href="/listings/online"
+                onclick={() => active = 'online'}
+                class="{active !== 'online' ? 'text-muted-foreground font-semibold' : 'font-bold'} text-sm duration-200 flex flex-row gap-3 px-2 w-full justify-center items-center h-full"
             >
-                <Provider />
-                <p>Service Providers</p>
-            </button>
+                <Laptop />
+                <p>Online Businesses</p>
+            </a>
         </section>    
         <section class="flex flex-row gap-6 flex w-64 justify-end">
             <!--

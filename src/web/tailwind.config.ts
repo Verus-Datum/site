@@ -15,6 +15,9 @@ const config: Config = {
 			}
 		},
 		extend: {
+			screens: {
+				'3xl': '1920px'
+			},
 			colors: {
 				border: 'hsl(var(--border) / <alpha-value>)',
 				input: 'hsl(var(--input) / <alpha-value>)',

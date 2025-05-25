@@ -65,20 +65,20 @@
 
 {#snippet MarkerContent()}
     <header>
-        <h1 class="font-semibold py-2 text-lg">
+        <h1 class="font-semibold py-2 text-xl">
             {business.name}
         </h1>
-        <h2 class="flex flex-row font-medium text-primary py-1 gap-1 items-center">
-            <MapPin size={24} />
+        <h2 class="flex flex-row font-medium text-primary py-1 gap-2 items-center">
+            <MapPin size={20} />
             {business.address}
         </h2>
-        <h2 class="flex flex-row font-medium text-primary py-1 gap-1 items-center">
-            <Provider size={24} />
+        <h2 class="flex flex-row font-medium text-primary py-1 gap-2 items-center">
+            <Provider size={20} />
             {business.market}
         </h2>
     </header>
 
-    <section class="py-5">
+    <section class="py-6">
         <h1 class="font-semibold text-primary text-2xl">
             {formatCurrency(business.asking_price)}
         </h1>
@@ -87,7 +87,7 @@
         </p>
     </section>
 
-    <footer class="w-full flex flex-row gap-2">
+    <footer class="w-full flex flex-row gap-3">
         <Button onclick={() => {
             isOpen = false;
             isSelected = true;
@@ -197,7 +197,7 @@
             }}>
                 {@render Marker()}
             </Popover.Trigger>
-            <Popover.Content class="bg-white p-4 rounded-xl shadow-ui w-[27rem] relative">
+            <Popover.Content class="bg-white p-5 rounded-xl shadow-ui w-[28.5rem] border-none relative">
                 {@render MarkerContent()}
             </Popover.Content>
         </Popover.Root>

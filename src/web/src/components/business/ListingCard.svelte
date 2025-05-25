@@ -17,11 +17,19 @@
     };
 
     let { listing }: Props = $props();
+
+    let images = [
+        "https://www.petitpalais.paris.fr/sites/default/files/content/images/274a7179_0.jpg",
+        "https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/Favor%203.jpeg",
+        "https://k2space.imgix.net/app/uploads/2023/06/K2-Criteo-Office-Curator-LARGE-102-scaled.jpg?auto=format&fit=max&w=5000&q=90",
+        "https://www.reuters.com/resizer/v2/EHRQCRVB6VNBJKECN6MCRQKD2A.jpg?auth=6872991dbba05561ae50f36a849f49629ff49bc39a99e8dea92137c1ca8bc5ff&height=628&width=1200&quality=80&smart=true",
+        "https://images.ctfassets.net/kftzwdyauwt9/28i2D9RyoKNOyuTukSGkw/a4c5a97d081a7c2b1d5aa100fd85d28e/o1-preview-general.png?w=3840&q=90&fm=webp"
+    ]
 </script>
 
 <div class="rounded-xl border w-full p-6 flex flex-col md:flex-row gap-6 shadow-ui">
-    <img src="https://www.petitpalais.paris.fr/sites/default/files/content/images/274a7179_0.jpg" class="w-full md:w-96 shrink-0 rounded-lg" />
-    <header class="flex flex-col py-2 justify-between w-full relative">
+    <img src={images[Math.floor(Math.random() * images.length)]} alt="Image" class="w-full md:w-96 h-60 shrink-0 object-cover rounded-lg" />
+    <header class="flex flex-col w-full relative">
         <h1 class="text-3xl pb-4 font-semibold w-full flex items-center justify-between">
             {listing.name}
             <button class="text-muted-foreground hover:text-muted-foreground/80">
@@ -60,7 +68,7 @@
             </Button>
         </div>
 
-        <div class="hidden md:flex justify-end gap-2 mt-4">
+        <div class="hidden md:flex absolute bottom-0 right-0 justify-end gap-2 mt-4">
             <Button class="text-base text-primary hover:text-primary/80 bg-transparent hover:bg-transparent font-normal">
                 View
             </Button>

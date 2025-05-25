@@ -1,6 +1,7 @@
 import type { LngLat, LngLatLike } from 'maplibre-gl';
 import { fakerEN_US as faker } from '@faker-js/faker';
 import type { User } from './User';
+import { markets } from '$utils/markets';
 
 type Media = {
 	url: string;
@@ -45,20 +46,7 @@ function generateFakeBusiness(
 		id: faker.number.int({ min: 1, max: 100000 }), // or generate with server/db
 		name: faker.company.name(),
 		address: faker.location.streetAddress(true),
-		market: faker.helpers.arrayElement([
-			'Retail',
-			'Ecommerce',
-			'Food & Beverage',
-			'Healthcare',
-			'Technology',
-			'Real Estate',
-			'Hospitality',
-			'Automotive',
-			'Education',
-			'Construction',
-			'Finance',
-			'Entertainment'
-		]),
+		market: faker.helpers.arrayElement(markets),
 		contact_method: 'Direct Owner',
 		latitude,
 		longitude,
