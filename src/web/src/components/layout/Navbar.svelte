@@ -77,7 +77,7 @@
                 Service Providers
             </button>
         </div>
-        <a href="/" class="flex-row gap-3 items-center hidden md:flex">
+        <a href="/" class="flex-row gap-3 items-center hidden md:flex w-64 justify-start">
             <img src={Logo} alt="Verus Datum" class="w-10 h-10 rounded-lg" />
             <h1 class="font-bold">Verus Datum</h1>
         </a>
@@ -101,8 +101,10 @@
                 <p>Service Providers</p>
             </button>
         </section>    
-        <section class="flex flex-row gap-6 flex">
-            <NotificationsDropdown />
+        <section class="flex flex-row gap-6 flex w-64 justify-end">
+            <!--
+                <NotificationsDropdown />
+            -->
             <UserDropdown />
         </section>
     </nav>

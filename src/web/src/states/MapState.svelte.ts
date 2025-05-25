@@ -15,7 +15,7 @@ class MapState implements MapStateType {
 	}
 
 	get container(): any {
-		return this.container;
+		return this._container;
 	}
 
 	set container(setTo: any) {

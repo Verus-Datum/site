@@ -48,7 +48,10 @@
 						props: { map: mapState.map, business: biz }
 					});
 					new maplibregl.Marker({ element: markerEl })
-						.setLngLat(biz.lngLat)
+						.setLngLat({
+                            lng: biz.longitude,
+                            lat: biz.latitude
+                        })
 						.addTo(mapState.map);
 				}
 

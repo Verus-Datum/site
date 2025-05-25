@@ -53,6 +53,7 @@
 	},
 	"dependencies": {
 		"bits-ui": "^1.5.2",
+		"firebase": "^11.8.1",
 		"maplibre-gl": "^5.5.0"
 	}
 }

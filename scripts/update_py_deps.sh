@@ -1,9 +1,11 @@
 #!/bin/bash
 
-cat ./**/*/requirements.txt \
+cat ./**/*/requirements.txt .devcontainer/requirements.in \
     | grep -v '^#' | grep -v '^$' \
-    | sort -u > .devcontainer/requirements.in
+    | sort -u > .devcontainer/mono-requirements.in
 
-uv pip compile .devcontainer/requirements.in \
+uv pip compile .devcontainer/mono-requirements.in \
     --output-file .devcontainer/requirements.txt \
-    && rm .devcontainer/requirements.in
+    && rm .devcontainer/mono-requirements.in
+
+uv pip install -e src/api
