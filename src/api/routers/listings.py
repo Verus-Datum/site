@@ -9,6 +9,7 @@ router = APIRouter(
     tags=["listings"],
 )
 
+
 @router.post(
     "",
     response_model=ListingResponse,
@@ -26,13 +27,14 @@ def create_listing(listing_in: ListingCreate, db: Session = Depends(get_db)):
         revenue_per_yr=listing_in.revenue_per_yr,
         gross_per_yr=listing_in.gross_per_yr,
         profit_per_yr=listing_in.profit_per_yr,
-        user_id=listing_in.user_id
+        user_id=listing_in.user_id,
     )
 
     db.add(listing)
     db.commit()
     db.refresh(listing)
     return listing
+
 
 @router.get(
     "",
@@ -41,6 +43,7 @@ def create_listing(listing_in: ListingCreate, db: Session = Depends(get_db)):
 )
 def get_all_listings(db: Session = Depends(get_db)):
     return db.query(Listing).all()
+
 
 @router.get(
     "/{firebase_uid}",
@@ -51,5 +54,5 @@ def get_listings_by_firebase_uid(firebase_uid: str, db: Session = Depends(get_db
     user = db.query(User).filter(User.firebase_uid == firebase_uid).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    
+
     return db.query(Listing).filter(Listing.user_id == user.id).all()

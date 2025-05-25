@@ -5,7 +5,7 @@ gui:
         repository: ghcr.io/verus-datum/gui
         tag: latest
     env:
-        - name: VITE_API_URL
+        - name: API_URL
           value: "https://vd.harville.dev/api:8081"
     replicaCount: 2
     port: 3000
@@ -20,7 +20,7 @@ api:
         repository: ghcr.io/verus-datum/api
         tag: latest
     env:
-        - name: VITE_API_URL
+        - name: API_URL
           value: "https://vd.harville.dev/api:8081"
         - name: DATABASE_URL
           value: "postgresql://admin:password@vd-db:5432/vd_db"

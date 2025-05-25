@@ -9,6 +9,7 @@ router = APIRouter(
     tags=["users"],
 )
 
+
 @router.post(
     "",
     response_model=UserResponse,
@@ -17,8 +18,7 @@ router = APIRouter(
 def create_user(user_in: UserCreate, db: Session = Depends(get_db)):
     if db.query(User).filter(User.email == user_in.email).first():
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Email already registered"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered"
         )
     user = User(
         first_name=user_in.first_name,
@@ -30,6 +30,7 @@ def create_user(user_in: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(user)
     return user
+
 
 @router.get(
     "/{firebase_uid}",

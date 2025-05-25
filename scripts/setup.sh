@@ -1,5 +1,8 @@
 #!/bin/bash
-# Setup script for devcontainers
+
+set -a
+source .devcontainer/dev.env
+set +a
 
 curl -LsSf https://astral.sh/uv/0.7.6/install.sh | sh
 

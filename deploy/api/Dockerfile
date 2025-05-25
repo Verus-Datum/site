@@ -9,7 +9,6 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-# TODO: use version locked file
 COPY deploy/api/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 

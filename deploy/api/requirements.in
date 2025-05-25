@@ -1,5 +1,5 @@
 fastapi[all]
 SQLAlchemy
-psycopg2
 pydantic
 email-validator
+psycopg2

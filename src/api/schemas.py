@@ -3,11 +3,13 @@ from typing import Optional
 
 from pydantic import BaseModel, ConfigDict, EmailStr
 
+
 class UserCreate(BaseModel):
     first_name: str
     last_name: str
     email: EmailStr
     firebase_uid: str
+
 
 class UserResponse(BaseModel):
     id: int
@@ -18,6 +20,7 @@ class UserResponse(BaseModel):
     created_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
+
 
 class ListingCreate(BaseModel):
     name: str
@@ -50,6 +53,7 @@ class ListingResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
 
 class HealthCheckResponse(BaseModel):
     db_alive: bool

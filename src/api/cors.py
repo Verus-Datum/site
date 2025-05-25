@@ -3,9 +3,9 @@ import warnings
 from fastapi.middleware.cors import CORSMiddleware
 
 
-API_URL = os.environ.get("VITE_API_URL", "127.0.0.1:8081")
-if API_URL == "127.0.0.1:8081":
-    warnings.warn("API_URL is set to 127.0.0.1:8081")
+API_URL = os.environ.get("API_URL", "localhost:8081")
+if API_URL == "localhost:8081":
+    warnings.warn("API_URL is set to localhost:8081")
 
 
 def configure_cors(app):
@@ -20,4 +20,3 @@ def configure_cors(app):
             allow_methods=["*"],
             allow_headers=["*"],
         )
-

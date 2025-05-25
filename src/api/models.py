@@ -1,7 +1,17 @@
-from sqlalchemy import Column, DateTime, Integer, String, func, Float, ForeignKey, Boolean
+from sqlalchemy import (
+    Column,
+    DateTime,
+    Integer,
+    String,
+    func,
+    Float,
+    ForeignKey,
+    Boolean,
+)
 from sqlalchemy.orm import relationship
 
 from src.api.db import Base
+
 
 class User(Base):
     __tablename__ = "users"
@@ -14,7 +24,9 @@ class User(Base):
     password = Column(String, nullable=True)
     firebase_uid = Column(String, nullable=False, index=True)
 
-    listings = relationship("Listing", back_populates="user", cascade="all, delete-orphan")
+    listings = relationship(
+        "Listing", back_populates="user", cascade="all, delete-orphan"
+    )
 
     created_at = Column(
         DateTime(timezone=True),
@@ -22,6 +34,7 @@ class User(Base):
         nullable=False,
         index=True,
     )
+
 
 class Listing(Base):
     __tablename__ = "listings"
