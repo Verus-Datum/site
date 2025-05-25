@@ -19,12 +19,19 @@ export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 
 onAuthStateChanged(auth, async (firebaseUser) => {
-	currentUser.firebase = firebaseUser ?? null;
+	if (currentUser) {
+		currentUser.firebase = firebaseUser ?? null;
+	}
 
 	if (firebaseUser) {
 		const token = await getIdToken(firebaseUser);
-		if ((await currentUser.getUserInfo()) === false) {
+		let userInfo = await currentUser.getUserInfo();
+
+		if (!userInfo) {
 			signOut(auth);
+			currentUser.firebase = null;
+			currentUser.loggedIn = false;
+			currentUser.user = null;
 		}
 	}
 });
