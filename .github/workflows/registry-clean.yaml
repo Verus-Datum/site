@@ -14,14 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Delete old ${{ matrix.package }} Versions
-        uses: actions/delete-package-versions@v5.0.0
-        with:
-          package-name: ${{ matrix.package }}
-          package-type: container
-          min-versions-to-keep: 4 # 3 + latest
-          token: ${{ secrets.PAT_NUKE }}
-
       - name: Delete all untagged ${{ matrix.package }} Images
         uses: actions/delete-package-versions@v5.0.0
         with:
@@ -30,6 +22,15 @@ jobs:
           delete-only-untagged-versions: 'true'
           min-versions-to-keep: 0 # delete every untagged manifest
           token: ${{ secrets.PAT_NUKE }}
+
+      - name: Delete old ${{ matrix.package }} Versions
+        uses: actions/delete-package-versions@v5.0.0
+        with:
+          package-name: ${{ matrix.package }}
+          package-type: container
+          min-versions-to-keep: 4 # 3 + latest
+          token: ${{ secrets.PAT_NUKE }}
+
 
   tags:
     runs-on: ubuntu-latest
