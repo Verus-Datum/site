@@ -56,3 +56,9 @@ jobs:
       - name: Push Images
         run: docker compose push
 
+      - name: Discord Notification
+        if: ${{ success() }}
+        run: |
+          curl -H "Content-Type: application/json" \
+               -d "{\"content\": \"🎉 New Service images pushed with tag: $IMAGE_TAG\"}" \
+               ${{ secrets.DISCORD_WEBHOOK_URL }}
