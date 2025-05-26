@@ -2,7 +2,7 @@ name: Build & Push Images
 
 on:
   workflow_run:
-    workflows: ["Python-Checks"]
+    workflows: ["Checks"]
     types:
       - completed
 
