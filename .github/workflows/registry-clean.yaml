@@ -1,4 +1,4 @@
-name: Cleanup Registry
+name: Cleanup
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
     - cron: '0 3 * * 0'    # every Sunday at 03:00 UTC
 
 jobs:
-  housekeeping:
+  packages:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,4 +21,42 @@ jobs:
           package-type: container
           min-versions-to-keep: 4 # 3 + latest
           token: ${{ secrets.PAT_NUKE }}
+  tags:
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Clean up git tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          KEEP: 3
+        run: |
+          git fetch --tags
+
+          # list all semver tags, newest -> oldest
+          ALL_TAGS=$(git tag --list '0.0.*' --sort=-v:refname)
+          OLD_TAGS=$(echo "$ALL_TAGS" | tail -n +$((KEEP+1))) # exclue the first KEEP tags
+
+          if [ -z "$OLD_TAGS" ]; then
+            echo "No old tags to clean up."
+            exit 0
+          fi
+
+          for TAG in $OLD_TAGS; do
+            # check if there is a release for the tag
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              https://api.github.com/repos/$GITHUB_REPOSITORY/releases/tags/$TAG)
+
+            if [ "$HTTP_STATUS" -eq 404 ]; then
+              echo "Deleting tag $TAG (no release found)"
+              git push --delete origin "$TAG"
+              git tag -d "$TAG"
+            else
+              echo "Skipping tag $TAG (has a release, status $HTTP_STATUS)"
+            fi
+          done
 
