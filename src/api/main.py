@@ -3,7 +3,7 @@ from fastapi import FastAPI
 
 import api.schemas # noqa: F401
 from api.routers import health, users, listings
-from api.cors import configure_cors, ROOT_PATH
+from api.cors import configure_cors
 from api.db import engine
 from api.models import Base
 
@@ -12,7 +12,7 @@ Base.metadata.create_all(bind=engine)
 
 def create_app():
     app = FastAPI(
-        root_path=ROOT_PATH,
+        root_path="/api",
     )
     configure_cors(app)
 
