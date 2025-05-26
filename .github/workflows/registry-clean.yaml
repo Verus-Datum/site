@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  house-keeping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete GUI Versions
+        uses: actions/delete-package-versions@v5.0.0
+        with:
+          package-name: 'gui'
+          package-type: 'container'
+          min-versions-to-keep: 3
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Delete DB Versions
+        uses: actions/delete-package-versions@v5.0.0
+        with:
+          package-name: 'db'
+          package-type: 'container'
+          min-versions-to-keep: 3
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Delete API Versions
+        uses: actions/delete-package-versions@v5.0.0
+        with:
+          package-name: 'api'
+          package-type: 'container'
+          min-versions-to-keep: 3
+          token: ${{ secrets.PAT_TOKEN }}
