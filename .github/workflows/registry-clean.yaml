@@ -1,6 +1,7 @@
 name: Cleanup Registry
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 3 * * 0'    # every Sunday at 03:00 UTC
 
