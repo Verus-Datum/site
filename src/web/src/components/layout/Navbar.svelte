@@ -11,6 +11,7 @@
     import Menu from "@lucide/svelte/icons/menu"
     import * as Sheet from "$components/ui/sheet";
     import Laptop from "@lucide/svelte/icons/laptop";
+    import transparent from '$assets/transparent.png';
 
     let {
         children
@@ -23,64 +24,46 @@
 </script>
 
 <div class="w-screen z-50 bg-background flex justify-center flex-col absolute top-0 left-0">
-    <nav class="w-full flex items-center justify-between px-6 border-b h-[4.5rem]">
-        <!--
+    <nav class="w-full flex items-center justify-between px-4 md:px-6 relative border-b h-[4rem] md:h-[4.5rem]">
         <Sheet.Root>
-            <Sheet.Trigger class="flex flex-row gap-2 items-center">
-                <Button variant="outline" size="icon" class="p-0">
-                    <Menu size={24} />
-                </Button>
-                <h1 class="font-bold">Verus Datum</h1>
+            <Sheet.Trigger class="flex text-muted-foreground flex-row gap-2 items-center md:hidden">
+                <Menu size={24} />
             </Sheet.Trigger>
-            <Sheet.Content side="left">
+            <Sheet.Content side="left" class="p-3">
                 <Sheet.Header>
-                    <a href="/" class="flex-row gap-3 items-center flex text-left">
-                        <img src={Logo} alt="Verus Datum" class="w-10 h-10 rounded-lg" />
-                        <h1 class="font-bold">Verus Datum</h1>
+                    <a href="/" class="flex flex-row text-primary gap-2 md:hidden items-center">
+                        <div class="w-11 h-11 bg-primary" style={`-webkit-mask-image: url(${transparent}); mask-image: url(${transparent}); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center;`}></div>
+                        <h1 class="font-semibold whitespace-nowrap text-black">Verus Datum</h1>
                     </a>
                 </Sheet.Header>
                 <div class="py-4 flex flex-col gap-0.5">
-                    <button
-                        class={`w-full text-left items-center justify-start p-3 flex flex-row gap-3 hover:bg-secondary duration-200 rounded-xl ${
+                    <a href="/"
+                        class={`w-full text-left items-center justify-start p-3 text-sm flex flex-row gap-3 hover:bg-secondary duration-200 rounded-xl ${
                             page.url.pathname === '/' ? 'text-black font-medium' : 'text-muted-foreground'
                         }`}
                     >
-                        <Briefcase size={24} />
-                        Businesses
-                    </button>
+                        <Briefcase size={20} />
+                        Browse
+                    </a>
 
-                    <button
-                        class={`w-full text-left items-center justify-start p-3 flex flex-row gap-3 hover:bg-secondary duration-200 rounded-xl ${
-                            page.url.pathname === '/service-provider' ? 'text-black font-medium' : 'text-muted-foreground'
+                    <a href="/listings/online"
+                        class={`w-full text-left items-center justify-start p-3 text-sm flex flex-row gap-3 hover:bg-secondary duration-200 rounded-xl ${
+                            page.url.pathname === '/listings/online' ? 'text-black font-medium' : 'text-muted-foreground'
                         }`}
                     >
-                        <Provider size={24} />
-                        Service Providers
-                    </button>
+                        <Laptop size={20} />
+                        Online Businesses
+                    </a>
                 </div>
             </Sheet.Content>
         </Sheet.Root>
-        -->
-        <div class="flex flex-row gap-4 md:hidden">
-            <a href="/"
-                class={`w-full text-left items-center hover:text-black justify-start font-medium text-sm flex text-nowrap flex-row gap-3 duration-200 rounded-xl ${
-                    page.url.pathname === '/' ? 'text-black font-medium' : 'text-muted-foreground'
-                }`}
-            >
-                Businesses
-            </a>
-
-            <button
-                class={`w-full text-left items-center hover:text-black justify-start font-medium text-sm flex text-nowrap flex-row gap-3 duration-200 rounded-xl ${
-                    page.url.pathname === '/service-provider' ? 'text-black font-medium' : 'text-muted-foreground'
-                }`}
-            >
-                Service Providers
-            </button>
-        </div>
-        <a href="/" class="flex-row gap-3 items-center hidden md:flex w-64 justify-start">
-            <img src={Logo} alt="Verus Datum" class="w-10 h-10 rounded-lg" />
-            <h1 class="font-bold">Verus Datum</h1>
+        <a href="/" class="absolute left-1/2 transform -translate-x-1/2 flex flex-row text-primary gap-2 md:hidden items-center">
+            <div class="w-11 h-11 bg-primary" style={`-webkit-mask-image: url(${transparent}); mask-image: url(${transparent}); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center;`}></div>
+            <h1 class="font-semibold whitespace-nowrap text-black">Verus Datum</h1>
+        </a>
+        <a href="/" class="flex-row text-primary gap-2 hidden md:flex items-center">
+            <div class="w-11 h-11 bg-primary" style={`-webkit-mask-image: url(${transparent}); mask-image: url(${transparent}); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center;`}></div>
+            <h1 class="font-semibold whitespace-nowrap text-black">Verus Datum</h1>
         </a>
         <section class="{page.url.pathname !== "/" && !page.url.pathname.startsWith("/listings") ? "hidden" : "hidden md:flex"} relative h-full w-full md:w-[25rem] items-center justify-center flex-row">
             <div
@@ -111,8 +94,4 @@
             <UserDropdown />
         </section>
     </nav>
-
-    {#if page.url.pathname === "/"}
-        {@render children?.()}
-    {/if}
 </div>

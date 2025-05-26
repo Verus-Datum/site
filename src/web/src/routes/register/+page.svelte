@@ -76,7 +76,7 @@
     }
 </script>
 
-<main in:fly={{ y: 20, duration: 650 }} class="md:pt-40 pt-8 pb-8 w-full md:w-[100%] lg:w-[80%] 2xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-center justify-start">
+<main in:fly={{ y: 20, duration: 650 }} class="md:pt-40 pt-28 pb-8 w-full md:w-[100%] lg:w-[80%] 2xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-center justify-start">
     <header class="flex flex-col gap-2 items-center justify-center text-center">
         <img src={Logo} alt="Verus Datum" class="w-14 h-14 rounded-lg" />
         <h1 class="text-2xl font-semibold mt-2">
