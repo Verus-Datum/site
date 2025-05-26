@@ -1,32 +1,23 @@
+name: Cleanup Registry
+
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 3 * * 0'    # every Sunday at 03:00 UTC
 
 jobs:
-  house-keeping:
+  housekeeping:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [gui, db, api]
     steps:
-      - name: Delete GUI Versions
+      - uses: actions/checkout@v3
+
+      - name: Delete ${{ matrix.package }} Versions
         uses: actions/delete-package-versions@v5.0.0
         with:
-          package-name: 'gui'
-          package-type: 'container'
+          package-name: ${{ matrix.package }}
+          package-type: container
           min-versions-to-keep: 3
           token: ${{ secrets.PAT_TOKEN }}
 
-      - name: Delete DB Versions
-        uses: actions/delete-package-versions@v5.0.0
-        with:
-          package-name: 'db'
-          package-type: 'container'
-          min-versions-to-keep: 3
-          token: ${{ secrets.PAT_TOKEN }}
-
-      - name: Delete API Versions
-        uses: actions/delete-package-versions@v5.0.0
-        with:
-          package-name: 'api'
-          package-type: 'container'
-          min-versions-to-keep: 3
-          token: ${{ secrets.PAT_TOKEN }}
