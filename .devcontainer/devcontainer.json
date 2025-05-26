@@ -17,12 +17,13 @@
         "ghcr.io/devcontainers/features/node:1": {},
         "ghcr.io/devcontainers/features/python:1": {
             "version": "3.11"
-        },
+        }
     },
-    "postCreateCommand": "sudo chmod +x scripts/* && scripts/setup.sh",
+    "postCreateCommand": "chmod +x scripts/* && ./scripts/setup.sh",
     "forwardPorts": [
-        3000,
-        8081
+        3000, // GUI
+        8081, // API
+        5432, // DB
     ],
     "customizations": {
         "vscode": {
