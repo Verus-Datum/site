@@ -5,6 +5,7 @@
 	import Button from '$components/ui/button/button.svelte';
 	import Ellipsis from '@lucide/svelte/icons/ellipsis';
 	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
+    import type { PageProps } from './$types'
 
     let { data }: PageProps = $props();
     let broker = $derived<Broker>(data.broker);

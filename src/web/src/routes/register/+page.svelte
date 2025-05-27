@@ -7,6 +7,7 @@
 	import { Input } from "$components/ui/input";
     import Logo from "$assets/logo.png"
     import { createUserWithEmailAndPassword } from 'firebase/auth';
+    import TransparentLogo from "$assets/transparent.png"
     import { auth } from '$utils/firebase';
     import { toast } from 'svelte-sonner';
     import { API_URL } from "$utils/api";
@@ -42,6 +43,8 @@
 
         const email = $formData.email;
         const password = $formData.password;
+        const first_name = $formData.firstName;
+        const last_name = $formData.lastName;
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -52,8 +55,8 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    first_name: "William",
-                    last_name: "Neel",
+                    first_name,
+                    last_name,
                     email: email,
                     firebase_uid: userCredential.user.uid,
                 }),
@@ -76,20 +79,34 @@
     }
 </script>
 
-<main in:fly={{ y: 20, duration: 650 }} class="md:pt-40 pt-28 pb-8 w-full md:w-[100%] lg:w-[80%] 2xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-center justify-start">
+<main in:fly={{ y: 20, duration: 650 }} class="pb-80 w-full md:w-[100%] h-screen lg:w-[80%] 2xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-center justify-center">
     <header class="flex flex-col gap-2 items-center justify-center text-center">
-        <img src={Logo} alt="Verus Datum" class="w-14 h-14 rounded-lg" />
+        <img src={TransparentLogo} alt="Verus Datum" class="w-14 h-14 bg-primary rounded-full p-1" />
         <h1 class="text-2xl font-semibold mt-2">
             Create an account
         </h1>
         <h2 class="text-muted-foreground">
-            Create your Verus Datum account
+            Start using Verus Datum today
         </h2>
     </header>
-    <form onsubmit={handleSubmit} method="POST" use:enhance class="md:w-[25rem] w-full flex flex-col gap-4">
+    <form onsubmit={handleSubmit} method="POST" use:enhance class="md:w-[25rem] w-full flex flex-col gap-6">
+        <div class="flex flex-row gap-6">
+            <Form.Field {form} name="firstName" class="w-full">
+                <Form.Control>
+                    <Form.Label>First Name</Form.Label>
+                    <Input disabled={registering} placeholder="John" type="text" bind:value={$formData.firstName} />
+                </Form.Control>
+            </Form.Field>
+            <Form.Field {form} name="lastName" class="w-full">
+                <Form.Control>
+                    <Form.Label>Last Name</Form.Label>
+                    <Input disabled={registering} placeholder="Smith" type="text" bind:value={$formData.lastName} />
+                </Form.Control>
+            </Form.Field>
+        </div>
         <Form.Field {form} name="email" class="w-full">
             <Form.Control>
-                <Form.Label>Email</Form.Label>
+                <Form.Label>Choose an email address</Form.Label>
                 <Input disabled={registering} placeholder="Email address" type="email" bind:value={$formData.email} />
             </Form.Control>
         </Form.Field>
@@ -99,6 +116,9 @@
                 <Input disabled={registering} placeholder="Password" type="password" bind:value={$formData.password} />
             </Form.Control>
         </Form.Field>
+        <p class="text-xs text-muted-foreground">
+            By creating a Verus Datum account, I agree to Verus Datum's <a href="/terms" class="underline underline-offset-1">Terms of Service</a> and <a href="/privacy-policy" class="underline underline-offset-1">Privacy Policy</a>.
+        </p>
         <Form.Button disabled={registering} class="rounded-full">Continue
             {#if registering}
                 <LoaderCircle class="animate-spin" />

@@ -6,6 +6,7 @@
 	import { Input } from "$components/ui/input";
     import LoaderCircle from "@lucide/svelte/icons/loader-circle";
     import Logo from "$assets/logo.png"
+    import TransparentLogo from "$assets/transparent.png"
     import { signInWithEmailAndPassword } from 'firebase/auth';
     import { auth } from '$utils/firebase';
     import { toast } from 'svelte-sonner';
@@ -55,17 +56,17 @@
     }
 </script>
 
-<main in:fly={{ y: 20, duration: 650 }} class="md:pt-40 pt-28 pb-8 w-full md:w-[100%] lg:w-[80%] 2xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-center justify-start">
+<main in:fly={{ y: 20, duration: 650 }} class="pb-80 w-full md:w-[100%] h-screen lg:w-[80%] 2xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-center justify-center">
     <header class="flex flex-col gap-2 items-center justify-center text-center">
-        <img src={Logo} alt="Verus Datum" class="w-14 h-14 rounded-lg" />
+        <img src={TransparentLogo} alt="Verus Datum" class="w-14 h-14 bg-primary rounded-full p-1" />
         <h1 class="text-2xl font-semibold mt-2">
             Welcome back
         </h1>
         <h2 class="text-muted-foreground">
-            Sign in to your Verus Datum account
+            Sign in with your Verus Datum account
         </h2>
     </header>
-    <form onsubmit={handleSubmit} method="POST" use:enhance class="md:w-[25rem] w-full flex flex-col gap-4">
+    <form onsubmit={handleSubmit} method="POST" use:enhance class="md:w-[25rem] w-full flex flex-col gap-6">
         <Form.Field {form} name="email" class="w-full">
             <Form.Control>
                 <Form.Label>Email</Form.Label>
@@ -74,8 +75,13 @@
         </Form.Field>
         <Form.Field {form} name="password" class="w-full">
             <Form.Control>
-                <Form.Label>Enter your password</Form.Label>
-                <Input disabled={loggingIn} placeholder="Password" type="password" bind:value={$formData.password} />
+                <div class="flex flex-col gap-2">
+                    <Form.Label>Enter your password</Form.Label>
+                    <Input disabled={loggingIn} placeholder="Password" type="password" bind:value={$formData.password} />
+                    <a href="/forgot-password" class="text-sm text-primary">
+                        Forgot my password
+                    </a>
+                </div>
             </Form.Control>
         </Form.Field>
         <Form.Button disabled={loggingIn} class="rounded-full">Continue
@@ -84,7 +90,7 @@
             {/if}
         </Form.Button>
         <a class="text-center text-primary text-sm" href="/register">
-            Not signed up yet? Register here
+            Don't have an account? Create a free one here
         </a>
     </form>
 </main>

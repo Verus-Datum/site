@@ -86,7 +86,7 @@
                     <Form.Label class="font-medium text-sm">
                         Business Name
                     </Form.Label>
-                    <Input disabled={creatingListing} {...props} bind:value={$formData.businessName} type="text" placeholder="ACME Inc." class="shadow-sm font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" />
+                    <Input disabled={creatingListing} {...props} bind:value={$formData.businessName} type="text" placeholder="ACME Inc." class="font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" />
                 {/snippet}
             </Form.Control>
             <Form.Description class="text-sm text-muted-foreground">
@@ -100,7 +100,7 @@
                     <Form.Label class="font-medium text-sm">
                         Industry / Market
                     </Form.Label>
-                    <Input disabled={creatingListing} {...props} bind:value={$formData.industryMarket} type="text" placeholder="Restaurant" class="shadow-sm font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" />
+                    <Input disabled={creatingListing} {...props} bind:value={$formData.industryMarket} type="text" placeholder="Restaurant" class="font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" />
                 {/snippet}
             </Form.Control>
         </Form.Field>
@@ -109,7 +109,7 @@
             <Form.Control>
                 {#snippet children({ props })}
                     <div class="flex flex-row gap-2 items-center">
-                        <Checkbox {...props} bind:checked={$formData.isPublic} class="shadow-sm font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" />
+                        <Checkbox {...props} bind:checked={$formData.isPublic} class="font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" />
                         <label for={props.id} class="text-sm">
                             Display listing publicly
                         </label>
@@ -178,7 +178,7 @@
                 <Form.Control>
                     {#snippet children({ props })} 
                         <Form.Label class="font-medium text-sm">Asking Price ($)</Form.Label>
-                        <Input disabled={creatingListing} {...props} type="number" placeholder="$450,000" class="shadow-sm font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" bind:value={$formData.askingPrice} {...props} />
+                        <Input disabled={creatingListing} {...props} type="number" placeholder="$450,000" class="font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" bind:value={$formData.askingPrice} {...props} />
                     {/snippet}
                 </Form.Control>
             </Form.Field>
@@ -187,7 +187,7 @@
                 <Form.Control>
                     {#snippet children({ props })} 
                         <Form.Label class="font-medium text-sm">Annual Revenue ($)</Form.Label>
-                        <Input disabled={creatingListing} {...props} type="number" placeholder="$850,000" class="shadow-sm font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" bind:value={$formData.annualRevenue} {...props} />
+                        <Input disabled={creatingListing} {...props} type="number" placeholder="$850,000" class="font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" bind:value={$formData.annualRevenue} {...props} />
                     {/snippet}
                 </Form.Control>
             </Form.Field>
@@ -196,7 +196,7 @@
                 <Form.Control>
                     {#snippet children({ props })} 
                         <Form.Label class="font-medium text-sm">Annual Gross ($)</Form.Label>
-                        <Input disabled={creatingListing} {...props} type="number" placeholder="$550,000" class="shadow-sm font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" bind:value={$formData.annualGross} {...props} />
+                        <Input disabled={creatingListing} {...props} type="number" placeholder="$550,000" class="font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" bind:value={$formData.annualGross} {...props} />
                     {/snippet}
                 </Form.Control>
             </Form.Field>
@@ -205,7 +205,7 @@
                 <Form.Control>
                     {#snippet children({ props })} 
                         <Form.Label class="font-medium text-sm">Annual Profit ($)</Form.Label>
-                        <Input disabled={creatingListing} {...props} type="number" placeholder="$125,000" class="shadow-sm font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" bind:value={$formData.annualProfit} {...props} />
+                        <Input disabled={creatingListing} {...props} type="number" placeholder="$125,000" class="font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" bind:value={$formData.annualProfit} {...props} />
                     {/snippet}
                 </Form.Control>
             </Form.Field>
