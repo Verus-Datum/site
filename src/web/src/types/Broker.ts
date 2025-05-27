@@ -17,6 +17,7 @@ type Broker = {
 	stats: Stats;
 	services: string[];
 	market: string;
+	avatar_url: string;
 };
 
 function generateFakeBroker(
@@ -77,7 +78,9 @@ function generateFakeBroker(
 		market,
 		lngLat,
 		stats,
-		services
+		services,
+		avatar_url:
+			'https://heroshotphotography.com/wp-content/uploads/2023/03/male-linkedin-corporate-headshot-on-white-square-1024x1024.jpg'
 	};
 }
 
