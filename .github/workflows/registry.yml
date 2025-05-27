@@ -33,8 +33,7 @@ jobs:
           password: ${{ secrets.PAT_TOKEN}}
 
       - name: Update Images:latest
-        run: |
-          docker compose build --no-cache --push
+        run: docker compose build --no-cache --push
 
       - name: Bump patch version
         id: bump
@@ -52,11 +51,8 @@ jobs:
           git tag "$NEXT"
           git push origin "$NEXT"
 
-      - name: Build Images
-        run: docker compose build --no-cache
-
-      - name: Push Images
-        run: docker compose push
+      - name: Update Images:tag
+        run: docker compose build --no-cache --push
 
       - name: Discord Notification
         if: ${{ success() }}
