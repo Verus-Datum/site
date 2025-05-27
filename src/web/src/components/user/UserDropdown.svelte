@@ -34,7 +34,6 @@
     {:else}
         <a href="/login" class="flex flex-row duration-150 rounded-lg gap-2 items-center">
             <img src={"https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"} class="w-9 h-9 rounded-full object-cover" />
-            <ChevronDown size={22} color="#717171" class="" />
         </a>
     {/if}
     <Popover.Content class="mr-2 w-[250px] bg-white shadow-lg rounded-md p-1 pb-1">

@@ -91,13 +91,13 @@
             </div>
 
             <div class="right-0 ml-auto bottom-0 hidden lg:flex">
-                <Button class="text-base font-normal">
+                <Button href={"/listings/example"} class="text-base font-normal">
                     View Listing
                 </Button>
             </div>
         </div>
 
-        <Button class="text-base font-normal w-full lg:hidden flex mt-4">
+        <Button href={"/listings/example"} class="text-base font-normal w-full lg:hidden flex mt-4">
             View Listing
         </Button>
     

@@ -19,9 +19,8 @@
     <BrokerList />
 </FloatingPanel>
 
-<Navbar>
-    <Header />
-</Navbar>
+<Navbar />
+<Header />
 
 <main class="">
     {@render children?.()}

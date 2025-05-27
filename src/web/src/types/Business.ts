@@ -2,6 +2,7 @@ import type { LngLat, LngLatLike } from 'maplibre-gl';
 import { fakerEN_US as faker } from '@faker-js/faker';
 import type { User } from './User';
 import { markets } from '$utils/markets';
+import { generateFakeBroker, type Broker } from './Broker';
 
 type Media = {
 	url: string;
@@ -24,6 +25,7 @@ type Business = {
 	profit_per_yr: number;
 
 	is_public: boolean;
+	broker: Broker;
 
 	// user: User;
 	// user_id: number;
@@ -54,7 +56,8 @@ function generateFakeBusiness(
 		revenue_per_yr: faker.number.int({ min: 100000, max: 5000000 }),
 		gross_per_yr: faker.number.int({ min: 80000, max: 4500000 }),
 		profit_per_yr: faker.number.int({ min: 20000, max: 1500000 }),
-		is_public: faker.datatype.boolean()
+		is_public: faker.datatype.boolean(),
+		broker: generateFakeBroker(min_lng, max_lng, min_lat, max_lat)
 	};
 }
 
