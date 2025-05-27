@@ -19,7 +19,13 @@
         children: Snippet
     } = $props();
 
-    let active = $derived(page.url.pathname === "/" ? "business" : "online")
+    let active = $derived(
+        page.url.pathname === "/" 
+            ? "business" 
+            : page.url.pathname === "/listings/online" 
+                ? "online" 
+                : ""
+    );
     let exampleUrl = "https://media.istockphoto.com/id/1413766112/photo/successful-mature-businessman-looking-at-camera-with-confidence.jpg?s=612x612&w=0&k=20&c=NJSugBzNuZqb7DJ8ZgLfYKb3qPr2EJMvKZ21Sj5Sfq4=";
 </script>
 
@@ -67,11 +73,10 @@
         </a>
         <section class="{page.url.pathname !== "/" && !page.url.pathname.startsWith("/listings") ? "hidden" : "hidden md:flex"} relative h-full w-full md:w-[25rem] items-center justify-center flex-row">
             <div
-                class="absolute bottom-0 h-0.5 bg-black transition-all duration-300"
+                class="absolute bottom-0 h-0.5 bg-black transition-all duration-300 {active !== "business" && active !== "online" ? "hidden" : ""}"
                 style:width="{active === 'business' ? '50%' : '50%'}"
                 style:left="{active === 'business' ? '0px' : '50%'}"
             />
-
             <a href="/"
                 onclick={() => active = 'business'}
                 class="{active !== 'business' ? 'text-muted-foreground font-semibold' : 'font-bold'} text-sm duration-200 flex flex-row gap-3 px-2 w-full justify-center items-center h-full"
