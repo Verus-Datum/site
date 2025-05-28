@@ -25,8 +25,8 @@ jobs:
 
       - name: Build and run services
         run: |
-          docker compose up --build --abort-on-container-exit
+          docker compose up -d --build --wait --wait-timeout 300
           EXIT_CODE=$?
+          docker ps
           docker compose down
           exit $EXIT_CODE
-
