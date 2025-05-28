@@ -17,26 +17,27 @@
     import { signOut } from "firebase/auth";
     import { currentUser } from "$states/CurrentUser.svelte";
 	import { toast } from "svelte-sonner";
+	import { goto } from "$app/navigation";
 
     let avatarUrl = null;
     let isOpen = $state(false);
 </script>
 
-<Popover.Root bind:open={isOpen}>
+<DropdownMenu.Root bind:open={isOpen}>
     {#if currentUser.user !== null && currentUser.firebase !== null}
-        <Popover.Trigger class="flex flex-row duration-150 rounded-lg gap-2 items-center">
+        <DropdownMenu.Trigger class="flex flex-row duration-150 rounded-lg gap-2 items-center">
             <Avatar.Root class="w-9 h-9">
                 <Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
                 <Avatar.Fallback>CN</Avatar.Fallback>
             </Avatar.Root>
             <ChevronDown size={22} color="#717171" class="" />
-        </Popover.Trigger>    
+        </DropdownMenu.Trigger>    
     {:else}
         <a href="/login" class="flex flex-row duration-150 rounded-lg gap-2 items-center">
             <img src={"https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"} class="w-9 h-9 rounded-full object-cover" />
         </a>
     {/if}
-    <Popover.Content class="mr-2 w-[250px] bg-white shadow-lg rounded-md p-1 pb-1">
+    <DropdownMenu.Content class="mr-2 w-[250px] bg-white shadow-lg rounded-md p-1 pb-1">
         <div class="font-medium leading-none py-2 px-2 text-sm">My Account</div>
         <div class="h-px bg-border/60 my-1 mx-[-0.25rem]" />
         
@@ -73,7 +74,8 @@
         <button onclick={() => {
             try {
                 signOut(auth);
-            } catch (error) {
+                goto('/login')
+            } catch (error) {   
                 toast.error(error.message)
             }
             isOpen = false;
@@ -81,5 +83,5 @@
             <LogOut size={20} class="opacity-50" />
             Log Out
         </button>
-    </Popover.Content>
-</Popover.Root>
+    </DropdownMenu.Content>
+</DropdownMenu.Root>

@@ -8,6 +8,7 @@
     import Logo from '$assets/logo.png'
     import type { Snippet } from "svelte";
 	import { page } from "$app/state";
+    import MapIcon from "@lucide/svelte/icons/map";
     import Menu from "@lucide/svelte/icons/menu"
     import * as Sheet from "$components/ui/sheet";
     import Laptop from "@lucide/svelte/icons/laptop";
@@ -29,8 +30,8 @@
     let active = $derived(
         page.url.pathname === "/" 
             ? "business" 
-            : page.url.pathname === "/listings/online" 
-                ? "online" 
+            : page.url.pathname === "/listings" 
+                ? "all" 
                 : ""
     );
     let exampleUrl = "https://media.istockphoto.com/id/1413766112/photo/successful-mature-businessman-looking-at-camera-with-confidence.jpg?s=612x612&w=0&k=20&c=NJSugBzNuZqb7DJ8ZgLfYKb3qPr2EJMvKZ21Sj5Sfq4=";
@@ -55,17 +56,17 @@
                             page.url.pathname === '/' ? 'text-black font-medium' : 'text-muted-foreground'
                         }`}
                     >
-                        <Briefcase size={20} />
-                        Browse
+                        <MapIcon size={24} />
+                        Map View
                     </a>
 
-                    <a onclick={() => sheetOpen = false} href="/listings/online"
+                    <a onclick={() => sheetOpen = false} href="/listings"
                         class={`w-full text-left items-center justify-start p-3 text-sm flex flex-row gap-3 hover:bg-secondary duration-200 rounded-xl ${
-                            page.url.pathname === '/listings/online' ? 'text-black font-medium' : 'text-muted-foreground'
+                            page.url.pathname === '/listings' ? 'text-black font-medium' : 'text-muted-foreground'
                         }`}
                     >
-                        <Laptop size={20} />
-                        Online Businesses
+                        <Briefcase size={24} />
+                        All Businesses      
                     </a>
                 </div>
             </Sheet.Content>
@@ -80,7 +81,7 @@
         </a>
         <section class="{ignoredPages.includes(page.url.pathname) ? "hidden" : "hidden md:flex"} absolute left-1/2 -translate-x-1/2 h-full w-full md:w-[25rem] items-center justify-center flex-row">
             <div
-                class="absolute bottom-0 h-0.5 bg-black transition-all duration-300 {active !== "business" && active !== "online" ? "hidden" : ""}"
+                class="absolute bottom-0 h-0.5 bg-black transition-all duration-300 {active !== "business" && active !== "all" ? "hidden" : ""}"
                 style:width="{active === 'business' ? '50%' : '50%'}"
                 style:left="{active === 'business' ? '0px' : '50%'}"
             />
@@ -88,15 +89,15 @@
                 onclick={() => active = 'business'}
                 class="{active !== 'business' ? 'text-muted-foreground font-semibold' : 'font-bold'} text-sm duration-200 flex flex-row gap-3 px-2 w-full justify-center items-center h-full"
             >
-                <Briefcase />
-                <p>Businesses to Buy</p>
+                <MapIcon size={24} />
+                Map View
             </a>
-            <a href="/listings/online"
-                onclick={() => active = 'online'}
-                class="{active !== 'online' ? 'text-muted-foreground font-semibold' : 'font-bold'} text-sm duration-200 flex flex-row gap-3 px-2 w-full justify-center items-center h-full"
+            <a href="/listings"
+                onclick={() => active = 'all'}
+                class="{active !== 'all' ? 'text-muted-foreground font-semibold' : 'font-bold'} text-sm duration-200 flex flex-row gap-3 px-2 w-full justify-center items-center h-full"
             >
-                <Laptop />
-                <p>Online Businesses</p>
+                <Briefcase size={24} />
+                All Businesses            
             </a>
         </section>    
         <section class="flex flex-row gap-6 flex w-64 justify-end">

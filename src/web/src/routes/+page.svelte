@@ -47,13 +47,16 @@
 <Button
 	variant="outline"
 	size="icon"
-	class="hidden xl:flex absolute top-[11rem] z-50 transition-all duration-300"
-	style="right: {showSidebar ? 'calc(32.5vw + 1.25rem)' : '1rem'}"
+	class={`hidden xl:flex absolute top-[11rem] z-50 transition-all duration-300 ${
+		showSidebar
+			? 'right-[calc(40vw+1.25rem)] 2xl:right-[calc(35vw+1.25rem)] 3xl:right-[calc(32.5vw+1.25rem)]'
+			: 'right-4'
+	}`}
 	onclick={() => (showSidebar = !showSidebar)}
 >
 	{#if showSidebar}
 		<ChevronRight size={16} />
 	{:else}
-            <ChevronLeft size={16} />
-        {/if}
+		<ChevronLeft size={16} />
+	{/if}
 </Button>
