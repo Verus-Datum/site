@@ -1,13 +1,6 @@
-import type { LngLat, LngLatLike } from 'maplibre-gl';
 import { fakerEN_US as faker } from '@faker-js/faker';
-import type { User } from './User';
 import { markets } from '$utils/markets';
 import { generateFakeBroker, type Broker } from './Broker';
-
-type Media = {
-	url: string;
-	type: 'image' | 'video';
-};
 
 type Business = {
 	id: number;

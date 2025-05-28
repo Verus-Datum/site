@@ -1,10 +1,11 @@
 import type { MapStateType } from '$types/Map';
 import maplibregl, { type LngLatLike } from 'maplibre-gl';
+import { mode } from 'mode-watcher';
 
 class MapState implements MapStateType {
 	private _center = $state<LngLatLike>([-86.225, 34.7295]);
 	private _map = $state<maplibregl.Map | undefined>();
-	private _container = $state<any>();
+	private _container = $state<string>();
 
 	set map(setTo: maplibregl.Map) {
 		this._map = setTo;
@@ -14,16 +15,19 @@ class MapState implements MapStateType {
 		return this._map;
 	}
 
-	get container(): any {
-		return this._container;
+	get container(): string {
+		return this._container as string;
 	}
 
-	set container(setTo: any) {
+	set container(setTo: string) {
 		this._container = setTo;
 		if (!this._map) {
 			this._map = new maplibregl.Map({
 				container: this._container,
-				style: 'https://tiles.openfreemap.org/styles/bright',
+				style:
+					mode.current === 'dark'
+						? 'https://tiles.openfreemap.org/styles/dark'
+						: 'https://tiles.openfreemap.org/styles/bright',
 				center: this._center,
 				zoom: 10
 			});

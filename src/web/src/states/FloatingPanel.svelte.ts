@@ -1,9 +1,8 @@
-import { type Broker } from '$types/Broker';
 import type { Snippet } from 'svelte';
 
 let open = $state(false);
 let snippet = $state<Snippet | undefined>();
-let snippets = $state<{ [key: string]: Snippet }>({});
+const snippets = $state<{ [key: string]: Snippet }>({});
 
 export const FloatingPanelState = {
 	get open(): boolean {

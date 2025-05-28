@@ -3,8 +3,6 @@ import { fail } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms';
 import { registrationSchema } from './schema';
 import { zod } from 'sveltekit-superforms/adapters';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '$utils/firebase';
 
 export const load: PageServerLoad = async () => {
 	return {

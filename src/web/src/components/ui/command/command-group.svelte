@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Command as CommandPrimitive, useId } from "bits-ui";
-	import { cn } from "$utils/shadcn.js";
+	import { Command as CommandPrimitive, useId } from 'bits-ui';
+	import { cn } from '$utils/shadcn.js';
 
 	let {
 		ref = $bindable(null),
@@ -15,14 +15,14 @@
 </script>
 
 <CommandPrimitive.Group
-	class={cn("text-foreground overflow-hidden p-1", className)}
+	class={cn('overflow-hidden p-1 text-foreground', className)}
 	bind:ref
 	value={value ?? heading ?? `----${useId()}`}
 	{...restProps}
 >
 	{#if heading}
 		<CommandPrimitive.GroupHeading
-			class="text-muted-foreground px-2 py-1.5 text-xs font-medium"
+			class="px-2 py-1.5 text-xs font-medium text-muted-foreground"
 		>
 			{heading}
 		</CommandPrimitive.GroupHeading>
