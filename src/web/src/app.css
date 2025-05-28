@@ -40,6 +40,9 @@ body {
 	height: 8px;
 }
 
+img {
+}
+
 .icon {
 	-webkit-mask-image: url('/assets/transparent.png');
 	mask-image: url('/assets/transparent.png');

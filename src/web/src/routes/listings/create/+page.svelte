@@ -43,7 +43,7 @@
                 method: 'POST',
                 body: JSON.stringify({
                     name: $formData.businessName,
-                    address: `${$formData.addressLine1}${$formData.addressLine2 ? ', ' + $formData.addressLine2 : ''}, ${$formData.city}, ${$formData.state} ${$formData.zip}`,
+                    address: $formData.isOnline ? 'The Internet' : `${$formData.addressLine1}${$formData.addressLine2 ? ', ' + $formData.addressLine2 : ''}, ${$formData.city}, ${$formData.state} ${$formData.zip}`,
                     market: $formData.industryMarket,
                     contact_method: $formData.isPublic ? 'public' : 'private',
                     longitude: 0, // replace with actual value
@@ -53,6 +53,7 @@
                     gross_per_yr: $formData.annualGross,
                     profit_per_yr: $formData.annualProfit,
                     user_id: currentUser.user?.id,
+                    online: $formData.isOnline,
                 }),
                 headers: {
                     'Content-Type': 'application/json'
@@ -65,7 +66,7 @@
         } catch (error) {
             creatingListing = false;
             toast.error(`Error creating listing: ${error.message}`)
-        }
+        } 
     }
 </script>
 
@@ -109,63 +110,78 @@
             <Form.Control>
                 {#snippet children({ props })}
                     <div class="flex flex-row gap-2 items-center">
-                        <Checkbox {...props} bind:checked={$formData.isPublic} class="font-medium appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" />
+                        <Checkbox {...props} bind:checked={$formData.isPublic} class="font-medium appearance-none border-border [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" />
                         <label for={props.id} class="text-sm">
-                            Display listing publicly
+                            Display Publicly
                         </label>
                     </div>
                 {/snippet}
             </Form.Control>
         </Form.Field>
 
-        <div class="flex flex-col gap-2">
-            <label class="font-medium text-sm {addressHasError ? "text-destructive" : ""}">
-                Business Address
-            </label>
-            <div class="">
-                <Form.Field {form} name="addressLine1" class="w-full flex flex-col">
-                    <Form.Control>
-                        {#snippet children({ props })}
-                            <Input disabled={creatingListing} {...props} bind:value={$formData.addressLine1} type="text" placeholder="Address Line 1" class="font-medium rounded-none rounded-t-lg" {...props} />
-                        {/snippet}
-                    </Form.Control>
-                </Form.Field>
+        <Form.Field {form} name="isOnline" class="w-full flex flex-col">
+            <Form.Control>
+                {#snippet children({ props })}
+                    <div class="flex flex-row gap-2 items-center">
+                        <Checkbox {...props} bind:checked={$formData.isOnline} class="font-medium appearance-none border-border [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none" />
+                        <label for={props.id} class="text-sm">
+                            Online Business
+                        </label>
+                    </div>
+                {/snippet}
+            </Form.Control>
+        </Form.Field>
 
-                <Form.Field {form} name="addressLine2" class="w-full flex flex-col">
-                    <Form.Control>
-                        {#snippet children({ props })}
-                            <Input disabled={creatingListing} {...props} bind:value={$formData.addressLine2} type="text" placeholder="Address Line 2 (optional)" class="font-medium rounded-none border-transparent border-x-border border-b-border" {...props} />
-                        {/snippet}
-                    </Form.Control>
-                </Form.Field>
-
-                <div class="flex flex-row">
-                    <Form.Field {form} name="city" class="w-full flex flex-col">
+        {#if !$formData.isOnline}
+            <div class="flex flex-col gap-2">
+                <label class="font-medium text-sm {addressHasError ? "text-destructive" : ""}">
+                    Business Address
+                </label>
+                <div class="">
+                    <Form.Field {form} name="addressLine1" class="w-full flex flex-col">
                         <Form.Control>
                             {#snippet children({ props })}
-                                <Input disabled={creatingListing} {...props} bind:value={$formData.city} type="text" placeholder="City" class="font-medium rounded-none border-transparent border-l-border border-b-border rounded-bl-lg border-r-border" {...props} />
+                                <Input disabled={creatingListing} {...props} bind:value={$formData.addressLine1} type="text" placeholder="Address Line 1" class="font-medium rounded-none rounded-t-lg" {...props} />
                             {/snippet}
                         </Form.Control>
                     </Form.Field>
 
-                    <Form.Field {form} name="state" class="w-full flex flex-col">
+                    <Form.Field {form} name="addressLine2" class="w-full flex flex-col">
                         <Form.Control>
                             {#snippet children({ props })}
-                                <Input disabled={creatingListing} {...props} bind:value={$formData.state} type="text" placeholder="State" class="font-medium rounded-none border-transparent border-b-border border-r-border" {...props} />
+                                <Input disabled={creatingListing} {...props} bind:value={$formData.addressLine2} type="text" placeholder="Address Line 2 (optional)" class="font-medium rounded-none border-transparent border-x-border border-b-border" {...props} />
                             {/snippet}
                         </Form.Control>
                     </Form.Field>
 
-                    <Form.Field {form} name="zip" class="w-full flex flex-col">
-                        <Form.Control>
-                            {#snippet children({ props })}
-                                <Input disabled={creatingListing} {...props} bind:value={$formData.zip} type="string" placeholder="ZIP" class="font-medium rounded-none border-transparent border-r-border border-b-border rounded-br-lg" {...props} />
-                            {/snippet}
-                        </Form.Control>
-                    </Form.Field>
+                    <div class="flex flex-row">
+                        <Form.Field {form} name="city" class="w-full flex flex-col">
+                            <Form.Control>
+                                {#snippet children({ props })}
+                                    <Input disabled={creatingListing} {...props} bind:value={$formData.city} type="text" placeholder="City" class="font-medium rounded-none border-transparent border-l-border border-b-border rounded-bl-lg border-r-border" {...props} />
+                                {/snippet}
+                            </Form.Control>
+                        </Form.Field>
+
+                        <Form.Field {form} name="state" class="w-full flex flex-col">
+                            <Form.Control>
+                                {#snippet children({ props })}
+                                    <Input disabled={creatingListing} {...props} bind:value={$formData.state} type="text" placeholder="State" class="font-medium rounded-none border-transparent border-b-border border-r-border" {...props} />
+                                {/snippet}
+                            </Form.Control>
+                        </Form.Field>
+
+                        <Form.Field {form} name="zip" class="w-full flex flex-col">
+                            <Form.Control>
+                                {#snippet children({ props })}
+                                    <Input disabled={creatingListing} {...props} bind:value={$formData.zip} type="string" placeholder="ZIP" class="font-medium rounded-none border-transparent border-r-border border-b-border rounded-br-lg" {...props} />
+                                {/snippet}
+                            </Form.Control>
+                        </Form.Field>
+                    </div>
                 </div>
             </div>
-        </div>
+        {/if}
 
         <div class="h-[1px] bg-border my-6 relative flex items-center justify-start">
             <p class="top-0 bg-background pr-6 mb-0.5 font-medium">

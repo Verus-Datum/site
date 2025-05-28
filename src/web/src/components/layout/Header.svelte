@@ -56,7 +56,7 @@
 </script>
 
 {#if page.url.pathname === "/"}
-    {#if !FloatingPanelState.open}
+    {#if false}
         <button onclick={() => {
             FloatingPanelState.open = true;
             FloatingPanelState.displaySnippet("brokers");

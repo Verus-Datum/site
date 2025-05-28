@@ -32,6 +32,14 @@
     });
     const { form: formData, enhance } = form;
 
+    let errors = $state();
+
+    $effect(() => {
+        form.errors.subscribe((errs) => {
+            errors = errs;
+        });
+    })
+
     async function handleSubmit(event) {
         event.preventDefault();
         const result = await form.validateForm();
@@ -46,6 +54,10 @@
             toast.success("Successfully logged in!", {
                 description: "Welcome back!"
             })
+
+            form.errors.set({});
+            errors = {};
+            
             goto("/")
             loggingIn = false;
         } catch (error) {
@@ -56,7 +68,7 @@
     }
 </script>
 
-<main in:fly={{ y: 20, duration: 650 }} class="pb-80 w-full md:w-[100%] h-screen lg:w-[80%] 2xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-center justify-center">
+<main in:fly={{ y: 20, duration: 650 }} class="w-full md:w-[100%] h-screen lg:w-[80%] 2xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-center justify-start pt-40">
     <header class="flex flex-col gap-2 items-center justify-center text-center">
         <img src={TransparentLogo} alt="Verus Datum" class="w-14 h-14 bg-primary rounded-full p-1" />
         <h1 class="text-2xl font-semibold mt-2">
@@ -71,6 +83,9 @@
             <Form.Control>
                 <Form.Label>Email</Form.Label>
                 <Input disabled={loggingIn} placeholder="Email address" type="email" bind:value={$formData.email} />
+                {#if errors}
+                    <Form.FieldErrors />
+                {/if}
             </Form.Control>
         </Form.Field>
         <Form.Field {form} name="password" class="w-full">
@@ -78,6 +93,9 @@
                 <div class="flex flex-col gap-2">
                     <Form.Label>Enter your password</Form.Label>
                     <Input disabled={loggingIn} placeholder="Password" type="password" bind:value={$formData.password} />
+                    {#if errors}
+                        <Form.FieldErrors />
+                    {/if}
                     <a href="/forgot-password" class="text-sm text-primary">
                         Forgot my password
                     </a>

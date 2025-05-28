@@ -19,11 +19,11 @@
     let { listing }: Props = $props();
 
     let images = [
-        "https://www.petitpalais.paris.fr/sites/default/files/content/images/274a7179_0.jpg",
-        "https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/Favor%203.jpeg",
-        "https://k2space.imgix.net/app/uploads/2023/06/K2-Criteo-Office-Curator-LARGE-102-scaled.jpg?auto=format&fit=max&w=5000&q=90",
-        "https://www.reuters.com/resizer/v2/EHRQCRVB6VNBJKECN6MCRQKD2A.jpg?auth=6872991dbba05561ae50f36a849f49629ff49bc39a99e8dea92137c1ca8bc5ff&height=628&width=1200&quality=80&smart=true",
-        "https://images.ctfassets.net/kftzwdyauwt9/28i2D9RyoKNOyuTukSGkw/a4c5a97d081a7c2b1d5aa100fd85d28e/o1-preview-general.png?w=3840&q=90&fm=webp"
+        "https://www.upmenu.com/wp-content/uploads/2022/08/Small-Cafe-Interior-Design.jpg",
+        "https://weadesign.com/wp-content/uploads/2024/01/office-interior-designs.webp",
+        "https://www.avantisystemsusa.com/wp-content/uploads/2020/07/Screen-Shot-2020-07-08-at-3.08.52-PM.png",
+        "https://images.squarespace-cdn.com/content/v1/5d6d67f2387da800015dc00e/e242ea2f-e67f-4991-85bc-6c07b48bcc73/Jude_WetCoffee_-6.jpg",
+        "https://www.blankcreatives.com.au/wp-content/uploads/2022/12/Wonderwood-cafe_09_WEB.jpg"
     ]
 </script>
 

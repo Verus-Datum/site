@@ -78,7 +78,7 @@
             <div class="w-11 h-11 bg-primary" style={`-webkit-mask-image: url(${transparent}); mask-image: url(${transparent}); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center;`}></div>
             <h1 class="font-semibold whitespace-nowrap text-black">Verus Datum</h1>
         </a>
-        <section class="{ignoredPages.includes(page.url.pathname) ? "hidden" : "hidden md:flex"} mx-auto relative h-full w-full md:w-[25rem] items-center justify-center flex-row">
+        <section class="{ignoredPages.includes(page.url.pathname) ? "hidden" : "hidden md:flex"} absolute left-1/2 -translate-x-1/2 h-full w-full md:w-[25rem] items-center justify-center flex-row">
             <div
                 class="absolute bottom-0 h-0.5 bg-black transition-all duration-300 {active !== "business" && active !== "online" ? "hidden" : ""}"
                 style:width="{active === 'business' ? '50%' : '50%'}"

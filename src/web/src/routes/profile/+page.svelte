@@ -10,6 +10,7 @@
     import ArrowUpRight from "@lucide/svelte/icons/arrow-up-right"
     import { currentUser } from "$states/CurrentUser.svelte";
     import { onMount } from "svelte";
+    import ScreenContainer from "$components/layout/ScreenContainer.svelte"
 
     import { flyAndScale } from "$utils/shadcn";
 	import { fly } from "svelte/transition";
@@ -45,7 +46,7 @@
     </button>
 {/snippet}
 
-<main in:fly={{ y: 20, duration: 650 }} class="md:pt-20 pt-8 pb-8 w-full md:w-[100%] lg:w-[80%] 2xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-start justify-start">
+<ScreenContainer>
     <header class="pt-20 w-full">
         <h1 class="text-5xl md:text-left text-center w-full font-semibold">
             Hello {currentUser.user?.first_name}
@@ -90,4 +91,4 @@
             {@render FlatCard("Help with business exit", "Request us help you with due diligence lists, valuation methods, M&A process steps", "orange")}
         </div>
     </section>
-</main>
+</ScreenContainer>

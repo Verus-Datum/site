@@ -83,17 +83,14 @@
 	}
 </script>
 
-<main in:fly={{ y: 20, duration: 650 }} class="lg:pt-20 pt-8 pb-8 w-full xl:w-[90%] 2xl:w-[68%] 3xl:w-[60%] px-8 mx-auto flex-col gap-10 flex items-start justify-start">
+<main in:fly={{ y: 20, duration: 650 }} class="lg:pt-20 pt-8 pb-8 w-full xl:w-[90%] 2xl:w-[68%] 3xl:w-[60%] px-8 mx-auto flex-col gap-6 flex items-start justify-start">
 	<header class="pt-20 w-full">
 		<h1 class="text-3xl md:text-left text-center w-full font-semibold">
-			View {filteredBusinesses.length} online listings
+			Online businesses for sale
 		</h1>
 	</header>
-
+    
 	<div class="flex flex-col gap-4 w-full">
-		<h2 class="text-lg font-medium text-muted-foreground">
-			Filters
-		</h2>
 		<div class="flex flex-row gap-4 w-full overflow-x-auto hide-scrollbar">
 			<Select.Root bind:value={sortBy} type="single" on:change={applyFilters}>
 				<Select.Trigger class="rounded-lg  flex-shrink-0 py-2 px-4 w-auto min-w-32 gap-4">
@@ -164,6 +161,10 @@
 				</Popover.Content>
 			</Popover.Root>
 		</div>
+
+        <h2 class="font-medium text-muted-foreground mt-2">
+			{filteredBusinesses.length} results
+		</h2>
 	</div>
 
 	<div class="w-full flex flex-col gap-6">
