@@ -31,8 +31,6 @@ fastapi==0.115.12
     # via -r .devcontainer/mono-requirements.in
 fastapi-cli==0.0.7
     # via -r .devcontainer/mono-requirements.in
-greenlet==3.2.2
-    # via sqlalchemy
 h11==0.16.0
     # via
     #   -r .devcontainer/mono-requirements.in

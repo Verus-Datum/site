@@ -1,0 +1,87 @@
+name: Cleanup
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 0'    # every Sunday at 03:00 UTC
+
+jobs:
+  packages:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [gui, db, api]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Delete all untagged ${{ matrix.package }} Images
+        uses: actions/delete-package-versions@v5.0.0
+        with:
+          package-name: ${{ matrix.package }}
+          package-type: container
+          delete-only-untagged-versions: 'true'
+          min-versions-to-keep: 0 # delete every untagged manifest
+          token: ${{ secrets.PAT_NUKE }}
+
+      - name: Delete old ${{ matrix.package }} Versions
+        uses: actions/delete-package-versions@v5.0.0
+        with:
+          package-name: ${{ matrix.package }}
+          package-type: container
+          min-versions-to-keep: 4 # 3 + latest
+          token: ${{ secrets.PAT_NUKE }}
+
+
+  tags:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+      KEEP: 3
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Delete old git tags
+        run: |
+          set -euo pipefail
+          git fetch --tags
+
+          # list all semver tags, newest -> oldest
+          ALL_TAGS=$(git tag --list '0.0.*' --sort=-v:refname)
+          if [ -z "$ALL_TAGS" ]; then
+            echo "No semver tags found."
+            exit 0
+          fi
+
+          TOTAL=$(echo "$ALL_TAGS" | wc -l)
+          DELETE_COUNT=$(( TOTAL - KEEP ))
+          if [ "$DELETE_COUNT" -le 0 ]; then
+            echo "Nothing to delete (only $TOTAL tags, KEEP=$KEEP)."
+            exit 0
+          fi
+
+          echo "Will delete up to $DELETE_COUNT tags without releases."
+          deleted=0
+
+          # start at tag #KEEP+1
+          for TAG in $(echo "$ALL_TAGS" | tail -n +$((KEEP+1))); do
+            [ "$deleted" -ge "$DELETE_COUNT" ] && break
+
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/$GITHUB_REPOSITORY/releases/tags/$TAG)
+
+            if [ "$HTTP_STATUS" -eq 404 ]; then
+              echo "Deleting $TAG"
+              git push --delete origin "$TAG"
+              git tag -d "$TAG"
+              deleted=$((deleted+1))
+            else
+              echo "Skipping $TAG (has release)"
+            fi
+          done
+

@@ -2,7 +2,7 @@ import type { MapStateType } from '$types/Map';
 import maplibregl, { type LngLatLike } from 'maplibre-gl';
 
 class MapState implements MapStateType {
-	private _center = $state<LngLatLike>([-86.5853, 34.7295]);
+	private _center = $state<LngLatLike>([-86.225, 34.7295]);
 	private _map = $state<maplibregl.Map | undefined>();
 	private _container = $state<any>();
 
@@ -24,7 +24,7 @@ class MapState implements MapStateType {
 			this._map = new maplibregl.Map({
 				container: this._container,
 				style: 'https://tiles.openfreemap.org/styles/bright',
-				center: [-86.5853, 34.7295],
+				center: this._center,
 				zoom: 10
 			});
 		}

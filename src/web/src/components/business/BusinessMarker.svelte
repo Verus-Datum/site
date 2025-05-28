@@ -88,13 +88,24 @@
     </section>
 
     <footer class="w-full flex flex-row gap-3">
+        <Button href={`/listings/example`} onclick={() => {
+            isOpen = false;
+            isOpenDrawer = false;
+            /* isOpen = false;
+            isSelected = true;
+            isOpenDrawer = false;
+            FloatingPanelState.open = true;
+            FloatingPanelState.snippet = LearnMoreContent; */
+        }} class="w-full font-semibold bg-blue-flat flex md:hidden text-blue-foreground hover:bg-blue-muted/30">
+            Learn More
+        </Button>
         <Button onclick={() => {
             isOpen = false;
             isSelected = true;
             isOpenDrawer = false;
             FloatingPanelState.open = true;
             FloatingPanelState.snippet = LearnMoreContent;
-        }} class="w-full font-semibold bg-blue-flat text-blue-foreground hover:bg-blue-muted/30">
+        }} class="w-full hidden md:flex font-semibold bg-blue-flat text-blue-foreground hover:bg-blue-muted/30">
             Learn More
         </Button>
         <Button class="w-full">
@@ -175,7 +186,12 @@
     </Carousel.Root>
 
     <footer class="w-full flex flex-row justify-end gap-2">
-        <Button class="w-2/5">
+        <Button onclick={() => {
+            FloatingPanelState.open = false;
+        }} href={`/listings/example`} class="w-full font-semibold bg-blue-flat text-blue-foreground hover:bg-blue-flat/70">
+            View Listing
+        </Button>
+        <Button class="w-full">
             Request Contact
         </Button>
     </footer>

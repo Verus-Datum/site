@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 set -a
 source .devcontainer/dev.env
@@ -11,3 +12,6 @@ npm install
 
 cd ../../
 uv pip install -r .devcontainer/requirements.txt
+uv pip install -e src/api
+
+export PYTHONPATH="$(pwd)/src/"

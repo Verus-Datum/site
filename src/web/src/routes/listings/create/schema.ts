@@ -4,6 +4,7 @@ export const formSchema = z.object({
 	businessName: z.string().min(1, 'Business name is required'),
 	industryMarket: z.string().min(1, 'Business industry is required'),
 	isPublic: z.boolean(),
+	isOnline: z.boolean(),
 	addressLine1: z.string().min(1, 'Address Line 1 is required'),
 	addressLine2: z.string().optional(),
 	city: z.string().min(1, 'City is required'),

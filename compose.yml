@@ -9,7 +9,6 @@ services:
             - 3000:3000
         environment: # NOTE: this is ignored by app
             API_URL: https://localhost:8081/api
-            # API_URL: ${API_URL:-https://vd.harville.dev/api}
 
     vd-api:
         image: ghcr.io/verus-datum/api:${IMAGE_TAG:-latest}
@@ -22,9 +21,6 @@ services:
         environment:
             API_URL: https://localhost:8081/api
             DATABASE_URL: postgresql://admin:password@vd-db:5432/vd_db
-
-            # API_URL: ${API_URL:-https://vd.harville.dev/api}
-            # DATABASE_URL: ${DATABASE_URL:-postgresql://admin:password@vd-db:5432/vd_db}
         depends_on:
             - vd-db
 

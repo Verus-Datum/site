@@ -9,5 +9,5 @@ export type AuthUser = {
 	signOut: () => void;
 	requiresAuthed: () => void;
 	requiresNotAuthed: () => void;
-	updateUserInfo: () => Promise<boolean>;
+	getUserInfo: () => Promise<boolean>;
 };

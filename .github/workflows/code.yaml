@@ -1,4 +1,4 @@
-name: Python-Checks
+name: Checks
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
     types: [opened, synchronize]
     paths:
       - 'src/**'
-      - '!src/app/**'
+      - 'deploy/**'
 
 jobs:
-  test:
+  py-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -34,7 +34,7 @@ jobs:
       - name: Run pytest
         run: pytest || (code=$?; [ $code -eq 5 ] && echo "No tests collected; passing" && exit 0 || exit $code)
 
-  lint:
+  py-lint:
     runs-on: ubuntu-latest
 
     steps:

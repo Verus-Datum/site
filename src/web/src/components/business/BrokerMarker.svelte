@@ -62,15 +62,6 @@
 </script>
 
 {#snippet MarkerContent()}
-    <button onclick={() => {
-        FloatingPanelState.open = true;
-        drawerOpen = false;
-        FloatingPanelState.displaySnippet("brokers");
-    }} class="flex pb-5 pt-1 text-left hover:text-foreground/80 duration-200 flex-row gap-2 font-medium items-center justify-center">
-        <Chevron size={24} />
-        Show All
-    </button>
-
     <header>
         <h1 class="font-semibold py-1 text-2xl">
             {broker.name}
@@ -122,21 +113,14 @@
         </div>
     </div>
 
-    <div class="flex items-center gap-2 mt-2 text-muted-foreground font-medium">
-        <Info size={24} />
-        Services:
-    </div>
-
-    <div class="w-full max-h-64 py-4 pb-6 overflow-y-auto pl-6 hide-scrollbar flex flex-col">
-        {#each broker.services as service}
-            <h1 class="py-3 border-b font-medium">
-                {service}
-            </h1>
-        {/each}
-    </div>
-
     <footer class="w-full flex flex-row justify-end gap-2">
-        <Button class="w-2/5">
+        <Button onclick={() => {
+            drawerOpen = false;
+            FloatingPanelState.open = false;
+        }} href={`/brokers/example`} class="w-full font-semibold bg-blue-flat text-blue-foreground hover:bg-blue-flat/70">
+            View Profile
+        </Button>
+        <Button class="w-full">
             Request Contact
         </Button>
     </footer>

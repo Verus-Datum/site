@@ -3,11 +3,18 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import { mount, onMount } from 'svelte';
 	import { mapState } from '$states/MapState.svelte';
-	import { generateFakeBusiness } from '$types/Business';
+	import { generateFakeBusiness, type Business } from '$types/Business';
 	import BusinessMarker from '$components/business/BusinessMarker.svelte';
-	import { generateFakeBroker } from '$types/Broker';
+	import { generateFakeBroker, type Broker } from '$types/Broker';
 	import BrokerMarker from '$components/business/BrokerMarker.svelte';
     import { fade } from 'svelte/transition';
+
+    type Props = {
+        brokers: Broker[],
+        businesses: Business[]
+    }
+
+    let { brokers, businesses }: Props = $props();
 
 	let mapContainer = $state<HTMLElement | undefined>();
 	let markersInitialized = false;
@@ -36,11 +43,6 @@
 			if (mapState.map && !markersInitialized && mapState.map.loaded()) {
 				clearInterval(checkMapReady);
 
-				const businesses = Array.from(
-					{ length: Math.floor(Math.random() * (50 - 35)) + 35 },
-					() => generateFakeBusiness(-86.75, -86.45, 34.65, 34.85)
-				);
-
 				for (const biz of businesses) {
 					const markerEl = document.createElement('div');
 					mount(BusinessMarker, {
@@ -54,11 +56,6 @@
                         })
 						.addTo(mapState.map);
 				}
-
-				const brokers = Array.from(
-					{ length: Math.floor(Math.random() * (15 - 5)) + 5 },
-					() => generateFakeBroker(-86.75, -86.45, 34.65, 34.85)
-				);
 
 				for (const bro of brokers) {
 					const markerEl = document.createElement('div');
