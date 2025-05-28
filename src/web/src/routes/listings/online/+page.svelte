@@ -86,7 +86,7 @@
 <main in:fly={{ y: 20, duration: 650 }} class="lg:pt-20 pt-8 pb-8 w-full xl:w-[90%] 2xl:w-[68%] 3xl:w-[60%] px-8 mx-auto flex-col gap-6 flex items-start justify-start">
 	<header class="pt-20 w-full">
 		<h1 class="text-3xl md:text-left text-center w-full font-semibold">
-			Online businesses for sale
+			View all businesses
 		</h1>
 	</header>
     

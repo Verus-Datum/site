@@ -45,6 +45,9 @@
                     name: $formData.businessName,
                     address: $formData.isOnline ? 'The Internet' : `${$formData.addressLine1}${$formData.addressLine2 ? ', ' + $formData.addressLine2 : ''}, ${$formData.city}, ${$formData.state} ${$formData.zip}`,
                     market: $formData.industryMarket,
+                    city: $formData.city,
+                    state: $formData.state,
+                    zip_code: $formData.zip,
                     contact_method: $formData.isPublic ? 'public' : 'private',
                     longitude: 0, // replace with actual value
                     latitude: 0, // replace with actual value

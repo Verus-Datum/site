@@ -36,7 +36,7 @@
     ];
 </script>
 
-<div class="rounded-xl relative border w-full p-6 flex flex-col md:flex-row gap-6 shadow-ui">
+<div class="rounded-xl relative border h-70 w-full p-5 flex flex-col md:flex-row gap-6">
     <img src={images[Math.floor(Math.random() * images.length)]} alt="Image" class="w-full md:w-80 shrink-0 object-cover rounded-lg" />
     <header class="flex flex-col justify-between w-full relative">
         <h1 class="text-2xl font-semibold w-full flex flex-col items-start">

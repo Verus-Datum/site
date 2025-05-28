@@ -12,6 +12,7 @@
 		"moduleResolution": "bundler",
 		"baseUrl": ".",
 		"paths": {
+			"$lib/*": ["src/lib/*"],
 			"$components/*": ["src/components/*"],
 			"$routes/*": ["src/routes/*"],
 			"$states/*": ["src/states/*"],

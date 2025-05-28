@@ -20,7 +20,7 @@ get along, so we shut typescript up by casting `value` to `never`.
 	bind:value={value as never}
 	{orientation}
 	class={cn(
-		"relative flex touch-none select-none items-center data-[orientation='vertical']:h-full data-[orientation='vertical']:min-h-44 data-[orientation='horizontal']:w-full data-[orientation='vertical']:w-auto data-[orientation='vertical']:flex-col",
+		"relative flex touch-none select-none items-center data-[orientation='vertical']:h-full data-[orientation='vertical']:min-h-44 data-[orientation='vertical']:w-auto data-[orientation='vertical']:flex-col",
 		className
 	)}
 	{...restProps}
@@ -37,7 +37,7 @@ get along, so we shut typescript up by casting `value` to `never`.
 		{#each thumbs as thumb (thumb)}
 			<SliderPrimitive.Thumb
 				index={thumb}
-				class="border-primary bg-background ring-offset-background focus-visible:ring-ring block size-5 rounded-full border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+				class="border-primary bg-background ring-offset-background focus-visible:ring-ring block size-[1.15rem] rounded-full border-2 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
 			/>
 		{/each}
 	{/snippet}

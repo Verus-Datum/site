@@ -7,6 +7,7 @@
     import { page } from "$app/state"
     import { Toaster } from "$components/ui/sonner";
 	import { currentUser } from '$states/CurrentUser.svelte';
+    import { ModeWatcher } from "mode-watcher";
 
     //$inspect(currentUser.user, currentUser.firebase, currentUser.loggedIn);
 
@@ -14,6 +15,7 @@
 </script>
 
 <Toaster />
+<ModeWatcher />
 
 <FloatingPanel>
     <BrokerList />

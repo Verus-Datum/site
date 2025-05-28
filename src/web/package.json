@@ -52,7 +52,7 @@
 		"zod": "^3.24.4"
 	},
 	"dependencies": {
-		"bits-ui": "^1.5.2",
+		"bits-ui": "1.8.0",
 		"firebase": "^11.8.1",
 		"maplibre-gl": "^5.5.0"
 	}
