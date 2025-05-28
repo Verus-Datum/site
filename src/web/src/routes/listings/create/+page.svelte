@@ -70,7 +70,7 @@
     }
 </script>
 
-<main in:fly={{ y: 20, duration: 650 }} class="md:pt-20 pt-8 pb-8 w-full md:w-[100%] lg:w-[80%] 2xl:w-[30%] px-8 mx-auto flex-col gap-10 flex items-start justify-start">
+<main in:fly={{ y: 20, duration: 650 }} class="md:pt-20 pt-8 pb-8 w-full md:w-[100%] lg:w-[80%] 2xl:w-[55%] 3xl:w-[40%] px-8 mx-auto flex-col gap-10 flex items-start justify-start">
     <header class="pt-20 w-full flex flex-col gap-3">
         <h1 class="text-3xl md:text-left text-center w-full font-semibold">
             Sell Your Business
