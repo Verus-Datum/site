@@ -7,6 +7,7 @@
 	import ChevronLeft from "@lucide/svelte/icons/chevron-left";
 	import ChevronRight from "@lucide/svelte/icons/chevron-right";
 	import { fly } from "svelte/transition";
+    import UserDropdown from "$components/user/UserDropdown.svelte";
 
 	const businesses = Array.from(
 		{ length: Math.floor(Math.random() * (50 - 35)) + 35 },

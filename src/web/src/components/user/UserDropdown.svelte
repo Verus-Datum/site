@@ -37,7 +37,7 @@
             <img src={"https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"} class="w-9 h-9 rounded-full object-cover" />
         </a>
     {/if}
-    <DropdownMenu.Content class="mr-2 w-[250px] bg-white shadow-lg rounded-md p-1 pb-1">
+    <DropdownMenu.Content class="mr-2 w-[250px] z-[9999] bg-white shadow-lg rounded-md p-1 pb-1">
         <div class="font-medium leading-none py-2 px-2 text-sm">My Account</div>
         <div class="h-px bg-border/60 my-1 mx-[-0.25rem]" />
         

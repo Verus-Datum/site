@@ -13,6 +13,7 @@
     import * as Sheet from "$components/ui/sheet";
     import Laptop from "@lucide/svelte/icons/laptop";
     import transparent from '$assets/transparent.png';
+    import { browser } from "$app/environment";
 
     let {
         children
@@ -37,7 +38,7 @@
     let exampleUrl = "https://media.istockphoto.com/id/1413766112/photo/successful-mature-businessman-looking-at-camera-with-confidence.jpg?s=612x612&w=0&k=20&c=NJSugBzNuZqb7DJ8ZgLfYKb3qPr2EJMvKZ21Sj5Sfq4=";
 </script>
 
-<div class="w-screen z-50 bg-background flex justify-center flex-col absolute top-0 left-0">
+<div class="w-screen z-40 bg-background flex justify-center flex-col absolute top-0 left-0">
     <nav class="w-full flex items-center justify-between px-4 md:px-6 relative border-b h-[4rem] md:h-[4.5rem]">
         <Sheet.Root bind:open={sheetOpen}>
             <Sheet.Trigger class="flex text-muted-foreground flex-row gap-2 items-center md:hidden">
@@ -100,7 +101,7 @@
                 All Businesses            
             </a>
         </section>    
-        <section class="flex flex-row gap-6 flex w-64 justify-end">
+        <section class="flex-row overflow-visible gap-6 flex w-64 justify-end">
             <!--
                 <NotificationsDropdown />
             -->
