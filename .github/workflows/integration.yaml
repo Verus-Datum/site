@@ -1,0 +1,32 @@
+name: Integration-Test
+
+concurrency:
+  group: integration-tests-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - "**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and run services
+        run: |
+          docker compose up -d --build --wait --wait-timeout 300
+          EXIT_CODE=$?
+          docker ps
+          docker compose down
+          exit $EXIT_CODE
