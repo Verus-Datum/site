@@ -63,7 +63,7 @@
 
                     <a onclick={() => sheetOpen = false} href="/listings"
                         class={`w-full text-left items-center justify-start p-3 text-sm flex flex-row gap-3 hover:bg-secondary duration-200 rounded-xl ${
-                            page.url.pathname === '/listings' ? 'text-black font-medium' : 'text-muted-foreground'
+                            page.url.pathname === '/listings' ? 'text-foreground font-medium' : 'text-muted-foreground'
                         }`}
                     >
                         <Briefcase size={24} />
@@ -74,15 +74,15 @@
         </Sheet.Root>
         <a href="/" class="absolute left-1/2 transform -translate-x-1/2 flex flex-row text-primary gap-2 md:hidden items-center">
             <div class="w-11 h-11 bg-primary" style={`-webkit-mask-image: url(${transparent}); mask-image: url(${transparent}); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center;`}></div>
-            <h1 class="font-semibold whitespace-nowrap text-black">Verus Datum</h1>
+            <h1 class="font-semibold whitespace-nowrap text-foreground">Verus Datum</h1>
         </a>
         <a href="/" class="flex-row text-primary gap-2 hidden md:flex items-center">
             <div class="w-11 h-11 bg-primary" style={`-webkit-mask-image: url(${transparent}); mask-image: url(${transparent}); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center;`}></div>
-            <h1 class="font-semibold whitespace-nowrap text-black">Verus Datum</h1>
+            <h1 class="font-semibold whitespace-nowrap text-foreground">Verus Datum</h1>
         </a>
         <section class="{ignoredPages.includes(page.url.pathname) ? "hidden" : "hidden md:flex"} absolute left-1/2 -translate-x-1/2 h-full w-full md:w-[25rem] items-center justify-center flex-row">
             <div
-                class="absolute bottom-0 h-0.5 bg-black transition-all duration-300 {active !== "business" && active !== "all" ? "hidden" : ""}"
+                class="absolute bottom-0 h-0.5 bg-foreground transition-all duration-300 {active !== "business" && active !== "all" ? "hidden" : ""}"
                 style:width="{active === 'business' ? '50%' : '50%'}"
                 style:left="{active === 'business' ? '0px' : '50%'}"
             />
