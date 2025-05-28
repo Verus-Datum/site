@@ -50,3 +50,35 @@ export function sortByName(businesses: Business[], direction: 'asc' | 'desc'): B
 		return direction === 'asc' ? cmp : -cmp;
 	});
 }
+
+export function getLowestAskingPrice(businesses: Business[]): number {
+	return Math.min(...businesses.map((b) => b.asking_price));
+}
+
+export function getHighestAskingPrice(businesses: Business[]): number {
+	return Math.max(...businesses.map((b) => b.asking_price));
+}
+
+export function getLowestRevenue(businesses: Business[]): number {
+	return Math.min(...businesses.map((b) => b.revenue_per_yr));
+}
+
+export function getHighestRevenue(businesses: Business[]): number {
+	return Math.max(...businesses.map((b) => b.revenue_per_yr));
+}
+
+export function getLowestGross(businesses: Business[]): number {
+	return Math.min(...businesses.map((b) => b.gross_per_yr));
+}
+
+export function getHighestGross(businesses: Business[]): number {
+	return Math.max(...businesses.map((b) => b.gross_per_yr));
+}
+
+export function getLowestProfit(businesses: Business[]): number {
+	return Math.min(...businesses.map((b) => b.profit_per_yr));
+}
+
+export function getHighestProfit(businesses: Business[]): number {
+	return Math.max(...businesses.map((b) => b.profit_per_yr));
+}

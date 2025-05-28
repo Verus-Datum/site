@@ -26,6 +26,7 @@ type Business = {
 
 	is_public: boolean;
 	broker: Broker;
+	type: 'Online' | 'Physical';
 
 	// user: User;
 	// user_id: number;
@@ -49,7 +50,7 @@ function generateFakeBusiness(
 		name: faker.company.name(),
 		address: faker.location.streetAddress(true),
 		market: faker.helpers.arrayElement(markets),
-		contact_method: 'Direct Owner',
+		contact_method: faker.helpers.arrayElement(['Broker', 'Direct Owner']),
 		latitude,
 		longitude,
 		asking_price,
@@ -57,6 +58,7 @@ function generateFakeBusiness(
 		gross_per_yr: faker.number.int({ min: 80000, max: 4500000 }),
 		profit_per_yr: faker.number.int({ min: 20000, max: 1500000 }),
 		is_public: faker.datatype.boolean(),
+		type: faker.helpers.arrayElement(['Physical', 'Online']),
 		broker: generateFakeBroker(min_lng, max_lng, min_lat, max_lat)
 	};
 }
