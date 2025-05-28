@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from "svelte";
+	import { fly } from "svelte/transition";
 
     type Props = {
         children: Snippet
