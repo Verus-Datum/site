@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Select as SelectPrimitive, type WithoutChild } from "bits-ui";
-	import ChevronDown from "@lucide/svelte/icons/chevron-down";
-	import { cn } from "$utils/shadcn.js";
+	import { Select as SelectPrimitive, type WithoutChild } from 'bits-ui';
+	import ChevronDown from '@lucide/svelte/icons/chevron-down';
+	import { cn } from '$utils/shadcn.js';
 
 	let {
 		ref = $bindable(null),
@@ -14,7 +14,7 @@
 <SelectPrimitive.Trigger
 	bind:ref
 	class={cn(
-		"rounded-full bg-background hover:bg-secondary duration-200 data-[placeholder]:text-muted-foreground flex w-full items-center justify-between border px-6 py-3.5 text-sm font-semibold focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+		'flex w-full items-center justify-between rounded-full border bg-background px-6 py-3.5 text-sm font-semibold duration-200 hover:bg-secondary focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground [&>span]:line-clamp-1',
 		className
 	)}
 	{...restProps}

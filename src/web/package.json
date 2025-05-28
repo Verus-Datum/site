@@ -30,6 +30,7 @@
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^2.46.1",
+		"eslint-plugin-unused-imports": "^4.1.4",
 		"formsnap": "^2.0.1",
 		"globals": "^15.14.0",
 		"mode-watcher": "^1.0.7",

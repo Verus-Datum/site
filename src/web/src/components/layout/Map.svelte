@@ -3,22 +3,21 @@
 	import 'maplibre-gl/dist/maplibre-gl.css';
 	import { mount, onMount } from 'svelte';
 	import { mapState } from '$states/MapState.svelte';
-	import { generateFakeBusiness, type Business } from '$types/Business';
+	import { type Business } from '$types/Business';
 	import BusinessMarker from '$components/business/BusinessMarker.svelte';
-	import { generateFakeBroker, type Broker } from '$types/Broker';
+	import { type Broker } from '$types/Broker';
 	import BrokerMarker from '$components/business/BrokerMarker.svelte';
-    import { fade } from 'svelte/transition';
+	
+type Props = {
+		brokers: Broker[];
+		businesses: Business[];
+	};
 
-    type Props = {
-        brokers: Broker[],
-        businesses: Business[]
-    }
-
-    let { brokers, businesses }: Props = $props();
+	let { brokers, businesses }: Props = $props();
 
 	let mapContainer = $state<HTMLElement | undefined>();
 	let markersInitialized = false;
-    let mapLoaded = $state<boolean>(false);
+	let mapLoaded = $state<boolean>(false);
 
 	onMount(() => {
 		if (!mapContainer) return;
@@ -51,9 +50,9 @@
 					});
 					new maplibregl.Marker({ element: markerEl })
 						.setLngLat({
-                            lng: biz.longitude,
-                            lat: biz.latitude
-                        })
+							lng: biz.longitude,
+							lat: biz.latitude
+						})
 						.addTo(mapState.map);
 				}
 
@@ -72,10 +71,15 @@
 			}
 		}, 100);
 
-        mapState.map.on('load', () => {
-            mapLoaded = true;
-        })
+		mapState.map.on('load', () => {
+			mapLoaded = true;
+		});
 	});
 </script>
 
-<div bind:this={mapContainer} class="w-screen h-screen overflow-hidden duration-500 {mapLoaded ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-[0.989] translate-y-5"}"></div>
+<div
+	bind:this={mapContainer}
+	class="h-screen w-screen overflow-hidden duration-500 {mapLoaded
+		? 'translate-y-0 scale-100 opacity-100'
+		: 'translate-y-5 scale-[0.989] opacity-0'}"
+></div>

@@ -80,6 +80,10 @@ img {
 	background-color: #a1a1aa;
 }
 
+.bg-card {
+	@apply border;
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;
@@ -93,7 +97,7 @@ img {
 		--border: 0 0% 87%;
 		--input: 220 13% 91%;
 		--primary: 212 84% 47%;
-		--primary-foreground: 210 20% 98%;
+		--primary-foreground: 0 0% 100%;
 		--secondary: 220 14.3% 95.9%;
 		--secondary-foreground: 220.9 39.3% 11%;
 		--accent: 220 14.3% 95.9%;
@@ -124,25 +128,25 @@ img {
 	}
 
 	.dark {
-		--background: 212 0% 4%;
-		--foreground: 210 20% 98%;
-		--muted: 215 27.9% 16.9%;
-		--muted-foreground: 0 0% 52%;
-		--popover: 224 71.4% 4.1%;
-		--popover-foreground: 210 20% 98%;
-		--card: 224 71.4% 4.1%;
-		--card-foreground: 210 20% 98%;
-		--border: 0 0% 14%;
-		--input: 215 27.9% 16.9%;
-		--primary: 0 0% 100%;
-		--primary-foreground: 220.9 39.3% 11%;
-		--secondary: 215 27.9% 16.9%;
-		--secondary-foreground: 210 20% 98%;
-		--accent: 215 27.9% 16.9%;
-		--accent-foreground: 210 20% 98%;
+		--background: 0 0% 7.0588%;
+		--foreground: 0 0% 98%;
+		--card: 0 0% 7.8431%;
+		--card-foreground: 0 0% 98%;
+		--popover: 0 0% 7.8431%;
+		--popover-foreground: 0 0% 98%;
+		--primary: 214.1379 99.1453% 54.1176%;
+		--primary-foreground: 0 0% 100%;
+		--secondary: 240 3.7% 12%;
+		--secondary-foreground: 0 0% 98%;
+		--muted: 240 3.7% 15.9%;
+		--muted-foreground: 240 5% 64.9%;
+		--accent: 240 3.7% 15.9%;
+		--accent-foreground: 0 0% 98%;
 		--destructive: 0 62.8% 30.6%;
-		--destructive-foreground: 210 20% 98%;
-		--ring: 216 12.2% 83.9%;
+		--destructive-foreground: 0 85.7% 97.3%;
+		--border: 0 0% 16%;
+		--input: 240 3.7% 15.9%;
+		--ring: 240 4.9% 83.9%;
 		--radius: 0.5rem;
 		--sidebar-background: 240 5.9% 10%;
 		--sidebar-foreground: 240 4.8% 95.9%;
@@ -153,12 +157,12 @@ img {
 		--sidebar-border: 240 3.7% 15.9%;
 		--sidebar-ring: 217.2 91.2% 59.8%;
 		--chip-red: 0 80% 61%;
-		--blue-flat: 213 71% 15%;
-		--blue-foreground: 212 69% 85%;
+		--blue-flat: 212 63% 10%;
+		--blue-foreground: 212 75% 57%;
 		--blue-muted: 212 49% 70%;
 		--green-foreground: 104 26% 87%;
 		--green-muted: 105 18% 67%;
-		--green-flat: 105 53% 13%;
+		--green-flat: 106 69% 11%;
 		--orange-foreground: 42 54% 83%;
 		--orange-muted: 42 41% 63%;
 		--orange-flat: 42 71% 15%;

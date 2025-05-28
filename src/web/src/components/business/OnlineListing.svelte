@@ -1,105 +1,91 @@
 <script lang="ts">
-    import { Button } from "$components/ui/button";
-    import MapPin from "@lucide/svelte/icons/map-pin";
-    import Provider from "@lucide/svelte/icons/life-buoy";
-    import Plus from "@lucide/svelte/icons/plus";
-    import Phone from "@lucide/svelte/icons/phone";
-    import Eye from "@lucide/svelte/icons/eye";
-    import EllipisVertical from "@lucide/svelte/icons/ellipsis-vertical";
-    import ArrowRight from "@lucide/svelte/icons/arrow-right";
-    import ArrowUpRight from "@lucide/svelte/icons/arrow-up-right"
-    import { currentUser } from "$states/CurrentUser.svelte";
-    import { onMount } from "svelte";
-    import type { Business } from "$types/Business";
-	import { Badge } from "$components/ui/badge";
-    
-    type Props = {
-        listing: Business;
-    };
+	import { Button } from '$components/ui/button';
+	import type { Business } from '$types/Business';
+	
+type Props = {
+		listing: Business;
+	};
 
-    let { listing }: Props = $props();
+	let { listing }: Props = $props();
 
-    const formatCurrency = (num: number) =>
+	const formatCurrency = (num: number) =>
 		new Intl.NumberFormat('en-US', {
 			style: 'currency',
 			currency: 'USD',
 			maximumFractionDigits: 0
 		}).format(num);
 
-    let images = [
-        "https://www.petitpalais.paris.fr/sites/default/files/content/images/274a7179_0.jpg",
-        "https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/Favor%203.jpeg",
-        "https://k2space.imgix.net/app/uploads/2023/06/K2-Criteo-Office-Curator-LARGE-102-scaled.jpg?auto=format&fit=max&w=5000&q=90",
-        "https://www.cmswire.com/-/media/96e6aad4e98842abb94d1bba60317770.ashx",
-        "https://media.wired.com/photos/6667528bbbc4a40373aab2af/master/pass/Everything-Apple-Announced-WWDC-2024-GettyImages-2156398720.jpg",
-        "https://fiu-original.b-cdn.net/fontsinuse.com/use-images/121/121154/121154.png?filename=Screenshot_2020-09-10%20Develop%20Preview%20Ship%20For%20the%20best%20frontend%20teams%20%E2%80%93%20Vercel(3).png"
-    ];
+	let images = [
+		'https://www.petitpalais.paris.fr/sites/default/files/content/images/274a7179_0.jpg',
+		'https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/Favor%203.jpeg',
+		'https://k2space.imgix.net/app/uploads/2023/06/K2-Criteo-Office-Curator-LARGE-102-scaled.jpg?auto=format&fit=max&w=5000&q=90',
+		'https://www.cmswire.com/-/media/96e6aad4e98842abb94d1bba60317770.ashx',
+		'https://media.wired.com/photos/6667528bbbc4a40373aab2af/master/pass/Everything-Apple-Announced-WWDC-2024-GettyImages-2156398720.jpg',
+		'https://fiu-original.b-cdn.net/fontsinuse.com/use-images/121/121154/121154.png?filename=Screenshot_2020-09-10%20Develop%20Preview%20Ship%20For%20the%20best%20frontend%20teams%20%E2%80%93%20Vercel(3).png'
+	];
 </script>
 
-<div class="rounded-xl relative border h-70 w-full p-5 flex flex-col md:flex-row gap-6">
-    <img src={images[Math.floor(Math.random() * images.length)]} alt="Image" class="w-full md:w-80 shrink-0 object-cover rounded-lg" />
-    <header class="flex flex-col justify-between w-full relative">
-        <h1 class="text-2xl font-semibold w-full flex flex-col items-start">
-            {listing.name}
-            <span class="text-primary text-xl py-2 flex flex-col lg:hidden">
-                {formatCurrency(listing.asking_price)}
-                <p class="text-muted-foreground font-medium text-sm">
-                    asking price
-                </p>
-            </span>
-            <span class="text-primary flex-col items-end absolute self-end hidden lg:flex">
-                {formatCurrency(listing.asking_price)}
-                <p class="text-muted-foreground font-medium text-base">
-                    asking price
-                </p>
-            </span>
-        </h1>
+<div class="h-70 relative flex w-full flex-col gap-6 rounded-xl border p-5 md:flex-row">
+	<img
+		src={images[Math.floor(Math.random() * images.length)]}
+		alt="Image"
+		class="w-full shrink-0 rounded-lg object-cover md:w-80"
+	/>
+	<header class="relative flex w-full flex-col justify-between">
+		<h1 class="flex w-full flex-col items-start text-2xl font-semibold">
+			{listing.name}
+			<span class="flex flex-col py-2 text-xl text-primary lg:hidden">
+				{formatCurrency(listing.asking_price)}
+				<p class="text-sm font-medium text-muted-foreground">asking price</p>
+			</span>
+			<span class="absolute hidden flex-col items-end self-end text-primary lg:flex">
+				{formatCurrency(listing.asking_price)}
+				<p class="text-base font-medium text-muted-foreground">asking price</p>
+			</span>
+		</h1>
 
-        <div class="h-full flex flex-col gap-2 py-4">
-            <div class="flex flex-col">
-                <span class="text-sm text-muted-foreground font-medium">Market</span>
-                <p class="font-medium">
-                    {listing.market}
-                </p>
-            </div>
-            <div class="flex flex-col">
-                <span class="text-sm text-muted-foreground font-medium">Contact Method</span>
-                <p class="font-medium">
-                    {listing.contact_method}
-                </p>
-            </div>
-        </div>
+		<div class="flex h-full flex-col gap-2 py-4">
+			<div class="flex flex-col">
+				<span class="text-sm font-medium text-muted-foreground">Market</span>
+				<p class="font-medium">
+					{listing.market}
+				</p>
+			</div>
+			<div class="flex flex-col">
+				<span class="text-sm font-medium text-muted-foreground">Contact Method</span>
+				<p class="font-medium">
+					{listing.contact_method}
+				</p>
+			</div>
+		</div>
 
-        <div class="w-full flex flex-row gap-6 truncate md:whitespace-normal md:overflow-visible overflow-x-auto hide-scrollbar">
-            <div class="flex flex-col">
-                <span class="text-sm text-muted-foreground font-medium">Revenue / Yr</span>
-                <p class="font-medium">
-                    {formatCurrency(listing.revenue_per_yr)}
-                </p>
-            </div>
-            <div class="flex flex-col">
-                <span class="text-sm text-muted-foreground font-medium">Gross / Yr</span>
-                <p class="font-medium">
-                    {formatCurrency(listing.gross_per_yr)}
-                </p>
-            </div>
-            <div class="flex flex-col">
-                <span class="text-sm text-muted-foreground font-medium">Profit / Yr</span>
-                <p class="font-medium">
-                    {formatCurrency(listing.profit_per_yr)}
-                </p>
-            </div>
+		<div
+			class="hide-scrollbar flex w-full flex-row gap-6 overflow-x-auto truncate md:overflow-visible md:whitespace-normal"
+		>
+			<div class="flex flex-col">
+				<span class="text-sm font-medium text-muted-foreground">Revenue / Yr</span>
+				<p class="font-medium">
+					{formatCurrency(listing.revenue_per_yr)}
+				</p>
+			</div>
+			<div class="flex flex-col">
+				<span class="text-sm font-medium text-muted-foreground">Gross / Yr</span>
+				<p class="font-medium">
+					{formatCurrency(listing.gross_per_yr)}
+				</p>
+			</div>
+			<div class="flex flex-col">
+				<span class="text-sm font-medium text-muted-foreground">Profit / Yr</span>
+				<p class="font-medium">
+					{formatCurrency(listing.profit_per_yr)}
+				</p>
+			</div>
 
-            <div class="right-0 ml-auto bottom-0 hidden lg:flex">
-                <Button href={"/listings/example"} class="text-base font-normal">
-                    View Listing
-                </Button>
-            </div>
-        </div>
+			<div class="bottom-0 right-0 ml-auto hidden lg:flex">
+				<Button href={'/listings/example'} class="">View Listing</Button>
+			</div>
+		</div>
 
-        <Button href={"/listings/example"} class="text-base font-normal w-full lg:hidden flex mt-4">
-            View Listing
-        </Button>
-    
-    </header>
+		<Button href={'/listings/example'} class="mt-4 flex w-full  lg:hidden">View Listing</Button>
+	</header>
 </div>

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Command as CommandPrimitive } from "bits-ui";
-	import { cn } from "$utils/shadcn.js";
+	import { Command as CommandPrimitive } from 'bits-ui';
+	import { cn } from '$utils/shadcn.js';
 
 	let {
 		ref = $bindable(null),
@@ -9,4 +9,4 @@
 	}: CommandPrimitive.SeparatorProps = $props();
 </script>
 
-<CommandPrimitive.Separator class={cn("bg-border -mx-1 h-px", className)} bind:ref {...restProps} />
+<CommandPrimitive.Separator class={cn('-mx-1 h-px bg-border', className)} bind:ref {...restProps} />

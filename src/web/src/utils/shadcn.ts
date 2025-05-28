@@ -12,22 +12,8 @@ type FlyAndScaleParams = {
 	delay?: number;
 };
 
-let minBlur = 1.5;
-let maxBlur = 3.5;
-let minDuration = 100;
-let maxDuration = 300;
-
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
-}
-
-function calculateBlur(duration: number) {
-	duration = Math.max(minDuration, Math.min(duration, maxDuration));
-
-	let blur =
-		maxBlur - ((duration - minDuration) * (maxBlur - minBlur)) / (maxDuration - minDuration);
-
-	return blur;
 }
 
 export const flyAndScale = (
@@ -82,7 +68,7 @@ export const flyAndScale = (
 	};
 };
 
-export function clickOutside(node: Node, callback: () => any, exclude: Node[] = []) {
+export function clickOutside(node: Node, callback: () => unknown, exclude: Node[] = []) {
 	const handleClick = (event: MouseEvent) => {
 		if (
 			node &&
