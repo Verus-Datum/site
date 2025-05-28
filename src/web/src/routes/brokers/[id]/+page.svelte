@@ -5,12 +5,13 @@
 	import Button from '$components/ui/button/button.svelte';
 	import Ellipsis from '@lucide/svelte/icons/ellipsis';
 	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
+    import type { PageProps } from './$types'
 
     let { data }: PageProps = $props();
     let broker = $derived<Broker>(data.broker);
 </script>
 
-<main in:fly={{ y: 20, duration: 650 }} class="pt-24 w-full md:w-[100%] lg:w-[80%] 2xl:w-[60%] 3xl:w-[40%] px-8 mx-auto flex-col gap-8 flex items-start justify-start">
+<main in:fly={{ y: 20, duration: 650 }} class="pt-24 w-full md:w-[100%] lg:w-[80%] 2xl:w-[60%] 3xl:w-[40%] px-4 mx-auto flex-col gap-8 flex items-start justify-start">
 	<nav class="w-full relative flex md:py-6 flex-row justify-between items-center">
 		<button onclick={() => history.back()} class="font-medium flex flex-row gap-2 items-center">
 			<ArrowLeft size={20} class="text-muted-foreground" />

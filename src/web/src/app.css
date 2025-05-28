@@ -40,9 +40,23 @@ body {
 	height: 8px;
 }
 
+img {
+}
+
 .icon {
 	-webkit-mask-image: url('/assets/transparent.png');
 	mask-image: url('/assets/transparent.png');
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-position: center;
+	mask-position: center;
+}
+
+.full {
+	-webkit-mask-image: url('/assets/full.png');
+	mask-image: url('/assets/full.png');
 	-webkit-mask-repeat: no-repeat;
 	mask-repeat: no-repeat;
 	-webkit-mask-size: contain;
