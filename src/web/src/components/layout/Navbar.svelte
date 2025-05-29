@@ -40,7 +40,7 @@ let {
 							class="h-11 w-11 bg-primary"
 							style={`-webkit-mask-image: url(${transparent}); mask-image: url(${transparent}); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center;`}
 						></div>
-						<h1 class="whitespace-nowrap font-semibold text-black">Verus Datum</h1>
+						<h1 class="whitespace-nowrap font-semibold text-foreground">Verus Datum</h1>
 					</a>
 				</Sheet.Header>
 				<div class="flex flex-col gap-0.5 py-4">
@@ -49,7 +49,7 @@ let {
 						href="/"
 						class={`flex w-full flex-row items-center justify-start gap-3 rounded-xl p-3 text-left text-sm duration-200 hover:bg-secondary ${
 							page.url.pathname === '/'
-								? 'font-medium text-black'
+								? 'font-medium text-foreground'
 								: 'text-muted-foreground'
 						}`}
 					>

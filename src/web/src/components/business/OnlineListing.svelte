@@ -2,7 +2,7 @@
 	import { Button } from '$components/ui/button';
 	import type { Business } from '$types/Business';
 	
-type Props = {
+    type Props = {
 		listing: Business;
 	};
 
@@ -32,17 +32,17 @@ type Props = {
 		class="w-full shrink-0 rounded-lg object-cover md:w-80"
 	/>
 	<header class="relative flex w-full flex-col justify-between">
-		<h1 class="flex w-full flex-col items-start text-2xl font-semibold">
-			{listing.name}
-			<span class="flex flex-col py-2 text-xl text-primary lg:hidden">
-				{formatCurrency(listing.asking_price)}
-				<p class="text-sm font-medium text-muted-foreground">asking price</p>
-			</span>
-			<span class="absolute hidden flex-col items-end self-end text-primary lg:flex">
-				{formatCurrency(listing.asking_price)}
-				<p class="text-base font-medium text-muted-foreground">asking price</p>
-			</span>
-		</h1>
+<div class="flex flex-row w-full justify-between items-start">
+	<h1 class="flex flex-col max-w-80 text-2xl font-semibold">
+		{listing.name}
+	</h1>
+	<div class="flex flex-col items-end leading-none">
+		<span class="text-xl font-bold text-primary">
+			{formatCurrency(listing.asking_price)}
+		</span>
+		<p class="text-sm font-medium text-muted-foreground">asking price</p>
+	</div>
+</div>
 
 		<div class="flex h-full flex-col gap-2 py-4">
 			<div class="flex flex-col">
@@ -60,7 +60,7 @@ type Props = {
 		</div>
 
 		<div
-			class="hide-scrollbar flex w-full flex-row gap-6 overflow-x-auto truncate md:overflow-visible md:whitespace-normal"
+			class="hide-scrollbar flex w-full flex-row gap-6"
 		>
 			<div class="flex flex-col">
 				<span class="text-sm font-medium text-muted-foreground">Revenue / Yr</span>
@@ -85,7 +85,7 @@ type Props = {
 				<Button href={'/listings/example'} class="">View Listing</Button>
 			</div>
 		</div>
-
+        
 		<Button href={'/listings/example'} class="mt-4 flex w-full  lg:hidden">View Listing</Button>
 	</header>
 </div>
