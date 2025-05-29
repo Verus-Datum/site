@@ -57,18 +57,22 @@
 		</header>
 
 		<div class="flex max-h-[50rem] w-full flex-col gap-6 overflow-auto">
-			{#if currentUser.user?.listings.length > 0}
-				{#each currentUser.user?.listings as listing}
-					<ListingCard {listing} />
-				{/each}
-			{:else}
-				<div
-					class="flex h-80 w-full flex-col items-center justify-center gap-2 rounded-xl border"
-				>
-					<h1 class="text-xl font-semibold">No listings yet</h1>
-					<h2 class="text-muted-foreground">Submit a listing for review</h2>
-				</div>
-			{/if}
+			{#if currentUser.user}
+                {#if currentUser.user.listings}
+                    {#if currentUser.user?.listings?.length > 0}
+                        {#each currentUser.user?.listings as listing}
+                            <ListingCard {listing} />
+                        {/each}
+                    {:else}
+                        <div
+                            class="flex h-80 w-full flex-col items-center justify-center gap-2 rounded-xl border"
+                        >
+                            <h1 class="text-xl font-semibold">No listings yet</h1>
+                            <h2 class="text-muted-foreground">Submit a listing for review</h2>
+                        </div>
+                    {/if}
+                {/if}
+            {/if}
 		</div>
 
 		<h2 class="text-xl font-semibold">Services</h2>

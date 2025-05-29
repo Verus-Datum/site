@@ -9,7 +9,6 @@ from api.models import Base
 
 Base.metadata.create_all(bind=engine)
 
-
 def create_app():
     app = FastAPI(
         root_path=ROOT_PATH,
