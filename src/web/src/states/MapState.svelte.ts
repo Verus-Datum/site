@@ -1,11 +1,12 @@
 import type { MapStateType } from '$types/Map';
 import maplibregl, { type LngLatLike } from 'maplibre-gl';
-import { mode } from 'mode-watcher';
+import { mode, type SystemModeValue } from 'mode-watcher';
 
 class MapState implements MapStateType {
 	private _center = $state<LngLatLike>([-86.225, 34.7295]);
 	private _map = $state<maplibregl.Map | undefined>();
 	private _container = $state<string>();
+	private _mode = $derived<SystemModeValue>(mode.current);
 
 	set map(setTo: maplibregl.Map) {
 		this._map = setTo;
@@ -32,6 +33,24 @@ class MapState implements MapStateType {
 				zoom: 10
 			});
 		}
+	}
+
+	set mode(setTo: SystemModeValue) {
+		this._mode = setTo;
+		if (this._map) {
+			this._map.setStyle(
+				this._mode === 'dark'
+					? 'https://tiles.openfreemap.org/styles/dark'
+					: 'https://tiles.openfreemap.org/styles/bright',
+				{
+					diff: false
+				}
+			);
+		}
+	}
+
+	get mode(): SystemModeValue {
+		return this._mode as SystemModeValue;
 	}
 
 	get center(): LngLatLike {

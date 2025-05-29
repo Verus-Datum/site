@@ -3,7 +3,7 @@
 	import * as DropdownMenu from '$components/ui/dropdown-menu';
 	import * as Avatar from '$components/ui/avatar';
 
-	import { toggleMode } from 'mode-watcher';
+	import { mode, toggleMode } from 'mode-watcher';
 
 	import Profile from '@lucide/svelte/icons/user';
 	import Billing from '@lucide/svelte/icons/credit-card';
@@ -17,6 +17,7 @@
 	import { currentUser } from '$states/CurrentUser.svelte';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
+	import { mapState } from '$states/MapState.svelte';
 
 	let avatarUrl = null;
 	let isOpen = $state(false);
@@ -88,7 +89,10 @@
 
 		<button
 			onclick={() => {
-				toggleMode();
+                toggleMode();
+                const newMode = mode.current;
+                mapState.mode = newMode;
+                console.log(newMode);
 			}}
 			class="flex w-full flex-row items-center gap-2 rounded-sm px-2 py-2 text-sm duration-150 hover:cursor-default hover:bg-secondary"
 		>
