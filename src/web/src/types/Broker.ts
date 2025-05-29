@@ -18,6 +18,13 @@ type Broker = {
 	services: string[];
 	market: string;
 	avatar_url: string;
+
+	/*
+    yrsInSphere: number;
+	dealsClosed: number;
+	wentThrough: number;
+	dealSizeRng: number[];
+    */
 };
 
 function generateFakeBroker(
