@@ -19,7 +19,9 @@ const businesses = Array.from({ length: Math.floor(Math.random() * (50 - 35)) + 
 	let showSidebar = $state(true);
 </script>
 
+<!--
 <Map {brokers} {businesses} />
+-->
 
 <aside
 	in:fly={{ duration: 550 }}

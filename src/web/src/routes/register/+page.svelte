@@ -14,6 +14,7 @@
 	import type { User } from '$types/User';
 	import { goto } from '$app/navigation';
 	import { fly } from 'svelte/transition';
+	import { userService } from '$services/userService';
 
 	type PageData = {
 		data: {
@@ -40,7 +41,7 @@
 		});
 	});
 
-	async function handleSubmit(event) {
+	async function handleSubmit(event: { preventDefault: () => void; }) {
 		event.preventDefault();
 		const result = await form.validateForm();
 		if (!result.valid) return;
@@ -52,27 +53,10 @@
 		const last_name = $formData.lastName;
 
 		try {
-			const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-			const res = await fetch(`${API_URL}/users`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					first_name,
-					last_name,
-					email: email,
-					firebase_uid: userCredential.user.uid
-				})
-			});
-
 			form.errors.set({});
 			errors = {};
 
-			const user = (await res.json()) as User;
-			currentUser.firebase = userCredential.user;
-			currentUser.user = user;
+			await userService.registerUser(email, password, first_name, last_name);
 
 			toast.success('Account successfully created!', {
 				description: 'You can now browse and contact business owners'
@@ -89,7 +73,7 @@
 
 <main
 	in:fly={{ y: 20, duration: 650 }}
-	class="mx-auto flex h-screen w-full flex-col items-center justify-start gap-10 px-8 pt-40 md:w-[100%] lg:w-[80%] 2xl:w-[60%]"
+	class="mx-auto flex h-screen w-full flex-col items-center justify-start gap-10 px-6 md:px-8 pt-32 mb-8 md:pt-40 md:w-[100%] lg:w-[80%] 2xl:w-[60%]"
 >
 	<header class="flex flex-col items-center justify-center gap-2 text-center">
 		<img

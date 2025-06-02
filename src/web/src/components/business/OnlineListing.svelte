@@ -32,17 +32,17 @@
 		class="w-full shrink-0 rounded-lg object-cover md:w-80"
 	/>
 	<header class="relative flex w-full flex-col justify-between">
-<div class="flex flex-row w-full justify-between items-start">
-	<h1 class="flex flex-col max-w-80 text-2xl font-semibold">
-		{listing.name}
-	</h1>
-	<div class="flex flex-col items-end leading-none">
-		<span class="text-xl font-bold text-primary">
-			{formatCurrency(listing.asking_price)}
-		</span>
-		<p class="text-sm font-medium text-muted-foreground">asking price</p>
-	</div>
-</div>
+        <div class="flex flex-row w-full justify-between items-start">
+            <h1 class="flex flex-col max-w-80 text-2xl font-semibold">
+                {listing.name}
+            </h1>
+            <div class="flex flex-col items-end leading-none">
+                <span class="text-xl font-bold text-primary">
+                    {formatCurrency(listing.asking_price)}
+                </span>
+                <p class="text-sm font-medium text-muted-foreground">asking price</p>
+            </div>
+        </div>
 
 		<div class="flex h-full flex-col gap-2 py-4">
 			<div class="flex flex-col">

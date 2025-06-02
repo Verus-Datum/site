@@ -12,15 +12,17 @@
 	import * as Carousel from '$components/ui/carousel';
 	import Info from '@lucide/svelte/icons/info';
 	import { FloatingPanelState } from '$states/FloatingPanel.svelte';
+	import type { Listing } from '$models/Listing';
 	
-type Props = {
-		business: Business;
+    type Props = {
+		business: Listing;
 		map: maplibregl.Map;
 	};
 
 	let { business, map }: Props = $props();
 
 	let container = $state<HTMLDivElement | undefined>();
+    let hovered = $state<boolean>(false);
 
 	const formatCurrency = (num: number) =>
 		new Intl.NumberFormat('en-US', {
@@ -215,15 +217,19 @@ type Props = {
 	{#if isDesktop.current}
 		<Popover.Root bind:open={isOpen}>
 			<Popover.Trigger
+                onmouseenter={() => hovered = true}
+                onmouseleave={() => hovered = false}
 				onclick={() => {
 					isSelected = !isSelected;
 				}}
 			>
 				{@render Marker()}
 			</Popover.Trigger>
-			<Popover.Content class="shadow-ui relative w-[28.5rem] rounded-xl bg-card p-5">
-				{@render MarkerContent()}
-			</Popover.Content>
+			{#if hovered}
+                <Popover.Content class="shadow-ui relative w-[28.5rem] rounded-xl bg-card p-5">
+                    {@render MarkerContent()}
+                </Popover.Content>
+            {/if}
 		</Popover.Root>
 	{:else}
 		<Drawer.Root bind:open={isOpenDrawer}>

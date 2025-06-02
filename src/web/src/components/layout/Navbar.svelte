@@ -25,7 +25,7 @@ let {
 		'https://media.istockphoto.com/id/1413766112/photo/successful-mature-businessman-looking-at-camera-with-confidence.jpg?s=612x612&w=0&k=20&c=NJSugBzNuZqb7DJ8ZgLfYKb3qPr2EJMvKZ21Sj5Sfq4=';
 </script>
 
-<div class="absolute left-0 top-0 z-40 flex w-screen flex-col justify-center bg-background">
+<div class="fixed left-0 top-0 z-40 flex w-screen flex-col justify-center bg-background bg-opacity-80 backdrop-blur-md">
 	<nav
 		class="relative flex h-[4rem] w-full items-center justify-between border-b px-4 md:h-[4.5rem] md:px-6"
 	>

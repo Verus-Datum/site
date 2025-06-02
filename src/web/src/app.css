@@ -134,12 +134,12 @@ img {
 		--card-foreground: 0 0% 98%;
 		--popover: 0 0% 7.8431%;
 		--popover-foreground: 0 0% 98%;
-		--primary: 214.1379 99.1453% 54.1176%;
+		--primary: 212 100% 60%;
 		--primary-foreground: 0 0% 100%;
 		--secondary: 240 3.7% 12%;
 		--secondary-foreground: 0 0% 98%;
 		--muted: 240 3.7% 15.9%;
-		--muted-foreground: 240 5% 64.9%;
+		--muted-foreground: 240 5% 55%;
 		--accent: 240 3.7% 15.9%;
 		--accent-foreground: 0 0% 98%;
 		--destructive: 0 62.8% 30.6%;
@@ -157,7 +157,7 @@ img {
 		--sidebar-border: 240 3.7% 15.9%;
 		--sidebar-ring: 217.2 91.2% 59.8%;
 		--chip-red: 0 80% 61%;
-		--blue-flat: 212 63% 10%;
+		--blue-flat: 212 63% 12%;
 		--blue-foreground: 212 75% 57%;
 		--blue-muted: 212 49% 70%;
 		--green-foreground: 104 26% 87%;

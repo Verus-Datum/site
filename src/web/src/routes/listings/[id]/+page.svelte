@@ -38,7 +38,7 @@
 
 <main
 	in:fly={{ y: 20, duration: 650 }}
-	class="mx-auto flex w-full flex-col items-start justify-start gap-8 px-4 pt-28 md:w-[100%] lg:w-[80%] 2xl:w-[60%] 3xl:w-[50%]"
+	class="mx-auto flex w-full flex-col items-start justify-start gap-8 px-4 pt-[6rem] md:pt-[6.5rem] md:w-[100%] lg:w-[80%] 2xl:w-[60%] 3xl:w-[50%]"
 >
 	<nav class="relative flex w-full flex-row items-center justify-between">
 		<button onclick={() => history.back()} class="flex flex-row items-center gap-2 font-medium">
@@ -58,7 +58,7 @@
 					<img
 						src={img}
 						alt="Company"
-						class="h-72 w-full shrink-0 rounded-lg object-cover"
+						class="md:h-72 h-48 w-full shrink-0 rounded-lg object-cover"
 					/>
 				</Carousel.Item>
 			{/each}
@@ -70,31 +70,31 @@
 
 	<div class="flex w-full flex-col gap-8 md:flex-row md:justify-between">
 		<header class="w-full">
-			<h1 class="flex w-full flex-col items-start text-3xl font-bold">
+			<h1 class="flex w-full flex-col items-start text-2xl md:text-3xl font-bold">
 				{listing.name}
-				<p class="text-base font-medium text-muted-foreground">
+				<p class="font-medium text-muted-foreground md:text-base text-sm">
 					Broker {broker.name}
 				</p>
 			</h1>
 		</header>
 
 		<div class="w-full md:flex md:flex-col md:items-end">
-			<h1 class="text-3xl font-bold text-primary">
+			<h1 class="text-2xl md:text-3xl font-bold text-primary">
 				{formatCurrency(listing.asking_price)}
 			</h1>
-			<p class="text-base font-medium text-muted-foreground">asking price</p>
+			<p class="font-medium text-muted-foreground md:text-base text-sm">asking price</p>
 		</div>
 	</div>
 
 	<div class="flex w-full flex-col gap-2 md:flex-row md:gap-6">
 		<div class="flex flex-col">
-			<span class="text-base font-medium text-muted-foreground">Location</span>
+			<span class="font-medium text-muted-foreground md:text-base text-sm">Location</span>
 			<p class="text-lg font-semibold">
 				{listing.address}
 			</p>
 		</div>
 		<div class="flex flex-col">
-			<span class="text-base font-medium text-muted-foreground">Market</span>
+			<span class="font-medium text-muted-foreground md:text-base text-sm">Market</span>
 			<p class="text-lg font-semibold">
 				{listing.market}
 			</p>
@@ -103,19 +103,19 @@
 
 	<div class="flex w-full flex-row gap-6">
 		<div class="flex flex-col">
-			<span class="text-base font-medium text-muted-foreground">Revenue / Yr</span>
+			<span class="font-medium text-muted-foreground md:text-base text-sm">Revenue / Yr</span>
 			<p class="text-lg font-semibold">
 				{formatCurrency(listing.revenue_per_yr)}
 			</p>
 		</div>
 		<div class="flex flex-col">
-			<span class="text-base font-medium text-muted-foreground">Gross / Yr</span>
+			<span class="font-medium text-muted-foreground md:text-base text-sm">Gross / Yr</span>
 			<p class="text-lg font-semibold">
 				{formatCurrency(listing.gross_per_yr)}
 			</p>
 		</div>
 		<div class="flex flex-col">
-			<span class="text-base font-medium text-muted-foreground">Profit / Yr</span>
+			<span class="font-medium text-muted-foreground md:text-base text-sm">Profit / Yr</span>
 			<p class="text-lg font-semibold">
 				{formatCurrency(listing.profit_per_yr)}
 			</p>
@@ -124,6 +124,9 @@
 
 	<section class="mt-4 flex w-full flex-col gap-8 border-t pt-6">
 		<header>
+            <h3 class="text-muted-foreground text-sm md:text-base font-medium">
+                About the broker
+            </h3>
 			<h1 class="py-1 text-2xl font-semibold">
 				{broker.name}
 			</h1>
@@ -135,19 +138,19 @@
 
 		<div class="flex w-full flex-col gap-6 md:flex-row">
 			<div class="flex flex-col">
-				<span class="text-base font-medium text-muted-foreground">Market</span>
+				<span class="font-medium text-muted-foreground md:text-base text-sm">Market</span>
 				<p class="text-lg font-semibold">
 					{broker.market}
 				</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="text-base font-medium text-muted-foreground">Address</span>
+				<span class="font-medium text-muted-foreground md:text-base text-sm">Address</span>
 				<p class="text-lg font-semibold">
 					{broker.address}
 				</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="text-base font-medium text-muted-foreground">Deal Size</span>
+				<span class="font-medium text-muted-foreground md:text-base text-sm">Deal Size</span>
 				<p class="text-lg font-semibold">
 					{formatCurrency(broker.stats.dealSizeRng[0])} – {formatCurrency(
 						broker.stats.dealSizeRng[1]
@@ -156,26 +159,26 @@
 			</div>
 		</div>
 
-		<div class="flex items-center gap-2 font-medium text-muted-foreground">Key Stats:</div>
+		<div class="flex items-center gap-2 text-sm md:text-base font-medium text-muted-foreground">Key Stats:</div>
 
 		<div class="flex w-full flex-row justify-between gap-4 px-0 py-4">
 			<div class="flex h-6 w-full flex-col items-center justify-center gap-1 text-center">
-				<h1 class="text-2xl font-semibold text-primary">{broker.stats.yrsInSphere}yrs</h1>
-				<h2 class="font-medium text-muted-foreground">in sphere</h2>
+				<h1 class="text-xl md:text-2xl font-semibold text-primary">{broker.stats.yrsInSphere}yrs</h1>
+				<h2 class="text-sm md:text-base font-medium text-muted-foreground">in sphere</h2>
 			</div>
 			<div
 				class="flex h-6 w-full flex-col items-center justify-center gap-1 border-l border-r border-opacity-80 text-center"
 			>
-				<h1 class="text-2xl font-semibold text-primary">{broker.stats.dealsClosed}</h1>
-				<h2 class="font-medium text-muted-foreground">deals closed</h2>
+				<h1 class="text-xl md:text-2xl font-semibold text-primary">{broker.stats.dealsClosed}</h1>
+				<h2 class="text-sm md:text-base font-medium text-muted-foreground">deals closed</h2>
 			</div>
 			<div class="flex h-6 w-full flex-col items-center justify-center gap-1 text-center">
-				<h1 class="text-2xl font-semibold text-primary">${broker.stats.wentThrough}M</h1>
-				<h2 class="font-medium text-muted-foreground">went through</h2>
+				<h1 class="text-xl md:text-2xl font-semibold text-primary">${broker.stats.wentThrough}M</h1>
+				<h2 class="text-sm md:text-base font-medium text-muted-foreground">went through</h2>
 			</div>
 		</div>
 
-		<div class="mt-2 flex items-center gap-2 font-medium text-muted-foreground">Services:</div>
+		<div class="mt-2 flex items-center gap-2 text-sm md:text-base font-medium text-muted-foreground">Services:</div>
 
 		<div class="hide-scrollbar flex max-h-64 w-full flex-col overflow-y-auto pl-6">
 			{#each broker.services as service}

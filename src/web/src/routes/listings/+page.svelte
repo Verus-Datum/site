@@ -485,7 +485,7 @@
 
 <main
 	in:fly={{ y: 20, duration: 650 }}
-	class="mx-auto flex w-full flex-col items-start justify-start gap-6 px-8 pb-8 pt-8 lg:pt-20 2xl:w-[68%] 3xl:w-[60%]"
+	class="mx-auto flex w-full flex-col items-start justify-start gap-6 px-6 pb-8 pt-8 lg:pt-20 2xl:w-[68%] 3xl:w-[60%]"
 >
 	<header class="w-full pt-20 flex flex-row gap-4">
 		<h1 class="w-full text-left text-3xl font-semibold">View all businesses</h1>

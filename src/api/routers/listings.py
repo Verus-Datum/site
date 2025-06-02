@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Request
-from sqlalchemy.orm import Session
-
+from sqlalchemy.orm import Session, selectinload
 from api.db import get_db
-from api.models import Listing, User
-from api.schemas import ListingCreate, ListingResponse
+from api.models import Listing, User, Business
+from api.schemas.listing import ListingCreate, ListingResponse
 
 router = APIRouter(
     tags=["listings"],
@@ -44,13 +43,37 @@ async def create_listing(request: Request, db: Session = Depends(get_db)):
     return listing
 
 
-@router.get(
-    "",
-    response_model=list[ListingResponse],
-    status_code=status.HTTP_200_OK,
-)
-def get_all_listings(db: Session = Depends(get_db)):
-    return db.query(Listing).all()
+@router.get("", response_model=list[ListingResponse])
+def get_listings(db: Session = Depends(get_db)):
+    listings = (
+        db.query(Listing)
+        .options(
+            selectinload(Listing.business).selectinload(Business.address)
+        )
+        .all()
+    )
+
+    result = []
+    for l in listings:
+        addr = l.business.address
+        result.append({
+            "id": l.id,
+            "contact_method": l.contact_method,
+            "is_public": l.is_public,
+            "asking_price": l.asking_price,
+            "status": l.status,
+            "views": l.views,
+            "name": l.business.name,
+            "market": l.business.market,
+            "revenue_per_yr": l.business.revenue_per_year,
+            "gross_per_yr": l.business.gross_per_year,
+            "profit_per_yr": l.business.profit_per_year,
+            "address": addr.address_line,
+            "longitude": addr.longitude,
+            "latitude": addr.latitude,
+            "user_id": l.user_id,
+        })
+    return result
 
 
 @router.get(

@@ -30,7 +30,7 @@
 		<header class="flex flex-row items-center gap-6">
 			<img src={broker.avatar_url} class="h-24 w-24 rounded-xl object-cover" />
 			<div>
-				<h1 class="py-1 text-2xl font-semibold">
+				<h1 class="py-1 text-xl md:text-2xl font-semibold">
 					{broker.name}
 				</h1>
 				<h2 class="flex flex-row items-center gap-2 font-medium text-muted-foreground">
@@ -42,19 +42,19 @@
 
 		<div class="flex w-full flex-col gap-6 md:flex-row">
 			<div class="flex flex-col">
-				<span class="text-base font-medium text-muted-foreground">Market</span>
+				<span class="text-sm md:text-base font-medium text-muted-foreground">Market</span>
 				<p class="text-lg font-semibold">
 					{broker.market}
 				</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="text-base font-medium text-muted-foreground">Address</span>
+				<span class="text-sm md:text-base font-medium text-muted-foreground">Address</span>
 				<p class="text-lg font-semibold">
 					{broker.address}
 				</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="text-base font-medium text-muted-foreground">Deal Size</span>
+				<span class="text-sm md:text-base font-medium text-muted-foreground">Deal Size</span>
 				<p class="text-lg font-semibold">
 					{formatCurrency(broker.stats.dealSizeRng[0])} – {formatCurrency(
 						broker.stats.dealSizeRng[1]
@@ -63,22 +63,22 @@
 			</div>
 		</div>
 
-		<div class="flex items-center gap-2 font-medium text-muted-foreground">Key Stats:</div>
+		<div class="flex items-center gap-2 text-sm md:text-base font-medium text-muted-foreground">Key Stats:</div>
 
 		<div class="flex w-full flex-row justify-between gap-4 px-0 py-4">
 			<div class="flex h-6 w-full flex-col items-center justify-center gap-1 text-center">
-				<h1 class="text-2xl font-semibold text-primary">{broker.stats.yrsInSphere}yrs</h1>
-				<h2 class="font-medium text-muted-foreground">in sphere</h2>
+				<h1 class="text-xl md:text-2xl font-semibold text-primary">{broker.stats.yrsInSphere}yrs</h1>
+				<h2 class="text-sm md:text-base font-medium text-muted-foreground">in sphere</h2>
 			</div>
 			<div
 				class="flex h-6 w-full flex-col items-center justify-center gap-1 border-l border-r border-opacity-80 text-center"
 			>
-				<h1 class="text-2xl font-semibold text-primary">{broker.stats.dealsClosed}</h1>
-				<h2 class="font-medium text-muted-foreground">deals closed</h2>
+				<h1 class="text-xl md:text-2xl font-semibold text-primary">{broker.stats.dealsClosed}</h1>
+				<h2 class="text-sm md:text-ba se font-medium text-muted-foreground">deals closed</h2>
 			</div>
 			<div class="flex h-6 w-full flex-col items-center justify-center gap-1 text-center">
-				<h1 class="text-2xl font-semibold text-primary">${broker.stats.wentThrough}M</h1>
-				<h2 class="font-medium text-muted-foreground">went through</h2>
+				<h1 class="text-xl md:text-2xl font-semibold text-primary">${broker.stats.wentThrough}M</h1>
+				<h2 class="text-sm md:text-base font-medium text-muted-foreground">went through</h2>
 			</div>
 		</div>
 

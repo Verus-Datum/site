@@ -3,7 +3,7 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from api.db import get_db
-from api.schemas import HealthCheckResponse
+from api.schemas.shared import HealthCheckResponse
 
 router = APIRouter(tags=["health"])
 

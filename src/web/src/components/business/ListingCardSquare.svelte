@@ -22,14 +22,14 @@
 
 <a
 	href="/listings/example"
-	class="flex w-full flex-col rounded-lg border duration-200 hover:bg-secondary"
+	class="flex w-full flex-col rounded-lg border duration-200 bg-secondary hover:bg-secondary/60"
 >
 	<img
 		src={images[Math.floor(Math.random() * images.length)]}
 		alt="Image"
-		class="h-48 w-full shrink-0 rounded-t-lg border-b object-cover"
+		class="h-48 w-full shrink-0 rounded-t-lg object-cover"
 	/>
-	<section class="p-3">
+	<section class="p-4">
 		<h1 class="flex items-center gap-2 text-xl font-semibold">
 			{listing.name}
 		</h1>
