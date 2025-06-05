@@ -12,8 +12,9 @@ from sqlalchemy.orm import relationship
 
 from api.db import Base
 
+
 class Subscription(Base):
-    __tablename__ = 'subscriptions'
+    __tablename__ = "subscriptions"
     id = Column(Integer, primary_key=True)
     stripe_customer_id = Column(String, unique=True)
     stripe_subscription_id = Column(String)
@@ -25,7 +26,7 @@ class Subscription(Base):
 
 
 class User(Base):
-    __tablename__ = 'users'
+    __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     profile_image_path = Column(String, nullable=True)
     role = Column(String)
@@ -34,20 +35,28 @@ class User(Base):
     email = Column(String, unique=True)
     firebase_uid = Column(String)
     created_at = Column(DateTime)
-    subscription_id = Column(Integer, ForeignKey('subscriptions.id'))
+    subscription_id = Column(Integer, ForeignKey("subscriptions.id"))
 
     subscription = relationship("Subscription", back_populates="users")
     listings = relationship("Listing", back_populates="user")
     broker_profile = relationship("Broker", uselist=False, back_populates="user")
-    seller_transactions = relationship("Transaction", foreign_keys="[Transaction.seller_user_id]", back_populates="seller")
-    buyer_transactions = relationship("Transaction", foreign_keys="[Transaction.buyer_user_id]", back_populates="buyer")
+    seller_transactions = relationship(
+        "Transaction",
+        foreign_keys="[Transaction.seller_user_id]",
+        back_populates="seller",
+    )
+    buyer_transactions = relationship(
+        "Transaction",
+        foreign_keys="[Transaction.buyer_user_id]",
+        back_populates="buyer",
+    )
     favorites = relationship("Favorite", back_populates="user")
 
 
 class Broker(Base):
-    __tablename__ = 'brokers'
+    __tablename__ = "brokers"
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
+    user_id = Column(Integer, ForeignKey("users.id"))
     first_name = Column(String)
     last_name = Column(String)
     phone_number = Column(String)
@@ -58,7 +67,7 @@ class Broker(Base):
 
 
 class Address(Base):
-    __tablename__ = 'addresses'
+    __tablename__ = "addresses"
     id = Column(Integer, primary_key=True)
     address_line = Column(String)
     city = Column(String)
@@ -72,11 +81,11 @@ class Address(Base):
 
 
 class Business(Base):
-    __tablename__ = 'businesses'
+    __tablename__ = "businesses"
     id = Column(Integer, primary_key=True)
     name = Column(String)
     market = Column(String)
-    address_id = Column(Integer, ForeignKey('addresses.id'), nullable=True)
+    address_id = Column(Integer, ForeignKey("addresses.id"), nullable=True)
     revenue_per_year = Column(Float)
     gross_per_year = Column(Float)
     profit_per_year = Column(Float)
@@ -95,10 +104,10 @@ class Business(Base):
 
 
 class Listing(Base):
-    __tablename__ = 'listings'
+    __tablename__ = "listings"
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
-    business_id = Column(Integer, ForeignKey('businesses.id'))
+    user_id = Column(Integer, ForeignKey("users.id"))
+    business_id = Column(Integer, ForeignKey("businesses.id"))
     contact_method = Column(String)
     is_public = Column(Boolean)
     asking_price = Column(Float)
@@ -114,42 +123,46 @@ class Listing(Base):
 
 
 class Transaction(Base):
-    __tablename__ = 'transactions'
+    __tablename__ = "transactions"
     id = Column(Integer, primary_key=True)
-    listing_id = Column(Integer, ForeignKey('listings.id'))
-    seller_user_id = Column(Integer, ForeignKey('users.id'))
-    buyer_user_id = Column(Integer, ForeignKey('users.id'))
+    listing_id = Column(Integer, ForeignKey("listings.id"))
+    seller_user_id = Column(Integer, ForeignKey("users.id"))
+    buyer_user_id = Column(Integer, ForeignKey("users.id"))
     price = Column(Float)
     sold_at = Column(DateTime)
 
     listing = relationship("Listing", back_populates="transactions")
-    seller = relationship("User", foreign_keys=[seller_user_id], back_populates="seller_transactions")
-    buyer = relationship("User", foreign_keys=[buyer_user_id], back_populates="buyer_transactions")
+    seller = relationship(
+        "User", foreign_keys=[seller_user_id], back_populates="seller_transactions"
+    )
+    buyer = relationship(
+        "User", foreign_keys=[buyer_user_id], back_populates="buyer_transactions"
+    )
 
 
 class Favorite(Base):
-    __tablename__ = 'favorites'
+    __tablename__ = "favorites"
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
-    listing_id = Column(Integer, ForeignKey('listings.id'))
+    user_id = Column(Integer, ForeignKey("users.id"))
+    listing_id = Column(Integer, ForeignKey("listings.id"))
 
     user = relationship("User", back_populates="favorites")
     listing = relationship("Listing", back_populates="favorites")
 
 
 class ListingImage(Base):
-    __tablename__ = 'listing_images'
+    __tablename__ = "listing_images"
     id = Column(Integer, primary_key=True)
-    listing_id = Column(Integer, ForeignKey('listings.id'))
+    listing_id = Column(Integer, ForeignKey("listings.id"))
     image_path = Column(String)
 
     listing = relationship("Listing", back_populates="images")
 
 
 class Document(Base):
-    __tablename__ = 'documents'
+    __tablename__ = "documents"
     id = Column(Integer, primary_key=True)
-    business_id = Column(Integer, ForeignKey('businesses.id'))
+    business_id = Column(Integer, ForeignKey("businesses.id"))
     document_name = Column(String)
     document_type = Column(String)
     file_path = Column(String)

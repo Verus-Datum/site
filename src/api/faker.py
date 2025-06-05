@@ -13,6 +13,7 @@ CITIES = {
     "Memphis": {"state": "TN", "lat": (35.05, 35.20), "lng": (-90.10, -89.90)},
 }
 
+
 def random_city_address():
     city_name, data = random.choice(list(CITIES.items()))
     lat = round(random.uniform(*data["lat"]), 6)
@@ -24,8 +25,10 @@ def random_city_address():
         "longitude": lng,
     }
 
+
 fake = Faker()
 db: Session = SessionLocal()
+
 
 def create_fake_user():
     return User(
@@ -35,8 +38,9 @@ def create_fake_user():
         firebase_uid=fake.uuid4(),
         profile_image_path=None,
         role=random.choice(["buyer", "broker"]),
-        created_at=datetime.utcnow()
+        created_at=datetime.utcnow(),
     )
+
 
 def create_fake_business():
     loc = random_city_address()
@@ -67,8 +71,9 @@ def create_fake_business():
         reason_for_sale="Retirement",
         will_stay_post_sale=True,
         confidential_sale=False,
-        website=fake.url()
+        website=fake.url(),
     )
+
 
 def create_fake_listing(user_id, business_id):
     return Listing(
@@ -79,8 +84,9 @@ def create_fake_listing(user_id, business_id):
         asking_price=fake.pyfloat(min_value=1e4, max_value=5e6),
         status="available",
         views=fake.random_int(min=0, max=500),
-        listed_at=datetime.utcnow()
+        listed_at=datetime.utcnow(),
     )
+
 
 """
 for _ in range(150):

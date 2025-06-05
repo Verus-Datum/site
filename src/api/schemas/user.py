@@ -4,6 +4,7 @@ from typing import List, Optional
 from pydantic import BaseModel, ConfigDict, EmailStr
 from api.schemas.listing import ListingResponse
 
+
 class UserCreate(BaseModel):
     first_name: str
     last_name: str
@@ -12,6 +13,7 @@ class UserCreate(BaseModel):
     profile_image_path: Optional[str] = None
     role: str
     subscription_id: Optional[int] = None
+
 
 class UserNestedResponse(BaseModel):
     id: int
@@ -23,6 +25,7 @@ class UserNestedResponse(BaseModel):
     role: str
 
     model_config = ConfigDict(from_attributes=True)
+
 
 class UserResponse(BaseModel):
     id: int

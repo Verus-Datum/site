@@ -4,10 +4,11 @@ from api.routers import health, users, listings
 from api.cors import configure_cors, ROOT_PATH
 from api.db import engine
 from api.models import Base
-import api.schemas # yes sir
+import api.schemas  # yes sir
 
 Base.metadata.create_all(bind=engine)
 # from api import faker
+
 
 def create_app():
     app = FastAPI(
@@ -28,4 +29,3 @@ app = create_app()
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
-

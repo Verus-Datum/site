@@ -8,6 +8,7 @@ router = APIRouter(
     tags=["listings"],
 )
 
+
 @router.post("", response_model=ListingResponse, status_code=status.HTTP_201_CREATED)
 async def create_listing(request: Request, db: Session = Depends(get_db)):
     try:
@@ -31,7 +32,7 @@ async def create_listing(request: Request, db: Session = Depends(get_db)):
         city="",
         state="",
         country="",
-        postal_code=""
+        postal_code="",
     )
 
     db.add(address)
@@ -47,7 +48,7 @@ async def create_listing(request: Request, db: Session = Depends(get_db)):
         asking_price=listing_in.asking_price,
         is_public=True,
         status="available",
-        views=0
+        views=0,
     )
 
     db.add(listing)
@@ -69,10 +70,15 @@ async def create_listing(request: Request, db: Session = Depends(get_db)):
         "address": address.address_line,
         "longitude": address.longitude,
         "latitude": address.latitude,
-        "user_id": listing.user_id
+        "user_id": listing.user_id,
     }
 
-@router.get("/id/{listing_id:int}", response_model=ListingResponse, status_code=status.HTTP_200_OK)
+
+@router.get(
+    "/id/{listing_id:int}",
+    response_model=ListingResponse,
+    status_code=status.HTTP_200_OK,
+)
 def get_listing_by_id(listing_id: int, db: Session = Depends(get_db)):
     listing = (
         db.query(Listing)
@@ -82,7 +88,7 @@ def get_listing_by_id(listing_id: int, db: Session = Depends(get_db)):
     )
     if not listing:
         raise HTTPException(status_code=404, detail="Listing not found")
-    
+
     addr = listing.business.address
     return {
         "id": listing.id,
@@ -107,32 +113,32 @@ def get_listing_by_id(listing_id: int, db: Session = Depends(get_db)):
 def get_listings(db: Session = Depends(get_db)):
     listings = (
         db.query(Listing)
-        .options(
-            selectinload(Listing.business).selectinload(Business.address)
-        )   
+        .options(selectinload(Listing.business).selectinload(Business.address))
         .all()
     )
 
     result = []
     for l in listings:
         addr = l.business.address
-        result.append({
-            "id": l.id,
-            "contact_method": l.contact_method,
-            "is_public": l.is_public,
-            "asking_price": l.asking_price,
-            "status": l.status,
-            "views": l.views,
-            "name": l.business.name,
-            "market": l.business.market,
-            "revenue_per_yr": l.business.revenue_per_year,
-            "gross_per_yr": l.business.gross_per_year,
-            "profit_per_yr": l.business.profit_per_year,
-            "address": addr.address_line,
-            "longitude": addr.longitude,
-            "latitude": addr.latitude,
-            "user_id": l.user_id,
-        })
+        result.append(
+            {
+                "id": l.id,
+                "contact_method": l.contact_method,
+                "is_public": l.is_public,
+                "asking_price": l.asking_price,
+                "status": l.status,
+                "views": l.views,
+                "name": l.business.name,
+                "market": l.business.market,
+                "revenue_per_yr": l.business.revenue_per_year,
+                "gross_per_yr": l.business.gross_per_year,
+                "profit_per_yr": l.business.profit_per_year,
+                "address": addr.address_line,
+                "longitude": addr.longitude,
+                "latitude": addr.latitude,
+                "user_id": l.user_id,
+            }
+        )
     return result
 
 
@@ -156,21 +162,23 @@ def get_listings_by_firebase_uid(firebase_uid: str, db: Session = Depends(get_db
     result = []
     for l in listings:
         addr = l.business.address
-        result.append({
-            "id": l.id,
-            "contact_method": l.contact_method,
-            "is_public": l.is_public,
-            "asking_price": l.asking_price,
-            "status": l.status,
-            "views": l.views,
-            "name": l.business.name,
-            "market": l.business.market,
-            "revenue_per_yr": l.business.revenue_per_year,
-            "gross_per_yr": l.business.gross_per_year,
-            "profit_per_yr": l.business.profit_per_year,
-            "address": addr.address_line,
-            "longitude": addr.longitude,
-            "latitude": addr.latitude,
-            "user_id": l.user_id,
-        })
+        result.append(
+            {
+                "id": l.id,
+                "contact_method": l.contact_method,
+                "is_public": l.is_public,
+                "asking_price": l.asking_price,
+                "status": l.status,
+                "views": l.views,
+                "name": l.business.name,
+                "market": l.business.market,
+                "revenue_per_yr": l.business.revenue_per_year,
+                "gross_per_yr": l.business.gross_per_year,
+                "profit_per_yr": l.business.profit_per_year,
+                "address": addr.address_line,
+                "longitude": addr.longitude,
+                "latitude": addr.latitude,
+                "user_id": l.user_id,
+            }
+        )
     return result

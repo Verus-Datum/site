@@ -53,3 +53,11 @@ dependencies = [ # uv add -r deploy/api/requirements.txt
 
 [tool.setuptools.packages.find]
 where = ["."]
+
+
+[tool.ruff.lint]
+ignore = ["E741", "F401"]
+
+[tool.ruff.lint.per-file-ignores]
+"schemas/**/*.py" = ["E401"]
+

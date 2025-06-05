@@ -1,5 +1,6 @@
 # import pytest
 
+
 def create_user(client, email="user@example.com", firebase_uid="uid-user"):
     payload = {
         "first_name": "Test",
@@ -8,7 +9,7 @@ def create_user(client, email="user@example.com", firebase_uid="uid-user"):
         "firebase_uid": firebase_uid,
         "role": "buyer",
         "profile_image_path": None,
-        "subscription_id": None
+        "subscription_id": None,
     }
     res = client.post("/users", json=payload)
     assert res.status_code == 201
@@ -38,7 +39,7 @@ def test_create_user_duplicate(client):
         "firebase_uid": "uid-dup",
         "role": "buyer",
         "profile_image_path": None,
-        "subscription_id": None
+        "subscription_id": None,
     }
     res = client.post("/users", json=payload)
     assert res.status_code == 400
@@ -77,7 +78,7 @@ def test_create_listing_success(client):
         "profit_per_yr": 20000.0,
         "user_id": user["id"],
         "contact_method": "email",
-        "asking_price": 500000.0
+        "asking_price": 500000.0,
     }
     res = client.post("/listings", json=payload)
     assert res.status_code == 201
@@ -108,10 +109,10 @@ def test_get_listings_by_firebase_uid_success(client):
         "profit_per_yr": 70000.0,
         "user_id": user["id"],
         "contact_method": "phone",
-        "asking_price": 300000.0
+        "asking_price": 300000.0,
     }
     client.post("/listings", json=payload)
-    res = client.get(f"/listings/{user['firebase_uid']}")
+    res = client.get(f"/listings/user/{user['firebase_uid']}")
     assert res.status_code == 200
     data = res.json()
     assert isinstance(data, list)
@@ -119,6 +120,37 @@ def test_get_listings_by_firebase_uid_success(client):
 
 
 def test_get_listings_by_firebase_uid_not_found(client):
-    res = client.get("/listings/nonexistent-uid")
+    res = client.get("/listings/user/nonexistent-uid")
     assert res.status_code == 404
     assert res.json()["detail"] == "User not found"
+
+
+def test_get_listing_by_id_success(client):
+    user = create_user(client, email="id@example.com", firebase_uid="uid-id")
+    payload = {
+        "name": "ID Business",
+        "address": "789 Sample Rd",
+        "market": "Services",
+        "longitude": 50.0,
+        "latitude": 60.0,
+        "revenue_per_yr": 800000.0,
+        "gross_per_yr": 850000.0,
+        "profit_per_yr": 90000.0,
+        "user_id": user["id"],
+        "contact_method": "email",
+        "asking_price": 400000.0,
+    }
+    res = client.post("/listings", json=payload)
+    assert res.status_code == 201
+    listing = res.json()
+
+    res = client.get(f"/listings/id/{listing['id']}")
+    assert res.status_code == 200
+    data = res.json()
+    assert data["id"] == listing["id"]
+    assert data["name"] == "ID Business"
+
+def test_get_listing_by_id_not_found(client):
+    res = client.get("/listings/id/999999")
+    assert res.status_code == 404
+    assert res.json()["detail"] == "Listing not found"
