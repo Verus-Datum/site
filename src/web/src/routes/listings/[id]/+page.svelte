@@ -10,11 +10,12 @@
 	import type { Broker } from '$types/Broker';
 	import Ellipsis from '@lucide/svelte/icons/ellipsis';
 	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
+	import type { Listing } from '$models/Listing';
 
 	let { data }: PageProps = $props();
 
-	let listing = $derived<Business>(data.listing);
-	let broker = $derived<Broker>(listing.broker);
+	let listing = $derived<Listing>(data.listing);
+	// let broker = $derived<Broker>(listing.broker);
 	let carouselAPI = $state<CarouselAPI>();
 	let current = $state(0);
 
@@ -71,9 +72,28 @@
 	<div class="flex w-full flex-col gap-8 md:flex-row md:justify-between">
 		<header class="w-full">
 			<h1 class="flex w-full flex-col items-start text-2xl md:text-3xl font-bold">
-				{listing.name}
+				<div class="flex flex-row gap-3 items-center">
+                    {listing.name}
+                    {#if listing.status === "sold"}
+                        <Badge class="font-medium" variant="destructive">
+                            {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
+                        </Badge>
+                    {:else if listing.status === "pending"}
+                        <Badge class="font-medium bg-yellow-500">
+                            {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
+                        </Badge>
+                    {:else if listing.status === "off_market"}
+                        <Badge class="font-medium opacity-50">
+                            {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
+                        </Badge>
+                    {:else if listing.status === "available"}
+                        <Badge class="font-medium">
+                            {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
+                        </Badge>
+                    {/if}
+                </div>
 				<p class="font-medium text-muted-foreground md:text-base text-sm">
-					Broker {broker.name}
+					{listing.contact_method}
 				</p>
 			</h1>
 		</header>
@@ -86,43 +106,47 @@
 		</div>
 	</div>
 
-	<div class="flex w-full flex-col gap-2 md:flex-row md:gap-6">
-		<div class="flex flex-col">
-			<span class="font-medium text-muted-foreground md:text-base text-sm">Location</span>
-			<p class="text-lg font-semibold">
-				{listing.address}
-			</p>
-		</div>
-		<div class="flex flex-col">
-			<span class="font-medium text-muted-foreground md:text-base text-sm">Market</span>
-			<p class="text-lg font-semibold">
-				{listing.market}
-			</p>
-		</div>
-	</div>
-
 	<div class="flex w-full flex-row gap-6">
-		<div class="flex flex-col">
-			<span class="font-medium text-muted-foreground md:text-base text-sm">Revenue / Yr</span>
-			<p class="text-lg font-semibold">
-				{formatCurrency(listing.revenue_per_yr)}
-			</p>
-		</div>
-		<div class="flex flex-col">
-			<span class="font-medium text-muted-foreground md:text-base text-sm">Gross / Yr</span>
-			<p class="text-lg font-semibold">
-				{formatCurrency(listing.gross_per_yr)}
-			</p>
-		</div>
-		<div class="flex flex-col">
-			<span class="font-medium text-muted-foreground md:text-base text-sm">Profit / Yr</span>
-			<p class="text-lg font-semibold">
-				{formatCurrency(listing.profit_per_yr)}
-			</p>
+        <div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 text-base lg:text-lg xl:text-xl leading-snug lg:leading-normal">
+			<div class="flex flex-col">
+				<span class="font-medium text-muted-foreground text-sm">Address</span>
+				<p class="text-base font-semibold">{listing.address}</p>
+			</div>
+			<div class="flex flex-col">
+				<span class="font-medium text-muted-foreground text-sm">Market</span>
+				<p class="text-base font-semibold">{listing.market}</p>
+			</div>
+			<div class="flex flex-col">
+				<span class="font-medium text-muted-foreground text-sm">Listed At</span>
+				<p class="text-base font-semibold">{new Date(listing.listed_at).toLocaleDateString()}</p>
+			</div>
+			<div class="flex flex-col">
+				<span class="font-medium text-muted-foreground text-sm">Asking Price</span>
+				<p class="text-base font-semibold text-primary">
+					{formatCurrency(listing.asking_price)}
+				</p>
+			</div>
+			<div class="flex flex-col">
+				<span class="font-medium text-muted-foreground text-sm">Revenue / Yr</span>
+				<p class="text-base font-semibold">{formatCurrency(listing.revenue_per_yr)}</p>
+			</div>
+			<div class="flex flex-col">
+				<span class="font-medium text-muted-foreground text-sm">Gross / Yr</span>
+				<p class="text-base font-semibold">{formatCurrency(listing.gross_per_yr)}</p>
+			</div>
+			<div class="flex flex-col">
+				<span class="font-medium text-muted-foreground text-sm">Profit / Yr</span>
+				<p class="text-base font-semibold">{formatCurrency(listing.profit_per_yr)}</p>
+			</div>
+			<div class="flex flex-col">
+				<span class="font-medium text-muted-foreground text-sm">Views</span>
+				<p class="text-base font-semibold">{listing.views}</p>
+			</div>
 		</div>
 	</div>
 
-	<section class="mt-4 flex w-full flex-col gap-8 border-t pt-6">
+	<!--
+    <section class="mt-4 flex w-full flex-col gap-8 border-t pt-6">
 		<header>
             <h3 class="text-muted-foreground text-sm md:text-base font-medium">
                 About the broker
@@ -188,6 +212,7 @@
 			{/each}
 		</div>
 	</section>
+    -->
 
 	<footer class="flex w-full flex-row gap-4 pb-12 lg:ml-auto lg:w-1/2 2xl:w-1/3">
 		<Button

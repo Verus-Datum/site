@@ -21,7 +21,7 @@
 </script>
 
 <a
-	href="/listings/example"
+	href={`/listings/${listing.id}`}
 	class="flex w-full flex-col rounded-lg border duration-200 bg-secondary hover:bg-secondary/60"
 >
 	<img

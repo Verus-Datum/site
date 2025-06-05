@@ -4,6 +4,7 @@ export type Listing = {
 	business_id: number;
 	contact_method: string;
 	is_public: boolean;
+	type: string; // 'online' | 'physical'
 	asking_price: number;
 	status: string;
 	views: number;

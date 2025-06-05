@@ -27,6 +27,9 @@
 		getLowestProfit,
 		getLowestRevenue
 	} from '$lib/businessFilters';
+	import type { Listing } from '$models/Listing';
+	import { listingService } from '$services/listingService';
+	import type { PageProps } from './$types';
 
 	type Filters = {
 		askingPrice: number[];
@@ -39,9 +42,12 @@
 		isPublic: boolean;
 	};
 
-	let businesses = $state<Business[]>([]);
-	let originalBusinesses = $state<Business[]>([]);
-	let filteredBusinesses = $state<Business[]>([]);
+    let { data }: PageProps = $props();
+
+    let isDesktop = $state<boolean>(false);
+	let businesses = $state<Listing[]>(data.listings);
+	let originalBusinesses = $state<Listing[]>(data.listings);
+	let filteredBusinesses = $state<Listing[]>(data.listings);
 	let selectedMarkets = $state<string[]>([]);
 	let sortBy = $state('');
 	let contactMethod = $state<string[]>(['Direct Owner', 'Broker']);
@@ -67,11 +73,8 @@
 		isPublic: true
 	});
 
-	onMount(() => {
-		let generated = Array.from({ length: 54 }, () => generateFakeBusiness(0, 0, 0, 0));
-		businesses = generated;
-		originalBusinesses = generated;
-		filteredBusinesses = generated;
+	onMount(async() => {
+        isDesktop = window.matchMedia('(min-width: 1024px)').matches;
 		filters.askingPrice = [getLowestAskingPrice(businesses), getHighestAskingPrice(businesses)];
 		filters.grossYearly = [getLowestGross(businesses), getHighestGross(businesses)];
 		filters.revenueYearly = [getLowestRevenue(businesses), getHighestRevenue(businesses)];
@@ -210,12 +213,6 @@
 
 		filteredBusinesses = result;
 	}
-
-	$effect(() => {
-		applyFilters();
-	});
-
-    const isDesktop = new MediaQuery("(min-width: 1024px)");
 </script>
 
 {#snippet Filters()}
@@ -489,7 +486,7 @@
 >
 	<header class="w-full pt-20 flex flex-row gap-4">
 		<h1 class="w-full text-left text-3xl font-semibold">View all businesses</h1>
-        {#if !isDesktop.current}
+        {#if !isDesktop}
             <Sheet.Root>
                 <Sheet.Trigger>
                     <Button variant="outline">
@@ -504,7 +501,7 @@
 	</header>
 
 	<section class="flex w-full flex-row gap-6">
-		{#if isDesktop.current}
+		{#if isDesktop}
             {@render Filters()}
         {/if}
 

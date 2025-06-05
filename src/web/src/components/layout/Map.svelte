@@ -7,26 +7,36 @@
 	import BusinessMarker from '$components/business/BusinessMarker.svelte';
 	import { type Broker } from '$types/Broker';
 	import BrokerMarker from '$components/business/BrokerMarker.svelte';
-	
-type Props = {
+	import type { Listing } from '$models/Listing';
+
+	type Props = {
 		brokers: Broker[];
-		businesses: Business[];
+		listings: Listing[];
 	};
 
-	let { brokers, businesses }: Props = $props();
+	let { brokers, listings }: Props = $props();
 
 	let mapContainer = $state<HTMLElement | undefined>();
 	let markersInitialized = false;
 	let mapLoaded = $state<boolean>(false);
 
+	function renderMarkersInBatches(list: any[], mountFn: (item: any) => void, batchSize = 50) {
+		let index = 0;
+		function batch() {
+			const slice = list.slice(index, index + batchSize);
+			for (const item of slice) mountFn(item);
+			index += batchSize;
+			if (index < list.length) requestIdleCallback(batch);
+		}
+		batch();
+	}
+
 	onMount(() => {
 		if (!mapContainer) return;
 
-		// First-time mount
 		if (!mapState.map) {
 			mapState.container = mapContainer;
 		} else {
-			// DOM element changed (e.g., remount)
 			const currentContainer = mapState.map.getContainer();
 			if (currentContainer !== mapContainer) {
 				mapState.map.remove();
@@ -38,41 +48,30 @@ type Props = {
 			}
 		}
 
-		const checkMapReady = setInterval(() => {
-			if (mapState.map && !markersInitialized && mapState.map.loaded()) {
-				clearInterval(checkMapReady);
+		mapState.map.on('load', () => {
+			mapLoaded = true;
 
-				for (const biz of businesses) {
-					const markerEl = document.createElement('div');
-					mount(BusinessMarker, {
-						target: markerEl,
-						props: { map: mapState.map, business: biz }
-					});
-					new maplibregl.Marker({ element: markerEl })
-						.setLngLat({
-							lng: biz.longitude,
-							lat: biz.latitude
-						})
-						.addTo(mapState.map);
-				}
+			if (!markersInitialized) {
+				renderMarkersInBatches(
+					listings,
+					(biz) => {
+						const el = document.createElement('div');
+						mount(BusinessMarker, { target: el, props: { map: mapState.map, business: biz } });
+						new maplibregl.Marker({ element: el }).setLngLat([biz.longitude, biz.latitude]).addTo(mapState.map);
+					}
+				);
 
-				for (const bro of brokers) {
-					const markerEl = document.createElement('div');
-					mount(BrokerMarker, {
-						target: markerEl,
-						props: { map: mapState.map, broker: bro }
-					});
-					new maplibregl.Marker({ element: markerEl })
-						.setLngLat(bro.lngLat)
-						.addTo(mapState.map);
-				}
+				renderMarkersInBatches(
+					brokers,
+					(bro) => {
+						const el = document.createElement('div');
+						mount(BrokerMarker, { target: el, props: { map: mapState.map, broker: bro } });
+						new maplibregl.Marker({ element: el }).setLngLat(bro.lngLat).addTo(mapState.map);
+					}
+				);
 
 				markersInitialized = true;
 			}
-		}, 100);
-
-		mapState.map.on('load', () => {
-			mapLoaded = true;
 		});
 	});
 </script>
@@ -82,4 +81,4 @@ type Props = {
 	class="h-screen w-screen overflow-hidden duration-500 {mapLoaded
 		? 'translate-y-0 scale-100 opacity-100'
 		: 'translate-y-5 scale-[0.989] opacity-0'}"
-></div>
+/>

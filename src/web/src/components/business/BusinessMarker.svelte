@@ -33,7 +33,7 @@
 
 	onMount(() => {
 		if (!map || !container) return;
-
+        
 		const marker = new maplibregl.Marker({ element: container })
 			.setLngLat({
 				lng: business.longitude,

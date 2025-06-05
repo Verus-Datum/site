@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Button } from '$components/ui/button';
+	import type { Listing } from '$models/Listing';
 	import type { Business } from '$types/Business';
 	
     type Props = {
-		listing: Business;
+		listing: Listing;
 	};
 
 	let { listing }: Props = $props();

@@ -3,14 +3,44 @@ import { API_URL } from '$utils/api';
 import { toast } from 'svelte-sonner';
 
 export const listingService = {
-	async getAll(): Promise<Listing[]> {
+	async getAll(cstmFetch?: (url: string) => any): Promise<Listing[]> {
 		try {
-			const res = await fetch(`${API_URL}/listings`);
-			if (!res.ok) throw new Error('Failed to fetch');
+			let res;
 
+			if (cstmFetch) {
+				res = await cstmFetch(`${API_URL}/listings`);
+			} else {
+				res = await fetch(`${API_URL}/listings`);
+			}
+
+			if (!res.ok) throw new Error('Failed to fetch');
 			return await res.json();
 		} catch (error) {
 			toast.error('Cannot load listings');
+			throw error;
+		}
+	},
+
+	getAllNonAsync(): Promise<Listing[]> {
+		return fetch(`${API_URL}/listings`)
+			.then((res) => {
+				if (!res.ok) throw new Error('Failed to fetch');
+				return res.json() as Promise<Listing[]>;
+			})
+			.catch((error) => {
+				toast.error('Cannot load listings');
+				throw error;
+			});
+	},
+
+	async getByListingId(id: string): Promise<Listing> {
+		try {
+			const res = await fetch(`${API_URL}/listings/id/${id}`);
+			if (!res.ok) throw new Error('Failed to fetch');
+
+			return (await res.json()) as Promise<Listing>;
+		} catch (error) {
+			toast.error('Cannot load listing');
 			throw error;
 		}
 	},
