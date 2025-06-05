@@ -5,7 +5,7 @@ import type { Listing } from '$models/Listing';
 import { listingService } from '$services/listingService';
 
 export const load: PageLoad = async ({ fetch, params }) => {
-	const listings: Listing[] = await listingService.getAll(fetch);
+	let listings: Listing[] = await listingService.getAll(fetch);
 	return {
 		listings
 	};

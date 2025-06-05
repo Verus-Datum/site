@@ -8,7 +8,7 @@
 	import * as Sheet from '$components/ui/sheet';
 	import transparent from '$assets/transparent.png';
 	
-let {
+    let {
 		children
 	}: {
 		children: Snippet;
