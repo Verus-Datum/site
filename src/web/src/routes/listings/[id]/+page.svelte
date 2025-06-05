@@ -39,7 +39,7 @@
 
 <main
 	in:fly={{ y: 20, duration: 650 }}
-	class="mx-auto flex w-full flex-col items-start justify-start gap-8 px-4 pt-[6rem] md:pt-[6.5rem] md:w-[100%] lg:w-[80%] 2xl:w-[60%] 3xl:w-[50%]"
+	class="mx-auto flex w-full flex-col items-start justify-start gap-8 px-4 pt-[6rem] md:w-[100%] md:pt-[6.5rem] lg:w-[80%] 2xl:w-[60%] 3xl:w-[50%]"
 >
 	<nav class="relative flex w-full flex-row items-center justify-between">
 		<button onclick={() => history.back()} class="flex flex-row items-center gap-2 font-medium">
@@ -59,7 +59,7 @@
 					<img
 						src={img}
 						alt="Company"
-						class="md:h-72 h-48 w-full shrink-0 rounded-lg object-cover"
+						class="h-48 w-full shrink-0 rounded-lg object-cover md:h-72"
 					/>
 				</Carousel.Item>
 			{/each}
@@ -71,69 +71,73 @@
 
 	<div class="flex w-full flex-col gap-8 md:flex-row md:justify-between">
 		<header class="w-full">
-			<h1 class="flex w-full flex-col items-start text-2xl md:text-3xl font-bold">
-				<div class="flex flex-row gap-3 items-center">
-                    {listing.name}
-                    {#if listing.status === "sold"}
-                        <Badge class="font-medium" variant="destructive">
-                            {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
-                        </Badge>
-                    {:else if listing.status === "pending"}
-                        <Badge class="font-medium bg-yellow-500">
-                            {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
-                        </Badge>
-                    {:else if listing.status === "off_market"}
-                        <Badge class="font-medium opacity-50">
-                            {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
-                        </Badge>
-                    {:else if listing.status === "available"}
-                        <Badge class="font-medium">
-                            {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
-                        </Badge>
-                    {/if}
-                </div>
-				<p class="font-medium text-muted-foreground md:text-base text-sm">
+			<h1 class="flex w-full flex-col items-start text-2xl font-bold md:text-3xl">
+				<div class="flex flex-row items-center gap-3">
+					{listing.name}
+					{#if listing.status === 'sold'}
+						<Badge class="font-medium" variant="destructive">
+							{listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
+						</Badge>
+					{:else if listing.status === 'pending'}
+						<Badge class="bg-yellow-500 font-medium">
+							{listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
+						</Badge>
+					{:else if listing.status === 'off_market'}
+						<Badge class="font-medium opacity-50">
+							{listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
+						</Badge>
+					{:else if listing.status === 'available'}
+						<Badge class="font-medium">
+							{listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
+						</Badge>
+					{/if}
+				</div>
+				<p class="text-sm font-medium text-muted-foreground md:text-base">
 					{listing.contact_method}
 				</p>
 			</h1>
 		</header>
 
 		<div class="w-full md:flex md:flex-col md:items-end">
-			<h1 class="text-2xl md:text-3xl font-bold text-primary">
+			<h1 class="text-2xl font-bold text-primary md:text-3xl">
 				{formatCurrency(listing.asking_price)}
 			</h1>
-			<p class="font-medium text-muted-foreground md:text-base text-sm">asking price</p>
+			<p class="text-sm font-medium text-muted-foreground md:text-base">asking price</p>
 		</div>
 	</div>
 
 	<div class="flex w-full flex-row gap-6">
-        <div class="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 text-base lg:text-lg xl:text-xl leading-snug lg:leading-normal">
+		<div
+			class="grid w-full grid-cols-1 gap-6 text-base leading-snug sm:grid-cols-2 lg:grid-cols-3 lg:text-lg lg:leading-normal xl:text-xl"
+		>
 			<div class="flex flex-col">
-				<span class="font-medium text-muted-foreground text-sm">Address</span>
+				<span class="text-sm font-medium text-muted-foreground">Address</span>
 				<p class="text-base font-semibold">{listing.address}</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="font-medium text-muted-foreground text-sm">Market</span>
+				<span class="text-sm font-medium text-muted-foreground">Market</span>
 				<p class="text-base font-semibold">{listing.market}</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="font-medium text-muted-foreground text-sm">Listed At</span>
-				<p class="text-base font-semibold">{new Date(listing.listed_at).toLocaleDateString()}</p>
+				<span class="text-sm font-medium text-muted-foreground">Listed At</span>
+				<p class="text-base font-semibold">
+					{new Date(listing.listed_at).toLocaleDateString()}
+				</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="font-medium text-muted-foreground text-sm">Revenue / Yr</span>
+				<span class="text-sm font-medium text-muted-foreground">Revenue / Yr</span>
 				<p class="text-base font-semibold">{formatCurrency(listing.revenue_per_yr)}</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="font-medium text-muted-foreground text-sm">Gross / Yr</span>
+				<span class="text-sm font-medium text-muted-foreground">Gross / Yr</span>
 				<p class="text-base font-semibold">{formatCurrency(listing.gross_per_yr)}</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="font-medium text-muted-foreground text-sm">Profit / Yr</span>
+				<span class="text-sm font-medium text-muted-foreground">Profit / Yr</span>
 				<p class="text-base font-semibold">{formatCurrency(listing.profit_per_yr)}</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="font-medium text-muted-foreground text-sm">Views</span>
+				<span class="text-sm font-medium text-muted-foreground">Views</span>
 				<p class="text-base font-semibold">{listing.views}</p>
 			</div>
 		</div>

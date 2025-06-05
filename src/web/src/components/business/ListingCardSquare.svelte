@@ -23,7 +23,7 @@
 
 <a
 	href={`/listings/${listing.id}`}
-	class="flex w-full flex-col rounded-lg border duration-200 bg-secondary hover:bg-secondary/60"
+	class="flex w-full flex-col rounded-lg border bg-secondary duration-200 hover:bg-secondary/60"
 >
 	<img
 		src={images[Math.floor(Math.random() * images.length)]}

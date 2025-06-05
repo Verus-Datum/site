@@ -150,6 +150,7 @@ def test_get_listing_by_id_success(client):
     assert data["id"] == listing["id"]
     assert data["name"] == "ID Business"
 
+
 def test_get_listing_by_id_not_found(client):
     res = client.get("/listings/id/999999")
     assert res.status_code == 404

@@ -13,8 +13,8 @@
 
 	import { mapState } from '$states/MapState.svelte';
 	import { type LngLatLike } from 'maplibre-gl';
-	
-    const locations = [
+
+	const locations = [
 		{ value: 'ny', label: 'New York', lng_lat: [-74.006, 40.7128] },
 		{ value: 'la', label: 'Los Angeles', lng_lat: [-118.2437, 34.0522] },
 		{ value: 'chi', label: 'Chicago', lng_lat: [-87.6298, 41.8781] },
@@ -70,7 +70,7 @@
 	{/if}
 
 	<div
-		class="hide-scrollbar absolute z-50 mt-[4rem] flex h-[5rem] w-full items-center gap-2 overflow-x-auto overflow-y-hidden border-b bg-background bg-opacity-80 backdrop-blur-md px-2 md:mt-[4.5rem] md:h-[5.5rem] md:gap-4 md:px-6"
+		class="hide-scrollbar absolute z-50 mt-[4rem] flex h-[5rem] w-full items-center gap-2 overflow-x-auto overflow-y-hidden border-b bg-background bg-opacity-80 px-2 backdrop-blur-md md:mt-[4.5rem] md:h-[5.5rem] md:gap-4 md:px-6"
 	>
 		<Select.Root type="single" name="location" bind:value={location}>
 			<Select.Trigger

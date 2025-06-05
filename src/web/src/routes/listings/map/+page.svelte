@@ -174,7 +174,7 @@
 {#key selectedBusiness?.id}
 	{#if selectedBusiness}
 		<div
-			class="absolute z-50 pointer-events-auto"
+			class="pointer-events-auto absolute z-50"
 			style="left: {triggerX}px; top: {triggerY}px; transform: translate(-50%, -50%);"
 			on:click|stopPropagation
 		>
@@ -189,21 +189,21 @@
 	class:translate-x-full={!showSidebar}
 >
 	{#if listings.length > 0}
-        <header class="flex w-full items-center justify-between">
-            <div>
-                <h1 class="text-2xl font-semibold">Businesses For Sale</h1>
-                <h2 class="py-2 text-sm font-medium text-muted-foreground">
-                    {listings.length} results
-                </h2>
-            </div>
-        </header>
+		<header class="flex w-full items-center justify-between">
+			<div>
+				<h1 class="text-2xl font-semibold">Businesses For Sale</h1>
+				<h2 class="py-2 text-sm font-medium text-muted-foreground">
+					{listings.length} results
+				</h2>
+			</div>
+		</header>
 
-        <section class="grid w-full grid-cols-2 gap-4">
-            {#each listings as business}
-                <ListingCardSquare listing={business} />
-            {/each}
-        </section>
-    {/if}
+		<section class="grid w-full grid-cols-2 gap-4">
+			{#each listings as business}
+				<ListingCardSquare listing={business} />
+			{/each}
+		</section>
+	{/if}
 </aside>
 
 <Button

@@ -40,7 +40,8 @@
 <ScreenContainer>
 	<header class="w-full pt-20">
 		<h1 class="w-full text-center text-5xl font-semibold md:text-left">
-			Hello {currentUser.user?.first_name?.charAt(0).toUpperCase() + currentUser.user?.first_name?.slice(1)}
+			Hello {currentUser.user?.first_name?.charAt(0).toUpperCase() +
+				currentUser.user?.first_name?.slice(1)}
 		</h1>
 	</header>
 
@@ -58,21 +59,21 @@
 
 		<div class="flex max-h-[50rem] w-full flex-col gap-6 overflow-auto">
 			{#if currentUser.user}
-                {#if currentUser.user.listings}
-                    {#if currentUser.user?.listings?.length > 0}
-                        {#each currentUser.user?.listings as listing}
-                            <ListingCard {listing} />
-                        {/each}
-                    {:else}
-                        <div
-                            class="flex h-80 w-full flex-col items-center justify-center gap-2 rounded-xl border"
-                        >
-                            <h1 class="text-xl font-semibold">No listings yet</h1>
-                            <h2 class="text-muted-foreground">Submit a listing for review</h2>
-                        </div>
-                    {/if}
-                {/if}
-            {/if}
+				{#if currentUser.user.listings}
+					{#if currentUser.user?.listings?.length > 0}
+						{#each currentUser.user?.listings as listing}
+							<ListingCard {listing} />
+						{/each}
+					{:else}
+						<div
+							class="flex h-80 w-full flex-col items-center justify-center gap-2 rounded-xl border"
+						>
+							<h1 class="text-xl font-semibold">No listings yet</h1>
+							<h2 class="text-muted-foreground">Submit a listing for review</h2>
+						</div>
+					{/if}
+				{/if}
+			{/if}
 		</div>
 
 		<h2 class="text-xl font-semibold">Services</h2>

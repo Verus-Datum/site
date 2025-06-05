@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { flyAndScale } from "$utils/shadcn";
+	import { flyAndScale } from '$utils/shadcn';
 	import { onMount } from 'svelte';
 	import { MediaQuery } from 'svelte/reactivity';
 	import MapPin from '@lucide/svelte/icons/map-pin';
@@ -13,13 +13,13 @@
 	import Info from '@lucide/svelte/icons/info';
 	import { FloatingPanelState } from '$states/FloatingPanel.svelte';
 	import type { Listing } from '$models/Listing';
-	import { formatCurrency } from "$utils/currency";
+	import { formatCurrency } from '$utils/currency';
 
 	type Props = {
-        listing: Listing,
-    }
+		listing: Listing;
+	};
 
-    let { listing }: Props = $props();
+	let { listing }: Props = $props();
 </script>
 
 {#snippet Content()}
@@ -47,17 +47,13 @@
 	<footer class="flex w-full flex-row gap-3">
 		<Button
 			href={`/listings/example`}
-			onclick={() => {
-
-			}}
+			onclick={() => {}}
 			class="flex w-full bg-blue-flat font-semibold text-blue-foreground hover:bg-blue-muted/30 md:hidden"
 		>
 			Learn More
 		</Button>
 		<Button
-			onclick={() => {
-
-			}}
+			onclick={() => {}}
 			class="hidden w-full bg-blue-flat font-semibold text-blue-foreground hover:bg-blue-muted/30 md:flex"
 		>
 			Learn More
@@ -66,6 +62,9 @@
 	</footer>
 {/snippet}
 
-<div transition:flyAndScale class="shadow-ui relative w-[28.5rem] rounded-xl bg-card text-popover-foreground border border-border p-4">
-    {@render Content()}
+<div
+	transition:flyAndScale
+	class="shadow-ui relative w-[28.5rem] rounded-xl border border-border bg-card p-4 text-popover-foreground"
+>
+	{@render Content()}
 </div>

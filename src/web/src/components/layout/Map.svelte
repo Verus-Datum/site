@@ -52,23 +52,24 @@
 			mapLoaded = true;
 
 			if (!markersInitialized) {
-				renderMarkersInBatches(
-					listings,
-					(biz) => {
-						const el = document.createElement('div');
-						mount(BusinessMarker, { target: el, props: { map: mapState.map, business: biz } });
-						new maplibregl.Marker({ element: el }).setLngLat([biz.longitude, biz.latitude]).addTo(mapState.map);
-					}
-				);
+				renderMarkersInBatches(listings, (biz) => {
+					const el = document.createElement('div');
+					mount(BusinessMarker, {
+						target: el,
+						props: { map: mapState.map, business: biz }
+					});
+					new maplibregl.Marker({ element: el })
+						.setLngLat([biz.longitude, biz.latitude])
+						.addTo(mapState.map);
+				});
 
-				renderMarkersInBatches(
-					brokers,
-					(bro) => {
-						const el = document.createElement('div');
-						mount(BrokerMarker, { target: el, props: { map: mapState.map, broker: bro } });
-						new maplibregl.Marker({ element: el }).setLngLat(bro.lngLat).addTo(mapState.map);
-					}
-				);
+				renderMarkersInBatches(brokers, (bro) => {
+					const el = document.createElement('div');
+					mount(BrokerMarker, { target: el, props: { map: mapState.map, broker: bro } });
+					new maplibregl.Marker({ element: el })
+						.setLngLat(bro.lngLat)
+						.addTo(mapState.map);
+				});
 
 				markersInitialized = true;
 			}

@@ -45,9 +45,13 @@
 {#if isDesktop.current}
 	<Popover.Root bind:open={isOpen}>
 		<Popover.Trigger onclick={() => (isOpen = !isOpen)}>
-			<div class="h-9 w-9 rounded-full bg-transparent flex items-center justify-center scale-75 cursor-pointer">
-				<div class={`${isOpenDrawer ? '' : ''} bg-transparent h-6 w-6 rounded-full flex items-center justify-center`}>
-					<div class="h-4 w-4 bg-transparent rounded-full" />
+			<div
+				class="flex h-9 w-9 scale-75 cursor-pointer items-center justify-center rounded-full bg-transparent"
+			>
+				<div
+					class={`${isOpenDrawer ? '' : ''} flex h-6 w-6 items-center justify-center rounded-full bg-transparent`}
+				>
+					<div class="h-4 w-4 rounded-full bg-transparent" />
 				</div>
 			</div>
 		</Popover.Trigger>
@@ -76,7 +80,10 @@
 				<footer class="flex w-full gap-3">
 					<Button
 						href={`/listings/${business.id}`}
-						onclick={() => { isOpen = false; isOpenDrawer = false; }}
+						onclick={() => {
+							isOpen = false;
+							isOpenDrawer = false;
+						}}
 						class="hidden w-full bg-blue-flat font-semibold text-blue-foreground hover:bg-blue-muted/30 md:flex"
 					>
 						View Listing
@@ -89,9 +96,13 @@
 {:else}
 	<Drawer.Root bind:open={isOpenDrawer}>
 		<Drawer.Trigger onclick={() => (isOpenDrawer = true)}>
-			<div class="h-9 w-9 rounded-full bg-transparent flex items-center justify-center scale-75 cursor-pointer">
-				<div class={`${isOpenDrawer ? '' : ''} bg-transparent h-6 w-6 rounded-full flex items-center justify-center`}>
-					<div class="h-4 w-4 bg-transparent rounded-full" />
+			<div
+				class="flex h-9 w-9 scale-75 cursor-pointer items-center justify-center rounded-full bg-transparent"
+			>
+				<div
+					class={`${isOpenDrawer ? '' : ''} flex h-6 w-6 items-center justify-center rounded-full bg-transparent`}
+				>
+					<div class="h-4 w-4 rounded-full bg-transparent" />
 				</div>
 			</div>
 		</Drawer.Trigger>
@@ -105,7 +116,9 @@
 					</h2>
 				</header>
 
-				<div class="grid grid-cols-[auto,1fr] grid-rows-3 items-center gap-x-4 gap-y-4 pt-5">
+				<div
+					class="grid grid-cols-[auto,1fr] grid-rows-3 items-center gap-x-4 gap-y-4 pt-5"
+				>
 					<div class="flex items-center gap-2 font-medium text-muted-foreground">
 						<MapPin size={24} />
 						Location:
@@ -141,7 +154,11 @@
 					<Carousel.Content class="flex w-full">
 						{#each exmplImgs as imgUrl}
 							<Carousel.Item class="w-full shrink-0 grow-0 basis-[85%]">
-								<img src={imgUrl} alt="Business" class="h-48 w-full rounded-lg object-cover" />
+								<img
+									src={imgUrl}
+									alt="Business"
+									class="h-48 w-full rounded-lg object-cover"
+								/>
 							</Carousel.Item>
 						{/each}
 					</Carousel.Content>
@@ -149,7 +166,9 @@
 
 				<footer class="flex w-full justify-end gap-2">
 					<Button
-						onclick={() => { isOpenDrawer = false; }}
+						onclick={() => {
+							isOpenDrawer = false;
+						}}
 						href={`/listings/${business.id}`}
 						class="w-full bg-blue-flat font-semibold text-blue-foreground hover:bg-blue-flat/70"
 					>

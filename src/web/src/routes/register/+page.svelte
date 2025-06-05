@@ -41,7 +41,7 @@
 		});
 	});
 
-	async function handleSubmit(event: { preventDefault: () => void; }) {
+	async function handleSubmit(event: { preventDefault: () => void }) {
 		event.preventDefault();
 		const result = await form.validateForm();
 		if (!result.valid) return;
@@ -73,7 +73,7 @@
 
 <main
 	in:fly={{ y: 20, duration: 650 }}
-	class="mx-auto flex h-screen w-full flex-col items-center justify-start gap-10 px-6 md:px-8 pt-32 mb-8 md:pt-40 md:w-[100%] lg:w-[80%] 2xl:w-[60%]"
+	class="mx-auto mb-8 flex h-screen w-full flex-col items-center justify-start gap-10 px-6 pt-32 md:w-[100%] md:px-8 md:pt-40 lg:w-[80%] 2xl:w-[60%]"
 >
 	<header class="flex flex-col items-center justify-center gap-2 text-center">
 		<img

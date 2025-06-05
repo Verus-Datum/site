@@ -11,8 +11,8 @@
 	import { Button } from '$components/ui/button';
 	import { markets } from '$utils/markets';
 	import { cn } from '$utils/shadcn';
-	
-let businesses = $state<Business[]>([]);
+
+	let businesses = $state<Business[]>([]);
 	let originalBusinesses = $state<Business[]>([]);
 	let filteredBusinesses = $state<Business[]>([]);
 
