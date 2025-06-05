@@ -14,6 +14,7 @@ const config = {
 		adapter: adapter({ out: 'build' }),
 		alias: {
 			$lib: 'src/lib',
+			$models: 'src/models',
 			$components: 'src/components',
 			$routes: 'src/routes',
 			$states: 'src/states',

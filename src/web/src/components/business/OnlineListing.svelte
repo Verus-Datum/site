@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { Button } from '$components/ui/button';
+	import type { Listing } from '$models/Listing';
 	import type { Business } from '$types/Business';
-	
-    type Props = {
-		listing: Business;
+
+	type Props = {
+		listing: Listing;
 	};
 
 	let { listing }: Props = $props();
@@ -32,17 +33,17 @@
 		class="w-full shrink-0 rounded-lg object-cover md:w-80"
 	/>
 	<header class="relative flex w-full flex-col justify-between">
-<div class="flex flex-row w-full justify-between items-start">
-	<h1 class="flex flex-col max-w-80 text-2xl font-semibold">
-		{listing.name}
-	</h1>
-	<div class="flex flex-col items-end leading-none">
-		<span class="text-xl font-bold text-primary">
-			{formatCurrency(listing.asking_price)}
-		</span>
-		<p class="text-sm font-medium text-muted-foreground">asking price</p>
-	</div>
-</div>
+		<div class="flex w-full flex-row items-start justify-between">
+			<h1 class="flex max-w-80 flex-col text-2xl font-semibold">
+				{listing.name}
+			</h1>
+			<div class="flex flex-col items-end leading-none">
+				<span class="text-xl font-bold text-primary">
+					{formatCurrency(listing.asking_price)}
+				</span>
+				<p class="text-sm font-medium text-muted-foreground">asking price</p>
+			</div>
+		</div>
 
 		<div class="flex h-full flex-col gap-2 py-4">
 			<div class="flex flex-col">
@@ -59,9 +60,7 @@
 			</div>
 		</div>
 
-		<div
-			class="hide-scrollbar flex w-full flex-row gap-6"
-		>
+		<div class="hide-scrollbar flex w-full flex-row gap-6">
 			<div class="flex flex-col">
 				<span class="text-sm font-medium text-muted-foreground">Revenue / Yr</span>
 				<p class="font-medium">
@@ -82,10 +81,12 @@
 			</div>
 
 			<div class="bottom-0 right-0 ml-auto hidden lg:flex">
-				<Button href={'/listings/example'} class="">View Listing</Button>
+				<Button href={`/listings/${listing.id}`} class="">View Listing</Button>
 			</div>
 		</div>
-        
-		<Button href={'/listings/example'} class="mt-4 flex w-full  lg:hidden">View Listing</Button>
+
+		<Button href={`/listings/${listing.id}`} class="mt-4 flex w-full lg:hidden"
+			>View Listing</Button
+		>
 	</header>
 </div>

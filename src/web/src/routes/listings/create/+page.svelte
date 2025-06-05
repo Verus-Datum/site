@@ -3,11 +3,7 @@
 	import { Input } from '$components/ui/input';
 	import { Checkbox } from '$components/ui/checkbox';
 	import * as Form from '$components/ui/form';
-	import {
-		superForm,
-		type Infer,
-		type SuperValidated
-	} from 'sveltekit-superforms';
+	import { superForm, type Infer, type SuperValidated } from 'sveltekit-superforms';
 	import { formSchema, type FormSchema } from './schema';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import { currentUser } from '$states/CurrentUser.svelte';
@@ -156,7 +152,10 @@
 
 		{#if !$formData.isOnline}
 			<div class="flex flex-col gap-2">
-				<label for="unknown" class="text-sm font-medium {addressHasError ? 'text-destructive' : ''}">
+				<label
+					for="unknown"
+					class="text-sm font-medium {addressHasError ? 'text-destructive' : ''}"
+				>
 					Business Address
 				</label>
 				<div class="">

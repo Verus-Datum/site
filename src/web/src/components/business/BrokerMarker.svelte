@@ -11,8 +11,8 @@
 	import * as Drawer from '$components/ui/drawer';
 	import { generateFakeBroker } from '$types/Broker';
 	import { FloatingPanelState } from '$states/FloatingPanel.svelte';
-	
-type Props = {
+
+	type Props = {
 		broker: Broker;
 		map: maplibregl.Map;
 	};

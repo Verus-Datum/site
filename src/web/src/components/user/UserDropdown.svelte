@@ -89,10 +89,10 @@
 
 		<button
 			onclick={() => {
-                toggleMode();
-                const newMode = mode.current;
-                mapState.mode = newMode;
-                console.log(newMode);
+				toggleMode();
+				const newMode = mode.current;
+				mapState.mode = newMode;
+				console.log(newMode);
 			}}
 			class="flex w-full flex-row items-center gap-2 rounded-sm px-2 py-2 text-sm duration-150 hover:cursor-default hover:bg-secondary"
 		>

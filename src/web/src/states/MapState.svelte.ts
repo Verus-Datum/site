@@ -1,10 +1,14 @@
-import type { MapStateType } from '$types/Map';
 import maplibregl, { type LngLatLike } from 'maplibre-gl';
 import { mode, type SystemModeValue } from 'mode-watcher';
 
+type MapStateType = {
+	map: maplibregl.Map | undefined;
+	center: LngLatLike;
+};
+
 class MapState implements MapStateType {
 	private _center = $state<LngLatLike>([-86.225, 34.7295]);
-	private _map = $state<maplibregl.Map | undefined>();
+	private _map = $state<maplibregl.Map>();
 	private _container = $state<string>();
 	private _mode = $derived<SystemModeValue>(mode.current);
 
