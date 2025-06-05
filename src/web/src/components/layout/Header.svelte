@@ -14,7 +14,7 @@
 	import { mapState } from '$states/MapState.svelte';
 	import { type LngLatLike } from 'maplibre-gl';
 	
-const locations = [
+    const locations = [
 		{ value: 'ny', label: 'New York', lng_lat: [-74.006, 40.7128] },
 		{ value: 'la', label: 'Los Angeles', lng_lat: [-118.2437, 34.0522] },
 		{ value: 'chi', label: 'Chicago', lng_lat: [-87.6298, 41.8781] },
@@ -54,7 +54,7 @@ const locations = [
 	let date = '';
 </script>
 
-{#if page.url.pathname === '/'}
+{#if page.url.pathname === '/listings/map'}
 	{#if false}
 		<button
 			onclick={() => {

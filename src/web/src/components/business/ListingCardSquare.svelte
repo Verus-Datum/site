@@ -4,9 +4,10 @@
 	import Phone from '@lucide/svelte/icons/phone';
 	import type { Business } from '$types/Business';
 	import { formatCurrency } from '$utils/currency';
+	import type { Listing } from '$models/Listing';
 
 	type Props = {
-		listing: Business;
+		listing: Listing;
 	};
 
 	let { listing }: Props = $props();

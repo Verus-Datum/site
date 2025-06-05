@@ -121,12 +121,6 @@
 				<p class="text-base font-semibold">{new Date(listing.listed_at).toLocaleDateString()}</p>
 			</div>
 			<div class="flex flex-col">
-				<span class="font-medium text-muted-foreground text-sm">Asking Price</span>
-				<p class="text-base font-semibold text-primary">
-					{formatCurrency(listing.asking_price)}
-				</p>
-			</div>
-			<div class="flex flex-col">
 				<span class="font-medium text-muted-foreground text-sm">Revenue / Yr</span>
 				<p class="text-base font-semibold">{formatCurrency(listing.revenue_per_yr)}</p>
 			</div>

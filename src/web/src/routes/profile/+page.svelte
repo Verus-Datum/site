@@ -40,7 +40,7 @@
 <ScreenContainer>
 	<header class="w-full pt-20">
 		<h1 class="w-full text-center text-5xl font-semibold md:text-left">
-			Hello {currentUser.user?.first_name}
+			Hello {currentUser.user?.first_name?.charAt(0).toUpperCase() + currentUser.user?.first_name?.slice(1)}
 		</h1>
 	</header>
 

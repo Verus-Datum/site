@@ -83,10 +83,10 @@
 			</div>
 
 			<div class="bottom-0 right-0 ml-auto hidden lg:flex">
-				<Button href={'/listings/example'} class="">View Listing</Button>
+				<Button href={`/listings/${listing.id}`} class="">View Listing</Button>
 			</div>
 		</div>
         
-		<Button href={'/listings/example'} class="mt-4 flex w-full  lg:hidden">View Listing</Button>
+		<Button href={`/listings/${listing.id}`} class="mt-4 flex w-full lg:hidden">View Listing</Button>
 	</header>
 </div>
