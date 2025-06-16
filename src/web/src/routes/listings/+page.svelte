@@ -19,9 +19,37 @@
 	import { Button } from '$components/ui/button';
 	import type { PageProps } from './$types';
 	import type { Listing } from '$models/Listing';
+	import { listingService } from '$services/listingService';
 
-	let { data }: PageProps = $props();
-	let listings = $derived<Listing[]>(data.listings);
+	let listings: Listing[] = [];
+	let page = 0;
+	let loading = false;
+
+	async function loadPage(pageNumber: number) {
+		loading = true;
+		const newListings = await listingService.getPage(pageNumber, 50);
+		listings = [...listings, ...newListings];
+		loading = false;
+	}
+
+	onMount(() => {
+		loadPage(page);
+
+		function onScroll() {
+			const scrollPosition = window.innerHeight + window.scrollY;
+			const threshold = document.body.offsetHeight - 200;
+			if (scrollPosition >= threshold && !loading) {
+				page += 1;
+				loadPage(page);
+			}
+		}
+
+		window.addEventListener('scroll', onScroll);
+
+		onDestroy(() => {
+			window.removeEventListener('scroll', onScroll);
+		});
+	});
 
 	const isDesktop = new MediaQuery('(min-width: 1024px)');
 </script>

@@ -8,7 +8,7 @@ services:
         ports:
             - 3000:3000
         environment: # NOTE: this is ignored by app
-            API_URL: https://localhost:8081/api
+            API_URL: https://localhost:8000/api
 
     vd-api:
         image: ghcr.io/verus-datum/api:${IMAGE_TAG:-latest}
@@ -17,9 +17,9 @@ services:
             dockerfile: deploy/api/Dockerfile
         container_name: vd-api
         ports:
-            - 8081:8081
+            - 8000:8000
         environment:
-            API_URL: https://localhost:8081/api
+            API_URL: https://localhost:8000/api
             DATABASE_URL: postgresql://admin:password@vd-db:5432/vd_db
         depends_on:
             - vd-db

@@ -84,6 +84,10 @@ img {
 	@apply border;
 }
 
+.width {
+	@apply max-w-[1200px] md:w-[100%] md:pt-20 lg:w-[80%] 2xl:w-[60%] 3xl:w-[65%];
+}
+
 @layer base {
 	:root {
 		--background: 0 0% 100%;
@@ -98,9 +102,9 @@ img {
 		--input: 220 13% 91%;
 		--primary: 212 84% 47%;
 		--primary-foreground: 0 0% 100%;
-		--secondary: 220 14.3% 95.9%;
+		--secondary: 0 0% 96%;
 		--secondary-foreground: 220.9 39.3% 11%;
-		--accent: 220 14.3% 95.9%;
+		--accent: 0 0% 96%;
 		--accent-foreground: 220.9 39.3% 11%;
 		--destructive: 0 72.2% 50.6%;
 		--destructive-foreground: 210 20% 98%;

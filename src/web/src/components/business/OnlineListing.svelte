@@ -26,7 +26,7 @@
 	];
 </script>
 
-<div class="h-70 relative flex w-full flex-col gap-6 rounded-xl border p-5 md:flex-row">
+<div class="h-70 relative flex w-full bg-secondary flex-col gap-6 rounded-xl border p-5 md:flex-row">
 	<img
 		src={images[Math.floor(Math.random() * images.length)]}
 		alt="Image"
