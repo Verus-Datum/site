@@ -18,6 +18,7 @@
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
 	import { mapState } from '$states/MapState.svelte';
+	import { Button } from '$components/ui/button';
 
 	let avatarUrl = null;
 	let isOpen = $state(false);
@@ -33,7 +34,18 @@
 			<ChevronDown size={22} color="#717171" class="" />
 		</DropdownMenu.Trigger>
 	{:else}
-		<a href="/login" class="flex flex-row items-center gap-2 rounded-lg duration-150">
+		<!-- Desktop -->
+		<div class="flex-row hidden md:flex gap-2 items-center">
+			<Button variant="link" href="/login" class='text-sm'>
+				Sign In
+			</Button>
+			<Button href="/register" class='rounded-full text-sm h-9 px-4'>
+				Get Started
+			</Button>
+		</div>
+
+		<!-- Mobile -->
+		<a href="/login" class="md:hidden flex flex-row items-center gap-2 rounded-lg duration-150">
 			<img
 				src={'https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg'}
 				class="h-9 w-9 rounded-full object-cover"

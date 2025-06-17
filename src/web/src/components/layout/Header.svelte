@@ -70,7 +70,7 @@
 	{/if}
 
 	<div
-		class="hide-scrollbar absolute z-50 mt-[4rem] flex h-[5rem] w-full items-center gap-2 overflow-x-auto overflow-y-hidden border-b bg-background bg-opacity-80 px-2 backdrop-blur-md md:mt-[4.5rem] md:h-[5.5rem] md:gap-4 md:px-6"
+		class="hide-scrollbar absolute z-50 mt-[4rem] flex h-[5rem] w-full items-center gap-2 overflow-x-auto overflow-y-hidden border-b bg-background px-2 backdrop-blur-md md:mt-[4.5rem] md:h-[5.5rem] md:gap-4 md:px-6"
 	>
 		<Select.Root type="single" name="location" bind:value={location}>
 			<Select.Trigger

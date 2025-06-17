@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Request
+from fastapi import APIRouter, Depends, HTTPException, status, Request, Query
 from sqlalchemy.orm import Session, selectinload
 from api.db import get_db
 from api.models import Address, Listing, User, Business
@@ -110,10 +110,17 @@ def get_listing_by_id(listing_id: int, db: Session = Depends(get_db)):
 
 
 @router.get("", response_model=list[ListingResponse])
-def get_listings(db: Session = Depends(get_db)):
+def get_listings(
+    offset: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1),
+    db: Session = Depends(get_db)
+):    
     listings = (
         db.query(Listing)
         .options(selectinload(Listing.business).selectinload(Business.address))
+        .order_by(Listing.id.desc())
+        .offset(offset)
+        .limit(limit)
         .all()
     )
 

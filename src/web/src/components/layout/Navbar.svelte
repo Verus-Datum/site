@@ -30,7 +30,7 @@
 </script>
 
 <div
-	class="fixed left-0 top-0 z-40 flex w-screen flex-col justify-center bg-background bg-opacity-80 backdrop-blur-md"
+	class="fixed left-0 top-0 z-40 flex w-screen flex-col justify-center bg-background backdrop-blur-md"
 >
 	<nav
 		class="relative flex h-[4rem] w-full items-center justify-between border-b px-4 md:h-[4.5rem] md:px-6"
@@ -42,7 +42,7 @@
 			<Sheet.Content side="left" class="p-3">
 				<Sheet.Header>
 					<a
-						href="/listings/map"
+						href="/"
 						class="flex flex-row items-center gap-2 text-primary md:hidden"
 					>
 						<div
@@ -82,16 +82,16 @@
 			</Sheet.Content>
 		</Sheet.Root>
 		<a
-			href="/listings/map"
+			href="/"
 			class="absolute left-1/2 flex -translate-x-1/2 transform flex-row items-center gap-2 text-primary md:hidden"
 		>
 			<div
-				class="h-11 w-11 bg-primary"
+				class="h-11 w-11 bg-primary"s
 				style={`-webkit-mask-image: url(${transparent}); mask-image: url(${transparent}); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center;`}
 			></div>
 			<h1 class="whitespace-nowrap font-semibold text-foreground">Verus Datum</h1>
 		</a>
-		<a href="/listings/map" class="hidden flex-row items-center gap-2 text-primary md:flex">
+		<a href="/" class="hidden flex-row items-center gap-2 text-primary md:flex">
 			<div
 				class="h-11 w-11 bg-primary"
 				style={`-webkit-mask-image: url(${transparent}); mask-image: url(${transparent}); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-position: center; mask-position: center;`}

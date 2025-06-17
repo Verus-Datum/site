@@ -3,3 +3,4 @@ SQLAlchemy
 pydantic
 email-validator
 psycopg2
+Faker
