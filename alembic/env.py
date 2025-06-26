@@ -1,3 +1,5 @@
+import os
+import sys
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
@@ -9,8 +11,12 @@ from alembic import context
 # access to the values within the .ini file in use.
 config = context.config
 
-db_url = "postgresql+psycopg2://admin:password@vd-db.default.svc.cluster.local:5432/vd_db"
-config.set_main_option("sqlalchemy.url", db_url)
+db_url = os.getenv("DATABASE_URL", "postgresql+psycopg2://admin:password@vd-db.default.svc.cluster.local:5432/vd_db")
+if input(f"Run with {db_url} (y/n): ").lower() == "y":
+    config.set_main_option("sqlalchemy.url", db_url)
+else:
+    print("Exiting.")
+    exit(1)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -21,7 +27,9 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(__file__)), "src"))
+from api.main import Base
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
