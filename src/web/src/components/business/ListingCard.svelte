@@ -9,9 +9,10 @@
 
 	type Props = {
 		listing: Business;
+        showView: boolean;
 	};
 
-	let { listing }: Props = $props();
+	let { listing, showView }: Props = $props();
 
 	let images = [
 		'https://www.upmenu.com/wp-content/uploads/2022/08/Small-Cafe-Interior-Design.jpg',
@@ -22,11 +23,11 @@
 	];
 </script>
 
-<div class="shadow-ui flex w-full flex-col gap-6 rounded-xl border p-6 md:flex-row">
+<div class="bg-secondary flex w-full flex-col gap-6 rounded-xl border p-6 md:flex-row">
 	<img
 		src={images[Math.floor(Math.random() * images.length)]}
 		alt="Image"
-		class="h-60 w-full shrink-0 rounded-lg object-cover md:w-96"
+		class="h-60 w-full shrink-0 rounded-md object-cover md:w-96"
 	/>
 	<header class="relative flex w-full flex-col">
 		<h1 class="flex w-full items-center justify-between pb-4 text-3xl font-semibold">
@@ -60,15 +61,15 @@
 
 		<div class="mt-6 flex flex-col gap-2 md:hidden">
 			<Button
-				class="w-full bg-blue-flat font-semibold text-blue-foreground hover:bg-blue-muted/30"
+				class="w-full bg-blue-flat {showView ? 'flex' : 'hidden'} font-semibold text-blue-foreground hover:bg-blue-muted/30"
 			>
 				View
 			</Button>
 			<Button class="w-full ">Request Referral</Button>
 		</div>
 
-		<div class="absolute bottom-0 right-0 mt-4 hidden justify-end gap-2 md:flex">
-			<Button class="bg-transparent text-primary hover:bg-transparent hover:text-primary/80">
+		<div class="absolute bottom-0 right-0 hidden justify-end gap-2 md:flex">
+			<Button class="bg-transparent {showView ? 'flex' : 'hidden'} text-primary hover:bg-transparent hover:text-primary/80">
 				View
 			</Button>
 			<Button class="">Request Referral</Button>

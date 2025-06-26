@@ -169,3 +169,19 @@ class Document(Base):
     uploaded_at = Column(DateTime)
 
     business = relationship("Business", back_populates="documents")
+
+
+class Product(Base):
+    __tablename__ = "products"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
+    description = Column(String)
+    category = Column(String, nullable=False)
+    tags = Column(String)  # comma-separated or JSON string
+    price = Column(Float, nullable=False)
+    locked = Column(Boolean, default=True)
+    popular = Column(Boolean, default=False)
+    preview_available = Column(Boolean, default=True)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, onupdate=func.now())

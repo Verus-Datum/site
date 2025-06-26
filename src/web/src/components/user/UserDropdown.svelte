@@ -18,6 +18,7 @@
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
 	import { mapState } from '$states/MapState.svelte';
+	import { Button } from '$components/ui/button';
 
 	let avatarUrl = null;
 	let isOpen = $state(false);
@@ -25,7 +26,7 @@
 
 <DropdownMenu.Root bind:open={isOpen}>
 	{#if currentUser.user !== null && currentUser.firebase !== null}
-		<DropdownMenu.Trigger class="flex flex-row items-center gap-2 rounded-lg duration-150">
+		<DropdownMenu.Trigger class="flex flex-row items-center gap-2 rounded-md duration-150">
 			<Avatar.Root class="h-9 w-9">
 				<Avatar.Image src="https://github.com/shadcn.png" alt="@shadcn" />
 				<Avatar.Fallback>CN</Avatar.Fallback>
@@ -33,7 +34,18 @@
 			<ChevronDown size={22} color="#717171" class="" />
 		</DropdownMenu.Trigger>
 	{:else}
-		<a href="/login" class="flex flex-row items-center gap-2 rounded-lg duration-150">
+		<!-- Desktop -->
+		<div class="flex-row hidden md:flex gap-2 items-center">
+			<Button size="sm" variant="ghost" href="/login" class='text-sm text-primary hover:text-primary'>
+				Sign In
+			</Button>
+			<Button size="sm" href="/register" class='px-4'>
+				Get Started
+			</Button>
+		</div>
+
+		<!-- Mobile -->
+		<a href="/login" class="md:hidden flex flex-row items-center gap-2 rounded-md duration-150">
 			<img
 				src={'https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg'}
 				class="h-9 w-9 rounded-full object-cover"

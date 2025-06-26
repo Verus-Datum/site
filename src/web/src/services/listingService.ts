@@ -3,14 +3,20 @@ import { API_URL } from '$utils/api';
 import { toast } from 'svelte-sonner';
 
 export const listingService = {
-	async getAll(cstmFetch?: (url: string) => any): Promise<Listing[]> {
+	async getAll(
+		offset = 0,
+		limit = 1000000,
+		cstmFetch?: (url: string) => any
+	): Promise<Listing[]> {
 		try {
 			let res;
 
+			const url = `${API_URL}/listings?offset=${offset}&limit=${limit}`;
+			console.log(url);
 			if (cstmFetch) {
-				res = await cstmFetch(`${API_URL}/listings`);
+				res = await cstmFetch(url);
 			} else {
-				res = await fetch(`${API_URL}/listings`);
+				res = await fetch(url);
 			}
 
 			if (!res.ok) throw new Error('Failed to fetch');
@@ -21,16 +27,10 @@ export const listingService = {
 		}
 	},
 
-	getAllNonAsync(): Promise<Listing[]> {
-		return fetch(`${API_URL}/listings`)
-			.then((res) => {
-				if (!res.ok) throw new Error('Failed to fetch');
-				return res.json() as Promise<Listing[]>;
-			})
-			.catch((error) => {
-				toast.error('Cannot load listings');
-				throw error;
-			});
+	async getPage(page: number, size = 50): Promise<Listing[]> {
+		const offset = page * size;
+		console.log(offset);
+		return await listingService.getAll(offset, size);
 	},
 
 	async getByListingId(id: string): Promise<Listing> {
@@ -38,7 +38,7 @@ export const listingService = {
 			const res = await fetch(`${API_URL}/listings/id/${id}`);
 			if (!res.ok) throw new Error('Failed to fetch');
 
-			return (await res.json()) as Promise<Listing>;
+			return await res.json();
 		} catch (error) {
 			toast.error('Cannot load listing');
 			throw error;
@@ -47,7 +47,7 @@ export const listingService = {
 
 	async getGeojson(): Promise<GeoJSON.FeatureCollection> {
 		try {
-			const listings = await listingService.getAll();
+			const listings = await listingService.getAll(0, 100000);
 
 			return {
 				type: 'FeatureCollection',
@@ -68,6 +68,24 @@ export const listingService = {
 			};
 		} catch (error) {
 			toast.error('Failed to generate GeoJSON');
+			throw error;
+		}
+	},
+
+	async getByBounds(
+		ne_lat: number,
+		ne_lng: number,
+		sw_lat: number,
+		sw_lng: number,
+		buffer_deg = 0.02
+	): Promise<Listing[]> {
+		try {
+			const url = `${API_URL}/listings/geo?ne_lat=${ne_lat}&ne_lng=${ne_lng}&sw_lat=${sw_lat}&sw_lng=${sw_lng}&buffer_deg=${buffer_deg}`;
+			const res = await fetch(url);
+			if (!res.ok) throw new Error('Failed to fetch geo listings');
+			return await res.json();
+		} catch (error) {
+			toast.error('Cannot load map listings');
 			throw error;
 		}
 	}

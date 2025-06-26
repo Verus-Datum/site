@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, status, Request
+from fastapi import APIRouter, Depends, HTTPException, status, Request, Query
 from sqlalchemy.orm import Session, selectinload
+from sqlalchemy import and_
 from api.db import get_db
 from api.models import Address, Listing, User, Business
 from api.schemas.listing import ListingCreate, ListingResponse
@@ -109,11 +110,66 @@ def get_listing_by_id(listing_id: int, db: Session = Depends(get_db)):
     }
 
 
+@router.get("/geo", response_model=list[ListingResponse])
+def get_listings_by_bounds(
+    ne_lat: float = Query(...),
+    ne_lng: float = Query(...),
+    sw_lat: float = Query(...),
+    sw_lng: float = Query(...),
+    buffer_deg: float = Query(0.02),
+    db: Session = Depends(get_db),
+):
+    min_lat = sw_lat - buffer_deg
+    max_lat = ne_lat + buffer_deg
+    min_lng = sw_lng - buffer_deg
+    max_lng = ne_lng + buffer_deg
+
+    listings = (
+        db.query(Listing)
+        .join(Business, Business.id == Listing.business_id)
+        .join(Address, Address.id == Business.address_id)
+        .filter(
+            Address.latitude.between(min_lat, max_lat),
+            Address.longitude.between(min_lng, max_lng),
+        )
+        .options(selectinload(Listing.business).selectinload(Business.address))
+        .all()
+    )
+
+    return [
+        {
+            "id": l.id,
+            "contact_method": l.contact_method,
+            "is_public": l.is_public,
+            "asking_price": l.asking_price,
+            "status": l.status,
+            "views": l.views,
+            "name": l.business.name,
+            "market": l.business.market,
+            "revenue_per_yr": l.business.revenue_per_year,
+            "gross_per_yr": l.business.gross_per_year,
+            "profit_per_yr": l.business.profit_per_year,
+            "address": l.business.address.address_line,
+            "longitude": l.business.address.longitude,
+            "latitude": l.business.address.latitude,
+            "user_id": l.user_id,
+        }
+        for l in listings
+    ]
+
+
 @router.get("", response_model=list[ListingResponse])
-def get_listings(db: Session = Depends(get_db)):
+def get_listings(
+    offset: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1),
+    db: Session = Depends(get_db),
+):
     listings = (
         db.query(Listing)
         .options(selectinload(Listing.business).selectinload(Business.address))
+        .order_by(Listing.id.desc())
+        .offset(offset)
+        .limit(limit)
         .all()
     )
 

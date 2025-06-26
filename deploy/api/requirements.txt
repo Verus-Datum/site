@@ -122,3 +122,4 @@ watchfiles==1.0.5
     # via uvicorn
 websockets==15.0.1
     # via uvicorn
+Faker==37.4.0

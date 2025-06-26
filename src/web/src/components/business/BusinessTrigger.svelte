@@ -57,7 +57,7 @@
 		</Popover.Trigger>
 
 		{#if isOpen}
-			<Popover.Content class="shadow-ui relative w-[28.5rem] rounded-xl bg-card p-5">
+			<Popover.Content class="shadow-ui relative w-[28.5rem] rounded-md bg-card p-4">
 				<header>
 					<h1 class="py-2 text-xl font-semibold">{business.name}</h1>
 					<h2 class="flex items-center gap-2 py-1 font-medium text-primary">
@@ -84,11 +84,11 @@
 							isOpen = false;
 							isOpenDrawer = false;
 						}}
-						class="hidden w-full bg-blue-flat font-semibold text-blue-foreground hover:bg-blue-muted/30 md:flex"
+						class="hidden h-10 w-full bg-blue-flat font-semibold text-blue-foreground hover:bg-blue-muted/30 md:flex"
 					>
 						View Listing
 					</Button>
-					<Button class="w-full">Request Contact</Button>
+					<Button class="w-full h-10">Request Contact</Button>
 				</footer>
 			</Popover.Content>
 		{/if}
@@ -157,7 +157,7 @@
 								<img
 									src={imgUrl}
 									alt="Business"
-									class="h-48 w-full rounded-lg object-cover"
+									class="h-48 w-full rounded-md object-cover"
 								/>
 							</Carousel.Item>
 						{/each}
@@ -170,11 +170,11 @@
 							isOpenDrawer = false;
 						}}
 						href={`/listings/${business.id}`}
-						class="w-full bg-blue-flat font-semibold text-blue-foreground hover:bg-blue-flat/70"
+						class="w-full h-10 bg-blue-flat font-semibold text-blue-foreground hover:bg-blue-flat/70"
 					>
 						View Listing
 					</Button>
-					<Button class="w-full">Request Contact</Button>
+					<Button class="w-full h-10">Request Contact</Button>
 				</footer>
 			</div>
 		</Drawer.Content>

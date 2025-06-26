@@ -20,7 +20,6 @@
 </FloatingPanel>
 
 <Navbar />
-<Header />
 
 <main class="">
 	{@render children?.()}

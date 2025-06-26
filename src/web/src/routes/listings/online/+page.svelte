@@ -86,7 +86,7 @@
 	<div class="flex w-full flex-col gap-4">
 		<div class="hide-scrollbar flex w-full flex-row gap-4 overflow-x-auto">
 			<Select.Root bind:value={sortBy} type="single" on:change={applyFilters}>
-				<Select.Trigger class="w-auto  min-w-32 flex-shrink-0 gap-4 rounded-lg px-4 py-2">
+				<Select.Trigger class="w-auto  min-w-32 flex-shrink-0 gap-4 rounded-md px-4 py-2">
 					{sortBy !== '' ? sortBy : 'Sort By'}
 				</Select.Trigger>
 				<Select.Content>
@@ -100,7 +100,7 @@
 			</Select.Root>
 
 			<Select.Root bind:value={contactMethod} type="single" on:change={applyFilters}>
-				<Select.Trigger class="w-auto  min-w-32 flex-shrink-0 gap-4 rounded-lg px-4 py-2">
+				<Select.Trigger class="w-auto  min-w-32 flex-shrink-0 gap-4 rounded-md px-4 py-2">
 					{contactMethod !== '' ? contactMethod : 'Contact Method'}
 				</Select.Trigger>
 				<Select.Content>
@@ -115,7 +115,7 @@
 					{#snippet child({ props })}
 						<Button
 							variant="outline"
-							class="min-w-[200px] flex-shrink-0 justify-between rounded-lg border-border px-4 py-2 font-semibold text-muted-foreground duration-200  hover:bg-secondary hover:text-muted-foreground {selectedMarkets.length >
+							class="min-w-[200px] flex-shrink-0 justify-between rounded-md border-border px-4 py-2 font-semibold text-muted-foreground duration-200  hover:bg-secondary hover:text-muted-foreground {selectedMarkets.length >
 							0
 								? 'font-semibold text-black'
 								: ''}"

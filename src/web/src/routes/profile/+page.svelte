@@ -12,7 +12,7 @@
 
 {#snippet FlatCard(title: string, subtext: string, color: string)}
 	<button
-		class="group relative flex h-64 w-full flex-col items-start justify-end rounded-lg p-6 text-left duration-200"
+		class="group relative flex h-64 w-full flex-col items-start justify-end rounded-md p-6 text-left duration-200"
 		style="
             --flat: var(--{color}-flat);
             --foreground: var(--{color}-foreground);

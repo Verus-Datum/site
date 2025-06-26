@@ -59,7 +59,7 @@
 					<img
 						src={img}
 						alt="Company"
-						class="h-48 w-full shrink-0 rounded-lg object-cover md:h-72"
+						class="h-48 w-full shrink-0 rounded-md object-cover md:h-72"
 					/>
 				</Carousel.Item>
 			{/each}

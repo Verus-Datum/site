@@ -26,11 +26,11 @@
 	];
 </script>
 
-<div class="h-70 relative flex w-full flex-col gap-6 rounded-xl border p-5 md:flex-row">
+<div class="h-70 relative flex w-full bg-secondary flex-col gap-6 rounded-xl border p-5 md:flex-row">
 	<img
 		src={images[Math.floor(Math.random() * images.length)]}
 		alt="Image"
-		class="w-full shrink-0 rounded-lg object-cover md:w-80"
+		class="w-full shrink-0 rounded-md object-cover md:w-80"
 	/>
 	<header class="relative flex w-full flex-col justify-between">
 		<div class="flex w-full flex-row items-start justify-between">
@@ -80,7 +80,7 @@
 				</p>
 			</div>
 
-			<div class="bottom-0 right-0 ml-auto hidden lg:flex">
+			<div class="bottom-0 right-0 ml-auto mt-auto hidden lg:flex">
 				<Button href={`/listings/${listing.id}`} class="">View Listing</Button>
 			</div>
 		</div>

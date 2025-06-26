@@ -155,3 +155,52 @@ def test_get_listing_by_id_not_found(client):
     res = client.get("/listings/id/999999")
     assert res.status_code == 404
     assert res.json()["detail"] == "Listing not found"
+
+
+def test_get_all_products_empty(client):
+    res = client.get("/products")
+    assert res.status_code == 200
+    assert res.json() == []
+
+
+def test_get_all_products_with_data(client, db_session):
+    from api.models import Product
+
+    product = Product(
+        name="Term Sheet Template",
+        description="Standard term sheet format for deal structure and key terms",
+        category="Legal",
+        tags="Terms,Structure",
+        price=39.0,
+        locked=False,
+        popular=True,
+        preview_available=True,
+    )
+    db_session.add(product)
+    db_session.commit()
+
+    res = client.get("/products")
+    assert res.status_code == 200
+    data = res.json()
+    assert isinstance(data, list)
+    assert len(data) >= 1
+    assert any(p["name"] == "Term Sheet Template" for p in data)
+
+
+def test_create_product_success(client):
+    payload = {
+        "name": "Valuation Model Spreadsheet",
+        "description": "Excel-based DCF model with sensitivity analysis and assumptions",
+        "category": "Valuation",
+        "tags": "Financial,Excel",
+        "price": 150,
+        "locked": True,
+        "popular": False,
+        "preview_available": True,
+    }
+    res = client.post("/products", json=payload)
+    assert res.status_code == 201
+    data = res.json()
+    assert data["name"] == "Valuation Model Spreadsheet"
+    assert data["price"] == 150
+    assert data["locked"] is True

@@ -81,8 +81,8 @@
 			alt="Verus Datum"
 			class="h-14 w-14 rounded-full bg-primary p-1"
 		/>
-		<h1 class="mt-2 text-2xl font-semibold">Create an account</h1>
-		<h2 class="text-muted-foreground">Start using Verus Datum today</h2>
+		<h1 class="mt-2 text-2xl font-semibold text-center">Create an account</h1>
+		<h2 class="text-muted-foreground text-center">Start using Verus Datum today</h2>
 	</header>
 	<form
 		onsubmit={handleSubmit}
@@ -155,7 +155,7 @@
 			>
 			and <a href="/privacy-policy" class="underline underline-offset-1">Privacy Policy</a>.
 		</p>
-		<Form.Button disabled={registering} class="rounded-full"
+		<Form.Button disabled={registering} class=""
 			>Continue
 			{#if registering}
 				<LoaderCircle class="animate-spin" />
