@@ -27,6 +27,8 @@ dnspython==2.7.0
     #   email-validator
 email-validator==2.2.0
     # via -r .devcontainer/mono-requirements.in
+faker==37.4.0
+    # via -r .devcontainer/mono-requirements.in
 fastapi==0.115.12
     # via -r .devcontainer/mono-requirements.in
 fastapi-cli==0.0.7
@@ -159,6 +161,8 @@ typing-inspection==0.4.0
     #   -r .devcontainer/mono-requirements.in
     #   pydantic
     #   pydantic-settings
+tzdata==2025.2
+    # via faker
 ujson==5.10.0
     # via -r .devcontainer/mono-requirements.in
 uvicorn==0.34.2
@@ -177,4 +181,3 @@ websockets==15.0.1
     # via
     #   -r .devcontainer/mono-requirements.in
     #   uvicorn
-Faker
