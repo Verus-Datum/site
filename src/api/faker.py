@@ -13,6 +13,7 @@ CITIES = {
     "Memphis": {"state": "TN", "lat": (35.05, 35.20), "lng": (-90.10, -89.90)},
 }
 
+
 def random_city_address():
     city_name, data = random.choice(list(CITIES.items()))
     lat = round(random.uniform(*data["lat"]), 6)
@@ -24,8 +25,10 @@ def random_city_address():
         "longitude": lng,
     }
 
+
 fake = Faker()
 db: Session = SessionLocal()
+
 
 def create_fake_user(role=None):
     return User(
@@ -38,6 +41,7 @@ def create_fake_user(role=None):
         created_at=datetime.utcnow(),
     )
 
+
 def create_fake_broker(user_id):
     return Broker(
         user_id=user_id,
@@ -47,6 +51,7 @@ def create_fake_broker(user_id):
         company_name=fake.company(),
         company_address=fake.address(),
     )
+
 
 def create_fake_business(address_id):
     return Business(
@@ -66,6 +71,7 @@ def create_fake_business(address_id):
         website=fake.url(),
     )
 
+
 def create_fake_address():
     loc = random_city_address()
     return Address(
@@ -77,6 +83,7 @@ def create_fake_address():
         longitude=loc["longitude"],
         latitude=loc["latitude"],
     )
+
 
 def create_fake_listing(user_id, business_id):
     return Listing(
@@ -90,11 +97,11 @@ def create_fake_listing(user_id, business_id):
         listed_at=datetime.utcnow(),
     )
 
+
 def populate():
     # Generate 80–90 brokers
     NUM_BROKERS = 85
     broker_users = []
-    broker_map = {}
 
     for _ in range(NUM_BROKERS):
         user = create_fake_user(role="broker")

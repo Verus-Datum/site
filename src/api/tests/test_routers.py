@@ -156,6 +156,7 @@ def test_get_listing_by_id_not_found(client):
     assert res.status_code == 404
     assert res.json()["detail"] == "Listing not found"
 
+
 def test_get_all_products_empty(client):
     res = client.get("/products")
     assert res.status_code == 200
@@ -184,6 +185,7 @@ def test_get_all_products_with_data(client, db_session):
     assert isinstance(data, list)
     assert len(data) >= 1
     assert any(p["name"] == "Term Sheet Template" for p in data)
+
 
 def test_create_product_success(client):
     payload = {

@@ -22,5 +22,6 @@ class ProductResponse(ProductBase):
     class Config:
         orm_mode = True
 
+
 class ProductCreate(ProductBase):
     pass

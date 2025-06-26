@@ -13,6 +13,7 @@ router = APIRouter(
 def get_all_products(db: Session = Depends(get_db)):
     return db.query(Product).order_by(Product.id.asc()).all()
 
+
 @router.post("", response_model=ProductResponse, status_code=status.HTTP_201_CREATED)
 def create_product(product_in: ProductCreate, db: Session = Depends(get_db)):
     product = Product(**product_in.dict())

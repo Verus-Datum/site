@@ -9,6 +9,7 @@ import api.schemas
 Base.metadata.create_all(bind=engine)
 # from api.faker import populate
 
+
 def create_app():
     app = FastAPI(
         root_path=ROOT_PATH,

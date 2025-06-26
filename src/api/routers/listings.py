@@ -162,8 +162,8 @@ def get_listings_by_bounds(
 def get_listings(
     offset: int = Query(0, ge=0),
     limit: int = Query(50, ge=1),
-    db: Session = Depends(get_db)
-):    
+    db: Session = Depends(get_db),
+):
     listings = (
         db.query(Listing)
         .options(selectinload(Listing.business).selectinload(Business.address))
