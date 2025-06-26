@@ -18,4 +18,4 @@ ENV PYTHONPATH=/app/src
 
 RUN pip install -e src/api
 
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "8"]
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8081", "--workers", "8"]
