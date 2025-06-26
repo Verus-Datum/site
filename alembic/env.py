@@ -12,11 +12,9 @@ from alembic import context
 config = context.config
 
 db_url = os.getenv("DATABASE_URL", "postgresql+psycopg2://admin:password@vd-db.default.svc.cluster.local:5432/vd_db")
-if input(f"Run with {db_url} (y/n): ").lower() == "y":
-    config.set_main_option("sqlalchemy.url", db_url)
-else:
-    print("Exiting.")
-    exit(1)
+print(f"\nRunning alembic with:\n\t{db_url=}")
+
+config.set_main_option("sqlalchemy.url", db_url)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
