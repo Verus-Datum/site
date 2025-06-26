@@ -90,32 +90,33 @@ def create_fake_listing(user_id, business_id):
         listed_at=datetime.utcnow(),
     )
 
-# Generate 80–90 brokers
-NUM_BROKERS = 85
-broker_users = []
-broker_map = {}
+def populate():
+    # Generate 80–90 brokers
+    NUM_BROKERS = 85
+    broker_users = []
+    broker_map = {}
 
-for _ in range(NUM_BROKERS):
-    user = create_fake_user(role="broker")
-    db.add(user)
+    for _ in range(NUM_BROKERS):
+        user = create_fake_user(role="broker")
+        db.add(user)
+        db.flush()
+        broker = create_fake_broker(user.id)
+        db.add(broker)
+        broker_users.append(user)
+
     db.flush()
-    broker = create_fake_broker(user.id)
-    db.add(broker)
-    broker_users.append(user)
 
-db.flush()
+    # Generate 150 businesses and assign to brokers in round-robin
+    for i in range(150):
+        broker_user = broker_users[i % NUM_BROKERS]
+        address = create_fake_address()
+        db.add(address)
+        db.flush()
+        business = create_fake_business(address.id)
+        db.add(business)
+        db.flush()
+        listing = create_fake_listing(broker_user.id, business.id)
+        db.add(listing)
 
-# Generate 150 businesses and assign to brokers in round-robin
-for i in range(150):
-    broker_user = broker_users[i % NUM_BROKERS]
-    address = create_fake_address()
-    db.add(address)
-    db.flush()
-    business = create_fake_business(address.id)
-    db.add(business)
-    db.flush()
-    listing = create_fake_listing(broker_user.id, business.id)
-    db.add(listing)
-
-db.commit()
-db.close()
+    db.commit()
+    db.close()

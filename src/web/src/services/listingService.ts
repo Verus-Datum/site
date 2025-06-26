@@ -3,12 +3,16 @@ import { API_URL } from '$utils/api';
 import { toast } from 'svelte-sonner';
 
 export const listingService = {
-	async getAll(offset = 0, limit = 1000000, cstmFetch?: (url: string) => any): Promise<Listing[]> {
+	async getAll(
+		offset = 0,
+		limit = 1000000,
+		cstmFetch?: (url: string) => any
+	): Promise<Listing[]> {
 		try {
 			let res;
-			
+
 			const url = `${API_URL}/listings?offset=${offset}&limit=${limit}`;
-			console.log(url)
+			console.log(url);
 			if (cstmFetch) {
 				res = await cstmFetch(url);
 			} else {
@@ -64,6 +68,24 @@ export const listingService = {
 			};
 		} catch (error) {
 			toast.error('Failed to generate GeoJSON');
+			throw error;
+		}
+	},
+
+	async getByBounds(
+		ne_lat: number,
+		ne_lng: number,
+		sw_lat: number,
+		sw_lng: number,
+		buffer_deg = 0.02
+	): Promise<Listing[]> {
+		try {
+			const url = `${API_URL}/listings/geo?ne_lat=${ne_lat}&ne_lng=${ne_lng}&sw_lat=${sw_lat}&sw_lng=${sw_lng}&buffer_deg=${buffer_deg}`;
+			const res = await fetch(url);
+			if (!res.ok) throw new Error('Failed to fetch geo listings');
+			return await res.json();
+		} catch (error) {
+			toast.error('Cannot load map listings');
 			throw error;
 		}
 	}

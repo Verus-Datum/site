@@ -1,7 +1,7 @@
 <script lang="ts">
 	import maplibregl from 'maplibre-gl';
 	import 'maplibre-gl/dist/maplibre-gl.css';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { mapState } from '$states/MapState.svelte';
 	import { listingService } from '$services/listingService';
 	import type { Listing } from '$models/Listing';
@@ -17,7 +17,7 @@
 	let showSidebar = $state(true);
 	let mapContainer = $state<HTMLElement | undefined>();
 	let mapLoaded = $state(false);
-
+    
 	let selectedBusiness = $state<Listing | null>(null);
 	let triggerX = $state(0);
 	let triggerY = $state(0);
@@ -28,47 +28,53 @@
 	let innerColor = $derived(mode.current === 'dark' ? '#193562' : '#ffffff');
 	let strokeColor = $state('#3b82f6');
 
-	function addBusinessLayer(listings: Listing[]) {
-		mapState.map.addSource('businesses', {
-			type: 'geojson',
-			data: {
-				type: 'FeatureCollection',
-				features: listings.map((biz) => ({
-					type: 'Feature',
-					id: biz.id,
-					geometry: {
-						type: 'Point',
-						coordinates: [biz.longitude, biz.latitude]
-					},
-					properties: { ...biz }
-				}))
-			}
-		});
+    function addBusinessLayer(listings: Listing[]) {
+        const map = mapState.map;
 
-		mapState.map.addLayer({
-			id: 'businesses-outer',
-			type: 'circle',
-			source: 'businesses',
-			paint: {
-				'circle-radius': 14,
-				'circle-color': outerColor,
-				'circle-stroke-width': 0,
-				'circle-stroke-color': strokeColor
-			}
-		});
+        if (map.getLayer('businesses-inner')) map.removeLayer('businesses-inner');
+        if (map.getLayer('businesses-outer')) map.removeLayer('businesses-outer');
+        if (map.getSource('businesses')) map.removeSource('businesses');
 
-		mapState.map.addLayer({
-			id: 'businesses-inner',
-			type: 'circle',
-			source: 'businesses',
-			paint: {
-				'circle-radius': 7,
-				'circle-color': innerColor,
-				'circle-stroke-width': 3,
-				'circle-stroke-color': strokeColor
-			}
-		});
-	}
+        map.addSource('businesses', {
+            type: 'geojson',
+            data: {
+                type: 'FeatureCollection',
+                features: listings.map((biz) => ({
+                    type: 'Feature',
+                    id: biz.id,
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [biz.longitude, biz.latitude]
+                    },
+                    properties: { ...biz }
+                }))
+            }
+        });
+
+        map.addLayer({
+            id: 'businesses-outer',
+            type: 'circle',
+            source: 'businesses',
+            paint: {
+                'circle-radius': 14,
+                'circle-color': outerColor,
+                'circle-stroke-width': 0,
+                'circle-stroke-color': strokeColor
+            }
+        });
+
+        map.addLayer({
+            id: 'businesses-inner',
+            type: 'circle',
+            source: 'businesses',
+            paint: {
+                'circle-radius': 7,
+                'circle-color': innerColor,
+                'circle-stroke-width': 3,
+                'circle-stroke-color': strokeColor
+            }
+        });
+    }
 
 	onMount(async () => {
 		if (!mapContainer) return;
@@ -86,7 +92,18 @@
 			}
 		}
 
-		listings = await listingService.getAll();
+        const bounds = mapState.map.getBounds();
+        const ne = bounds.getNorthEast();
+        const sw = bounds.getSouthWest();
+        listings = await listingService.getByBounds(ne.lat, ne.lng, sw.lat, sw.lng);
+
+        mapState.map.on('moveend', async () => {
+            const bounds = mapState.map.getBounds();
+            const ne = bounds.getNorthEast();
+            const sw = bounds.getSouthWest();
+            listings = await listingService.getByBounds(ne.lat, ne.lng, sw.lat, sw.lng);
+            addBusinessLayer(listings); // optionally re-render
+        });
 
 		mapState.map.on('load', () => {
 			mapLoaded = true;
@@ -185,13 +202,16 @@
 
 <aside
 	in:fly={{ duration: 550 }}
-	class="absolute bottom-0 right-0 z-50 hidden h-[calc(100vh-4rem-5rem)] flex-col gap-4 overflow-y-auto border-l bg-background p-6 transition-transform duration-300 md:h-[calc(100vh-4.5rem-5.5rem)] xl:flex xl:w-[40vw] 2xl:w-[35vw] 3xl:w-[32.5vw]"
+	class="absolute bottom-0 right-0 z-50 hidden h-[calc(100vh-4rem)] flex-col gap-4 overflow-y-auto border-l bg-background p-6 transition-transform duration-300 md:h-[calc(100vh-4rem)] xl:flex xl:w-[40vw] 2xl:w-[35vw] 3xl:w-[32.5vw]"
 	class:translate-x-full={!showSidebar}
 >
 	{#if listings.length > 0}
 		<header class="flex w-full items-center justify-between">
-			<div>
-				<h1 class="text-2xl font-semibold">Businesses For Sale</h1>
+			<div class="w-full">
+				<div class="flex flex-row w-full justify-between items-center">
+                    <h1 class="text-2xl font-semibold">Businesses For Sale</h1>
+                    <a href="/listings" class="text-sm text-primary font-medium hover:text-primary/80">View all listings</a>
+                </div>
 				<h2 class="py-2 text-sm font-medium text-muted-foreground">
 					{listings.length} results
 				</h2>
@@ -209,9 +229,9 @@
 <Button
 	variant="outline"
 	size="icon"
-	class={`absolute top-[11rem] z-50 hidden transition-all duration-300 xl:flex ${
+	class={`absolute top-[4.5rem] z-50 hidden transition-all duration-300 xl:flex ${
 		showSidebar
-			? 'right-[calc(40vw+1.25rem)] 2xl:right-[calc(35vw+1.25rem)] 3xl:right-[calc(32.5vw+1.25rem)]'
+			? 'right-[calc(40vw+0.5rem)] 2xl:right-[calc(35vw+0.5rem)] 3xl:right-[calc(32.5vw+0.5rem)]'
 			: 'right-4'
 	}`}
 	onclick={() => (showSidebar = !showSidebar)}

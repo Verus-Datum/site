@@ -117,7 +117,7 @@
 				</div>
 			</Form.Control>
 		</Form.Field>
-		<Form.Button disabled={loggingIn} class="rounded-full"
+		<Form.Button disabled={loggingIn} class=""
 			>Continue
 			{#if loggingIn}
 				<LoaderCircle class="animate-spin" />

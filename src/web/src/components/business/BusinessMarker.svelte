@@ -179,7 +179,7 @@
 		<Carousel.Content class="flex w-full">
 			{#each exmplImgs as imgUrl}
 				<Carousel.Item class="w-full shrink-0 grow-0 basis-[85%]">
-					<img src={imgUrl} alt="Cafe" class="h-48 w-full rounded-lg object-cover" />
+					<img src={imgUrl} alt="Cafe" class="h-48 w-full rounded-md object-cover" />
 				</Carousel.Item>
 			{/each}
 		</Carousel.Content>
@@ -226,7 +226,7 @@
 				{@render Marker()}
 			</Popover.Trigger>
 			{#if hovered}
-				<Popover.Content class="shadow-ui relative w-[28.5rem] rounded-xl bg-card p-5">
+				<Popover.Content class="shadow-ui relative w-[28.5rem] rounded-md bg-card p-3">
 					{@render MarkerContent()}
 				</Popover.Content>
 			{/if}

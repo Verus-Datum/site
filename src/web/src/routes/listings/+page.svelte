@@ -63,14 +63,9 @@
 			<button class="text-sm text-primary"> Clear </button>
 		</h1>
 
-		<div class="flex flex-col gap-3 border-b py-5">
-			<h2 class="font-medium text-muted-foreground">Keyword</h2>
-			<Input placeholder="Enter keyword" />
-		</div>
-
 		<div class="flex flex-row items-center gap-2 border-b py-5">
 			<Checkbox class="border-border" id="public" />
-			<label for="public" class="text-sm font-medium text-muted-foreground">Public</label>
+			<label for="public" class="text-sm font-medium text-muted-foreground">Is Public</label>
 		</div>
 
 		<Accordion.Root type="multiple">
@@ -127,7 +122,7 @@
 						<Popover.Trigger class="w-full items-center justify-between px-4">
 							<Button
 								variant="outline"
-								class="min-w-[200px] flex-shrink-0 justify-between rounded-lg border-border px-4 py-2 font-semibold text-muted-foreground hover:bg-secondary hover:text-muted-foreground"
+								class="min-w-[200px] flex-shrink-0 justify-between rounded-md border-border px-4 py-2 font-semibold text-muted-foreground hover:bg-secondary hover:text-muted-foreground"
 							>
 								Select markets
 								<ChevronUpDownIcon class="rotate-180 opacity-50" />
@@ -245,21 +240,30 @@
 
 <main
 	in:fly={{ y: 20, duration: 650 }}
-	class="mx-auto flex w-full flex-col items-start justify-start gap-6 px-8 pb-8 pt-8 lg:pt-20 2xl:w-[68%] 3xl:w-[60%]"
+	class="mx-auto flex w-full flex-col items-start justify-start gap-6 px-8 pb-8 pt-8 lg:pt-20 2xl:w-[68%] 3xl:w-[50%]"
 >
-	<header class="flex w-full flex-row gap-4 pt-20">
-		<h1 class="w-full text-left text-3xl font-semibold">View all businesses</h1>
-		{#if !isDesktop.current}
-			<Sheet.Root>
-				<Sheet.Trigger>
-					<Button variant="outline">Filters</Button>
-				</Sheet.Trigger>
-				<Sheet.Content side="left">
-					{@render Filters()}
-				</Sheet.Content>
-			</Sheet.Root>
-		{/if}
-	</header>
+    <header class="flex flex-col lg:items-center items-start gap-6 w-full my-6 lg:my-10 mt-20">
+        <h1 class="text-4xl font-semibold text-left lg:text-center">
+            Browse businesses for sale across every industry
+        </h1>
+        <h2 class="text-muted-foreground text-left lg:text-center">
+            Explore listings from real owners and brokers. Filter by location, price, and business industry.
+        </h2>
+
+        <div class="flex flex-row gap-2 w-full md:w-[55%]">
+            <Input placeholder="Search listings..." class="w-full h-11 text-sm" />
+            {#if !isDesktop.current}
+                <Sheet.Root>
+                    <Sheet.Trigger>
+                        <Button variant="outline" class="h-11 bg-secondary">Filters</Button>
+                    </Sheet.Trigger>
+                    <Sheet.Content side="left">
+                        {@render Filters()}
+                    </Sheet.Content>
+                </Sheet.Root>
+            {/if}
+        </div>
+    </header>
 
 	<section class="flex w-full flex-row gap-6">
 		{#if isDesktop.current}

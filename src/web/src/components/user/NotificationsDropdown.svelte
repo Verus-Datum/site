@@ -15,7 +15,7 @@
 			>2 Notifications</DropdownMenu.Label
 		>
 		<div class="-mx-1 my-1 h-px bg-muted"></div>
-		<button class="flex flex-row gap-2 rounded-lg p-2 text-left hover:bg-secondary">
+		<button class="flex flex-row gap-2 rounded-md p-2 text-left hover:bg-secondary">
 			<Avatar.Root class="h-10 w-10 rounded-full border">
 				<Avatar.Fallback>DM</Avatar.Fallback>
 			</Avatar.Root>
@@ -27,7 +27,7 @@
 				</p>
 			</header>
 		</button>
-		<button class="flex flex-row gap-2 rounded-lg p-2 text-left hover:bg-secondary">
+		<button class="flex flex-row gap-2 rounded-md p-2 text-left hover:bg-secondary">
 			<Avatar.Root class="h-10 w-10 rounded-full border">
 				<Avatar.Fallback>JD</Avatar.Fallback>
 			</Avatar.Root>
