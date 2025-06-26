@@ -29,7 +29,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(__file__)), "src"))
-from api.main import Base
+from api.main import Base  # noqa: E402
 
 target_metadata = Base.metadata
 
