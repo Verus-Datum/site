@@ -18,6 +18,16 @@ spec:
     spec:
       imagePullSecrets:
         - name: {{ $.Values.imagePullSecret }}
+      initContainers:
+        - name: migrate-db
+          image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"
+          command:
+            - alembic
+            - upgrade
+            - head
+          env:
+            - name: DATABASE_URL
+              value: "{{ .Values.api.env.DATABASE_URL }}"
       containers:
         - name: api
           image: "{{ .Values.api.image.repository }}:{{ .Values.api.image.tag }}"

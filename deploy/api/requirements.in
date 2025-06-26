@@ -4,3 +4,4 @@ pydantic
 email-validator
 psycopg2
 Faker
+alembic
