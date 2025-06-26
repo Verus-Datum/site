@@ -11,7 +11,10 @@ from alembic import context
 # access to the values within the .ini file in use.
 config = context.config
 
-db_url = os.getenv("DATABASE_URL", "postgresql+psycopg2://admin:password@vd-db.default.svc.cluster.local:5432/vd_db")
+db_url = os.getenv(
+    "DATABASE_URL",
+    "postgresql+psycopg2://admin:password@vd-db.default.svc.cluster.local:5432/vd_db",
+)
 print(f"\nRunning alembic with:\n\t{db_url=}")
 
 config.set_main_option("sqlalchemy.url", db_url)
@@ -27,6 +30,7 @@ if config.config_file_name is not None:
 # target_metadata = mymodel.Base.metadata
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(__file__)), "src"))
 from api.main import Base
+
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
@@ -73,9 +77,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
