@@ -12,7 +12,6 @@ from sqlalchemy.orm import relationship
 
 from api.db import Base
 
-
 class Subscription(Base):
     __tablename__ = "subscriptions"
     id = Column(Integer, primary_key=True)

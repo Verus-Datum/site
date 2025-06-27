@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import { type Business } from '$types/Business';
 	import OnlineListing from '$components/business/OnlineListing.svelte';
 	import { onMount } from 'svelte';
 	import * as Command from '$components/ui/command';
@@ -8,16 +7,13 @@
 	import CheckIcon from '@lucide/svelte/icons/check';
 	import ChevronUpDownIcon from '@lucide/svelte/icons/chevron-up';
 	import { markets } from '$utils/markets';
-	import { cn } from '$utils/shadcn';
 	import { Input } from '$components/ui/input';
 	import * as Accordion from '$components/ui/accordion';
 	import { Checkbox } from '$components/ui/checkbox';
 	import { Slider } from '$components/ui/slider';
 	import { MediaQuery } from 'svelte/reactivity';
-	import { formatCurrency } from '$utils/currency';
 	import * as Sheet from '$components/ui/sheet';
 	import { Button } from '$components/ui/button';
-	import type { PageProps } from './$types';
 	import type { Listing } from '$models/Listing';
 	import { listingService } from '$services/listingService';
 

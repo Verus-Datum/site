@@ -29,18 +29,14 @@ body {
 	@apply cursor-default;
 }
 
-/* Global light mode scrollbar */
-* {
-	scrollbar-width: thin;
-	scrollbar-color: #d4d4d8 transparent;
-}
-
 *::-webkit-scrollbar {
 	width: 8px;
 	height: 8px;
+	@apply bg-secondary;
 }
 
-img {
+*::-webkit-scrollbar-thumb {
+	@apply rounded-xl bg-muted !important;
 }
 
 .icon {
