@@ -36,7 +36,16 @@
 	{:else}
 		<!-- Desktop -->
 		<div class="flex-row hidden md:flex gap-2 items-center">
-			<Button size="sm" variant="ghost" href="/login" class='text-sm text-primary hover:text-primary'>
+            <Button class="size-9" onclick={() => {
+				toggleMode();
+				const newMode = mode.current;
+				mapState.mode = newMode;
+				console.log(newMode);
+			}} variant="outline" size="icon">
+    			<Sun size={20} class="flex opacity-50 dark:hidden" />
+                <Moon size={20} class="hidden opacity-50 dark:flex dark:scale-100" />
+            </Button>
+			<Button variant="outline" size="sm" href="/login" class='text-sm text-primary hover:text-primary'>
 				Sign In
 			</Button>
 			<Button size="sm" href="/register" class='px-4'>

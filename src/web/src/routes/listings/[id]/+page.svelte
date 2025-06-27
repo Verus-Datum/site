@@ -145,7 +145,7 @@
                                     {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
                                 </Badge>
                             {:else if listing.status === 'available'}
-                                <Badge class="font-medium bg-blue-200 border-blue-300 text-blue-700">
+                                <Badge class="font-medium bg-blue-flat text-blue-foreground">
                                     {listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}
                                 </Badge>
                             {/if}
@@ -194,17 +194,17 @@
                 </h1>
 
                 <div class="flex flex-col sm:flex-row gap-5">
-                    <div class="w-full p-5 items-center gap-0.5 justify-center text-center flex flex-col bg-blue-flat border border-blue-100 rounded-lg">
+                    <div class="w-full p-5 items-center gap-0.5 justify-center text-center flex flex-col bg-blue-flat rounded-lg">
                         <h1 class="text-primary font-bold text-xl">{formatCurrency(listing.revenue_per_yr)}</h1>
                         <h2 class="text-sm font-medium">Annual Revenue</h2>
                         <p class="text-sm text-muted-foreground">Gross income per year</p>
                     </div>
-                    <div class="w-full p-5 items-center gap-0.5 bg-secondary rounded-lg border-border border justify-center text-center flex flex-col">
+                    <div class="w-full p-5 items-center gap-0.5 bg-secondary rounded-lg justify-center text-center flex flex-col">
                         <h1 class="font-bold text-xl">{formatCurrency(listing.gross_per_yr)}</h1>
                         <h2 class="text-sm font-medium">Gross Income</h2>
                         <p class="text-sm text-muted-foreground">Total yearly gross</p>
                     </div>
-                    <div class="w-full p-5 items-center gap-0.5 justify-center text-center flex flex-col bg-green-flat border border-green-100 rounded-lg">
+                    <div class="w-full p-5 items-center gap-0.5 justify-center text-center flex flex-col bg-green-flat rounded-lg">
                         <h1 class="text-green-600 font-bold text-xl">{formatCurrency(listing.profit_per_yr)}</h1>
                         <h2 class="text-sm font-medium">Annual Profit</h2>
                         <p class="text-sm text-muted-foreground">Net profit per year</p>
