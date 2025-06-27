@@ -7,7 +7,6 @@ from api.schemas.shared import HealthCheckResponse
 
 router = APIRouter(tags=["health"])
 
-
 @router.get("/db", response_model=HealthCheckResponse, status_code=status.HTTP_200_OK)
 def health_check(db: Session = Depends(get_db)):
     try:
