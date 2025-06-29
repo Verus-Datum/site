@@ -17,17 +17,18 @@ os.makedirs(log_dir, exist_ok=True)
 log_file = os.path.join(log_dir, "vd-api.log")
 
 handler = TimedRotatingFileHandler(
-    log_file, when="midnight", interval=1, backupCount=7, encoding='utf-8'
+    log_file, when="midnight", interval=1, backupCount=7, encoding="utf-8"
 )
 handler.suffix = "%Y-%m-%d"
 
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[handler, logging.StreamHandler()]
+    handlers=[handler, logging.StreamHandler()],
 )
 
 logger = logging.getLogger(__name__)
+
 
 def create_app():
     app = FastAPI(

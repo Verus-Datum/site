@@ -4,8 +4,10 @@ from sqlalchemy.orm import Session
 
 from api.db import get_db
 from api.schemas.shared import HealthCheckResponse
+from api.populate import populate as _populate
 
 router = APIRouter(tags=["health"])
+
 
 @router.get("/db", response_model=HealthCheckResponse, status_code=status.HTTP_200_OK)
 def health_check(db: Session = Depends(get_db)):
@@ -14,3 +16,8 @@ def health_check(db: Session = Depends(get_db)):
         return {"db_alive": True, "result": result}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"DB error: {e}")
+
+
+@router.get("/db/populate")
+def populate(db: Session = Depends(get_db)):
+    _populate()
