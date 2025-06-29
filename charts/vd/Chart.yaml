@@ -1,4 +1,4 @@
 apiVersion: v2
 name: vd
-version: 0.1.95
+version: 0.1.96
 description: “Umbrella chart for vd GUI & API”
