@@ -7,14 +7,15 @@
 	import { type CarouselAPI } from '$components/ui/carousel/context';
 	import { Badge } from '$components/ui/badge';
 	import { formatCurrency } from '$utils/currency';
-	import Button from '$components/ui/button/button.svelte';
 	import type { Broker } from '$types/Broker';
 	import Ellipsis from '@lucide/svelte/icons/ellipsis';
 	import ArrowLeft from '@lucide/svelte/icons/arrow-left';
 	import type { Listing } from '$models/Listing';
     import Building from "@lucide/svelte/icons/building-2"
     import Eye from "@lucide/svelte/icons/eye";
+    import { Button } from '$components/ui/button';
     import Calendar from "@lucide/svelte/icons/calendar";
+    import * as Dialog from '$components/ui/dialog'
     import Phone from '@lucide/svelte/icons/phone';
     import Mail from "@lucide/svelte/icons/mail";
     import User from '@lucide/svelte/icons/user';
@@ -76,10 +77,19 @@
                 <Heart size={12} />
                 Save
             </button>
-            <button class="py-2 px-4 h-8 hover:bg-secondary/60 font-medium duration-200 flex flex-row gap-2 items-center bg-secondary border rounded-md text-xs">
-                <Share size={12} />
-                Share
-            </button>
+            <Dialog.Root>
+                <Dialog.Trigger class="py-2 px-4 h-8 hover:bg-secondary/60 font-medium duration-200 flex flex-row gap-2 items-center bg-secondary border rounded-md text-xs">
+                    <Share size={12} />
+                    Share
+                </Dialog.Trigger>
+                <Dialog.Content>
+                    <Dialog.Header>
+                        <Dialog.Title>
+                            Share this listing
+                        </Dialog.Title>
+                    </Dialog.Header>
+                </Dialog.Content>
+            </Dialog.Root>
             <button>
                 <Ellipsis size={16} />
             </button>

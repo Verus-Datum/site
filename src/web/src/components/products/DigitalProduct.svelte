@@ -23,7 +23,7 @@
         </h2>
     </header>
 
-    <div class="flex flex-row gap-2 flex-wrap">
+    <div class="flex flex-row gap-2 truncate">
         {#each tags as tag}
             <Badge variant="outline" class="text-xs">
                 {tag.trim().charAt(0).toUpperCase() + tag.trim().slice(1)}
