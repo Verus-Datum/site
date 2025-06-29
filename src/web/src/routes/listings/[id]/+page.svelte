@@ -174,7 +174,7 @@
                         <h1 class="font-semibold">{listing.views}</h1>
                         <h2 class="text-sm text-muted-foreground">Views</h2>
                     </div>
-                    <div class="flex flex-col gap-1 items-center">
+                    <div class="flex flex-col gap-1 items-center">  
                         <Calendar size={22} class="text-muted-foreground/80" />
                         <h1 class="font-semibold">{listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}</h1>
                         <h2 class="text-sm text-muted-foreground">Status</h2>

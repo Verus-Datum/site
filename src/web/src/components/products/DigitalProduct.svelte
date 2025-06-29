@@ -23,10 +23,10 @@
         </h2>
     </header>
 
-    <div class="flex flex-row gap-2">
+    <div class="flex flex-row gap-2 flex-wrap">
         {#each tags as tag}
             <Badge variant="outline" class="text-xs">
-                {tag}
+                {tag.trim().charAt(0).toUpperCase() + tag.trim().slice(1)}
             </Badge>
         {/each}
     </div>

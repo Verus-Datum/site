@@ -6,6 +6,7 @@
     import * as Select from "$components/ui/select"
 	import { productService } from "$services/productService";
 	import { Input } from "$components/ui/input";
+	import { Skeleton } from "$components/ui/skeleton";
 
 	let products = $state<Product[]>([]);
 	let productsLoaded = $state<boolean>(false);
@@ -46,12 +47,18 @@
     </header>
 
 	{#each Object.entries(categorized) as [category, items]}
-		<div class="mb-8">
+		<div class="mb-8 w-full">
 			<h2 class="text-xl font-bold mb-4">{category}</h2>
 			<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-				{#each items as product}
-					<DigitalProduct {product} />
-				{/each}
+				{#if productsLoaded}
+					{#each items as product}
+						<DigitalProduct {product} />
+					{/each}
+				{:else}
+					{#each Array(6) as _}
+						<Skeleton class="w-full h-64" />
+					{/each}				
+				{/if}
 			</div>
 		</div>
 	{/each}
