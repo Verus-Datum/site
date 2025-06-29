@@ -16,6 +16,7 @@
 	import { Button } from '$components/ui/button';
 	import type { Listing } from '$models/Listing';
 	import { listingService } from '$services/listingService';
+	import { Skeleton } from '$components/ui/skeleton';
 
 	let listings: Listing[] = [];
 	let page = 0;
@@ -267,9 +268,21 @@
 		{/if}
 
 		<div class="flex w-full flex-col gap-6">
-			{#each listings as listing}
-				<OnlineListing {listing} />
-			{/each}
+			{#if loading === true}
+				{#each Array(15) as i}
+					<Skeleton class='w-full h-64'></Skeleton>
+				{/each}
+			{:else}
+				{#if listings.length > 0}
+					{#each listings as listing}
+						<OnlineListing {listing} />
+					{/each}
+				{:else}
+					<h1 class="w-full flex items-center justify-center py-16 font-medium text-lg">
+						No listings found
+					</h1>
+				{/if}
+			{/if}
 		</div>
 	</section>
 </main>

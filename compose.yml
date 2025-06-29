@@ -1,14 +1,14 @@
 services:
-    vd-gui:
-        image: ghcr.io/verus-datum/gui:${IMAGE_TAG:-latest}
-        build:
-            context: .
-            dockerfile: deploy/gui/Dockerfile
-        container_name: vd-gui
-        ports:
-            - 3000:3000
-        environment: # NOTE: this is ignored by app
-            API_URL: https://localhost:8081/api
+    # vd-gui:
+    #     image: ghcr.io/verus-datum/gui:${IMAGE_TAG:-latest}
+    #     build:
+    #         context: .
+    #         dockerfile: deploy/gui/Dockerfile
+    #     container_name: vd-gui
+    #     ports:
+    #         - 3000:3000
+    #     environment: # NOTE: this is ignored by app
+    #         API_URL: https://localhost:8081/api
 
     vd-api:
         image: ghcr.io/verus-datum/api:${IMAGE_TAG:-latest}

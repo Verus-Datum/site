@@ -77,6 +77,22 @@ function generateFakeBroker(
 		faker.number.int({ min: 2, max: 5 })
 	);
 
+	const achievements = faker.helpers.arrayElements(
+		[
+			'Closed $10M+ in deals',
+			'Top 1% broker nationwide',
+			'5-year client satisfaction award',
+			'100+ deals closed',
+			'Certified M&A Advisor'
+		],
+		faker.number.int({ min: 2, max: 4 })
+	);
+
+	const reviews = Array.from({ length: faker.number.int({ min: 2, max: 5 }) }, () => ({
+		author: faker.person.firstName(),
+		content: faker.lorem.sentence()
+	}));
+
 	return {
 		name: faker.person.fullName(),
 		title: 'Broker',
@@ -87,9 +103,18 @@ function generateFakeBroker(
 		stats,
 		services,
 		avatar_url:
-			'https://heroshotphotography.com/wp-content/uploads/2023/03/male-linkedin-corporate-headshot-on-white-square-1024x1024.jpg'
+			'https://heroshotphotography.com/wp-content/uploads/2023/03/male-linkedin-corporate-headshot-on-white-square-1024x1024.jpg',
+		about: faker.lorem.paragraph(20, 40),
+		phone_number: faker.phone.number('+1 (###) ###-####'),
+		email: faker.internet.email(),
+		company_address: faker.location.streetAddress(true),
+		achievements,
+		response_time: faker.helpers.arrayElement(['<1hr', 'Same Day', '1-2 Days']),
+		listing_count: faker.number.int({ min: 3, max: 15 }),
+		languages: faker.helpers.arrayElements(['English', 'Spanish', 'Mandarin', 'French', 'German'], 2),
+		license_number: `LIC-${faker.number.int({ min: 100000, max: 999999 })}`,
+		reviews
 	};
 }
-
 export { generateFakeBroker };
 export type { Broker, Stats };

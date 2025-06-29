@@ -25,10 +25,6 @@ body {
 	display: none; /* Chrome, Safari, Opera */
 }
 
-.button {
-	@apply cursor-default;
-}
-
 *::-webkit-scrollbar {
 	width: 8px;
 	height: 8px;
@@ -84,14 +80,6 @@ body {
 	@apply max-w-[1200px] md:w-[100%] md:pt-20 lg:w-[80%] 2xl:w-[60%] 3xl:w-[65%];
 }
 
-button {
-	@apply hover:cursor-default;
-}
-
-a {
-	@apply hover:cursor-default;
-}
-
 @layer base {
 	:root {
 		--background: 0 0% 100%;
@@ -142,7 +130,7 @@ a {
 		--card-foreground: 0 0% 98%;
 		--popover: 0 0% 7.8431%;
 		--popover-foreground: 0 0% 98%;
-		--primary: 212 100% 60%;
+		--primary: 220 100% 60%;
 		--primary-foreground: 0 0% 100%;
 		--secondary: 240 3.7% 12%;
 		--secondary-foreground: 0 0% 98%;
