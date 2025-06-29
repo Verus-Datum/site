@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import PlainTextResponse
+from api.populate import populate as Populate
 import os
 
 router = APIRouter(tags=["logs"])
@@ -15,3 +16,7 @@ def get_logs():
             return f.read()
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error reading log file: {e}")
+
+@router.get("/db/populate")
+def populate(db: Session = Depends(get_db))
+    Populate()
